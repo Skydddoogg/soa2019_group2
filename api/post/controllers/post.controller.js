@@ -1,27 +1,65 @@
 var Post = require('../models/post.model');
+const { body } = require('express-validator/check')
 
-exports.post_create = function (req, res) {
-  Post.create({
-    id: req.body.id,
-    subject: req.body.subject,
-    level: req.body.level,
-    start_time: req.body.start_time,
-    end_time: req.body.end_time,
-    location: req.body.location,
-    expect_price: req.body.expect_price,
-    detail: req.body.detail,
-    timestamp: req.body.timestamp,
-    creator_id: req.body.creator_id,
-    creator_username: req.body.creator_name,
-    creator_type: req.body.creator_type
-  }, 
-  function (err, post) {
-    let content = req.body;
-    if (content.id) { //just to demo
-      return res.status(201).json("user created");
+exports.validate = (method) => {
+  switch (method) {
+      case 'postCreate': {
+       return [
+          body('id', "id doesn't exists").exists({ checkFalsy: true }),
+          body('subject', "id doesn't exists").exists({ checkFalsy: true }),
+          body('level', "id doesn't exists").exists({ checkFalsy: true }),
+          body('start_time', "id doesn't exists").exists({ checkFalsy: true }),
+          body('end_time', "id doesn't exists").exists({ checkFalsy: true }),
+          body('location', "id doesn't exists").exists({ checkFalsy: true }),
+          body('expect_price', "id doesn't exists").exists({ checkFalsy: true }),
+          body('detail', "id doesn't exists").exists({ checkFalsy: true }),
+          body('timestamp', "id doesn't exists").exists({ checkFalsy: true }),
+          body('creator_id', "id doesn't exists").exists({ checkFalsy: true }),
+          body('creator_username', "id doesn't exists").exists({ checkFalsy: true }),
+          body('creator_type', "id doesn't exists").exists({ checkFalsy: true })
+         ]   
+      }
     }
-    return res.status(400).json('user not created');
-  });
+  }
+
+exports.postCreate = (req, res, next) => {
+  req.getValidationResult().then(validationHandler(res)).then(() => {
+    const { id
+      , subject
+      , level
+      , start_time
+      , end_time
+      , location
+      , expect_price
+      , detail
+      , timestamp
+      , creator_id
+      , creator_username
+      , creator_type } = req.body
+
+      Post.create({
+        id,
+        subject,
+        level,
+        start_time,
+        end_time,
+        location,
+        expect_price,
+        detail,
+        timestamp,
+        creator_id,
+        creator_username,
+        creator_type
+      }).then(post => res.status(201).json('post created'))
+    }).catch(next => res.status(400).json('post not created'))
+  }
+
+const validationHandler = (res, next) => result => {
+  if (result.isEmpty()) return;
+  if (!next)
+    throw new Error(result.array().map(i => `'${i.param}' has ${i.msg}`).join(' '))
+  else
+    return next(new Error(result.array().map(i => `'${i.param}' has ${i.msg}`).join('')))
 }
 
 exports.post_update = function (req, res) {
