@@ -23,3 +23,17 @@ exports.post_create = function (req, res) {
     return res.status(400).json('user not created');
   });
 }
+
+exports.post_update = function (req, res) {
+    Post.findByIdAndUpdate(req.params.postid, req.body, {new: true}, function (err, user) {
+        if (err) return res.status(500).json("There was a problem updating the post.");
+        res.status(200).json('Post updated');
+    });
+}
+
+exports.post_delete = function (req, res) {
+    Post.findByIdAndRemove(req.params.postid, function (err, user) {
+        if (err) return res.status(500).json("There was a problem deleting the post.");
+        res.status(200).json('Post deleted');
+    });
+}

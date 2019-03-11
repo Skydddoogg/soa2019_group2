@@ -8,5 +8,7 @@ var PostController = require('../controllers/post.controller');
 
 // Create new post
 router.post('/create', PostController.post_create);
+router.put('/:postid/update', PostController.post_update);
+router.delete('/:postid/delete', PostController.post_delete);
 
 module.exports = router;
