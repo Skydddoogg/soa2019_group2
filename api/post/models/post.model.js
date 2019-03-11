@@ -12,9 +12,9 @@ let PostSchema = new Schema({
     detail: {type: String, required: false, max: 300},
     timestamp: {type: Number, required: true},
     creator_id: {type: String, required: true},
-    creator_name: {type: String, required: true},
+    creator_username: {type: String, required: true},
     creator_type: {type: String, required: true}
 });
 
 //Export the model
-module.exports = mongoose.models('Post', PostSchema);
+module.exports = mongoose.model('Post', PostSchema);
