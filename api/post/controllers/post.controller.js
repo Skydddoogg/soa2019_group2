@@ -62,14 +62,14 @@ const validationHandler = (res, next) => result => {
     return next(new Error(result.array().map(i => `'${i.param}' has ${i.msg}`).join('')))
 }
 
-exports.post_update = function (req, res) {
+exports.postEdit = function (req, res) {
     Post.findByIdAndUpdate(req.params.postid, req.body, {new: true}, function (err, user) {
         if (err) return res.status(500).json("There was a problem updating the post.");
         res.status(200).json('Post updated');
     });
 }
 
-exports.post_delete = function (req, res) {
+exports.postDelete = function (req, res) {
     Post.findByIdAndRemove(req.params.postid, function (err, user) {
         if (err) return res.status(500).json("There was a problem deleting the post.");
         res.status(200).json('Post deleted');
