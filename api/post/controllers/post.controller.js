@@ -19,5 +19,8 @@ exports.post_create = function (req, res) {
         }
     );
 
-    res.send('Post created successfully and the creator is ' + post.creator_username)
+    if (Object.keys(post.toJSON()).length == 12){
+        return res.status(201).json("Post created");
+    }
+    return res.status(400).json("Bad request");
 };
