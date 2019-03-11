@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
+var bodyParser = require('body-parser');
 
-const post_controller = require('../controllers/post.controller');
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+var PostController = require('../controllers/post.controller');
 
-router.post('/create', post_controller.post_create);
+// Create new post
+router.post('/create', PostController.post_create);
 
 module.exports = router;

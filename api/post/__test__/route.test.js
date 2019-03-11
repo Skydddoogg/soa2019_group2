@@ -2,23 +2,13 @@ const request = require('supertest');
 const server = require('../app.js');
 
 beforeAll(async () => {
-  // do something before anything else runs
-  console.log('Jest starting!');
+  console.log('Start testing with Jest');
 });
 
-// close the server after each test
 afterAll(() => {
   server.close;
-  console.log('server closed!');
+  console.log('Server closed');
 });
-
-// describe('Test GET Method /post', () => {
-//   test('get post route GET /', async () => {
-//   const response = await request(server).get('/');
-//   expect(response.status).toEqual(200);
-//   expect(response.text).toContain('Hello World!');
-//   });
-// });
 
 /**
  * Testing POST Method with correct data format to add post
