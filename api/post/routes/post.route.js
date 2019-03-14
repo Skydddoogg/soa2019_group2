@@ -8,8 +8,9 @@ router.use(bodyParser.json());
 var PostController = require('../controllers/post.controller');
 
 // Create new post
-router.post('/create', PostController.validate('postCreate'), PostController.postCreate);
-router.put('/edit/:postid', PostController.postEdit);
-router.delete('/delete/:postid', PostController.postDelete);
+router.post('/create', PostController.validate('createAndUpdate'), PostController.postCreate);
+console.log(PostController.postEdit)
+router.put('/edit/:id', PostController.validate('createAndUpdate'), PostController.postEdit);
+router.delete('/delete/:id', PostController.postDelete);
 
 module.exports = router;
