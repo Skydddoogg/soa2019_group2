@@ -4,10 +4,17 @@ var bodyParser = require('body-parser');
 var Search = require('../models/search.model');
 var mongoose = require('mongoose');
 
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+
 exports.getAllPosts = (req, res) => {
     Search.find({}, function (err, posts) {
-        if (err) return res.status(400).send("There was a problem finding the posts");
-        res.status(201).send(posts);
+        console.log(posts);
+        if (err) {
+            return res.status(400).send("There was a problem finding the posts");
+        }else {
+            res.status(201).send(posts);
+        }
     });
 }
 

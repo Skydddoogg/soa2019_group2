@@ -1,7 +1,14 @@
 var mongoose = require('mongoose');
 
 var SearchSchema = new mongoose.Schema({
-    subject: {type: String, required: true},
+    subject: {type: String, required: true}
+});
+mongoose.model('Search', SearchSchema);
+
+module.exports = mongoose.model('Search');
+
+/*
+subject: {type: String, required: true},
     level: {type: String, required: true},
     start_time: {type: String, required: true},
     end_time: {type: String, required: true},
@@ -11,7 +18,4 @@ var SearchSchema = new mongoose.Schema({
     creator_id: {type: String, required: true},
     creator_username: {type: String, required: true},
     creator_type: {type: String, required: true}
-});
-mongoose.model('Search', SearchSchema);
-
-module.exports = mongoose.model('Search');
+    */
