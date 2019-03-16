@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-var PostController = require('../controllers/post.controller');
+const PostController = require('../controllers/post.controller');
 
 router.post('/create', PostController.validate('createAndUpdate'), PostController.postCreate);
 
