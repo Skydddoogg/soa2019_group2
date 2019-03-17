@@ -5,6 +5,6 @@ var db  = require('./db');
 
 var PostRouter = require('./routes/post.route');
 app.use(expressValidator());
-app.use('/posts', PostRouter);
+app.use('/post', PostRouter);
 
 module.exports = app;
