@@ -9,12 +9,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 exports.getByParam = (req, res) => {
-    // var a = Util.checkNull(req.params.subject);
-    // var b = Util.checkNull(req.params.level);
-    // var c = Util.checkNull(req.params.startPrice);
-    // var d = Util.checkNull(req.params.endPrice);
+    var arraySubject = req.params.subject.split('&');
+    var arrayLevel = req.params.level.split('&');
+    var startPrice = req.params.startPrice;
+    var endPrice = req.params.endPrice;
 
-    Search.find({subject : {$exists: true}, level : req.params.level, expect_price : {$gte:parseInt(req.params.startPrice), $lte:parseInt(req.params.endPrice)}}, function (err, posts) {
+    var query = Util.checkNull(arraySubject, arrayLevel, startPrice, endPrice);
+
+    Search.find(query, function (err, posts) {
         if (err) {
             return res.status(400).json("There was a problem finding the posts");
         }else {
