@@ -34,3 +34,12 @@
 | Data[1].creator_username | riariaria |
 | Data[1].creator_type | student |
 
+# Try to get post from API that is not exist in the database
+
+## GET /search/math/M.4/500/1000
+
+## Expectation
+
+| Assert | Expected |
+| - | - |
+| Data | *should not exist* |
