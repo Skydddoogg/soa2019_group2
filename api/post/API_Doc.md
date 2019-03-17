@@ -1,7 +1,5 @@
 # Post data with correctness of format to API
 
-This can be run with `cotton -u http://localhost:3000 API_Doc.md`
-
 ## POST /post/create
 
 Data in header
