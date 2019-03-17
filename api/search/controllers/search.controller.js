@@ -19,9 +19,14 @@ exports.getAllPosts = (req, res) => {
     });
 }
 
-// exports.getBySubject = (req, res) => {
-//     Search.find({"subject" : req.params.subject}, function (err, posts) {
-//         if (err) return res.status(400).send("There was a problem finding the user.");
-//         res.status(201).send(posts);
-//     });
-// }
+exports.getByParam = (req, res) => {
+    Post.find({subject : req.params.subject, level : req.params.level, expect_price : {$gte:parseInt(req.params.startPrice), $lte:parseInt(req.params.endPrice)}}, function (err, posts) {
+        if (err) {
+            console.log("Error");
+            return res.status(400).json("There was a problem finding the posts");
+        }else {
+            console.log("Success");
+            res.status(201).json(posts);
+        }
+    });
+}
