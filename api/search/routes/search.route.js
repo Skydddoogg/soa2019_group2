@@ -8,6 +8,6 @@ router.use(bodyParser.json());
 var SearchController = require('../controllers/search.controller');
 
 router.get('/', SearchController.getAllPosts);
-// router.get('/:subject', SearchController.getBySubject);
+// router.get('/:subject/:', SearchController.getBySubject);
 
 module.exports = router;
