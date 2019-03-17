@@ -7,4 +7,4 @@
 * Step 3: Run the server with ```npm run start```
 * Step 4: Run the test with ```cotton -u http://localhost:3000 API_Doc.md```
    * Note that [Cotton](https://github.com/chonla/cotton) (Markdown Test Specification Runner) need to be installed.
-   * In [API_Doc.md](https://github.com/Skydddoogg/soa2019_group2/blob/master/api/post/API_Doc.md) (API document) you can see API information of this service.
+   * In [API_Doc.md](https://github.com/Skydddoogg/soa2019_group2/blob/master/api/search/API_Doc.md) (API document) you can see API information of this service.
