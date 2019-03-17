@@ -6,11 +6,11 @@
 
 | Assert | Expected |
 | - | - |
-| Data.subject[0] | math |
-| Data.level[0] | High school |
-| Data.expect_price[0] | 500 |
-| Data.creator_id[0] | 0123456789 |
-| Data.creator_username[0] | riariaria |
-| Data.creator_type[0] | student |
+| Data[0].subject | math |
+| Data[0].level | High school |
+| Data[0].expect_price | 500 |
+| Data[0].creator_id | 0123456789 |
+| Data[0].creator_username | riariaria |
+| Data[0].creator_type | student |
 
 
