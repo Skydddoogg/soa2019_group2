@@ -15,7 +15,7 @@
 
 # Get multiple posts from API
 
-## GET /search/math/High school/0/1000
+## GET /search/math&English/High school/0/1000
 
 ## Expectation
 
