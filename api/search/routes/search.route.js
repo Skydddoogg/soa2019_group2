@@ -7,8 +7,6 @@ router.use(bodyParser.json());
 
 var SearchController = require('../controllers/search.controller');
 
-router.get('/', SearchController.getAllPosts);
-
 router.get('/:subject/:level/:startPrice/:endPrice', SearchController.getByParam);
 
 module.exports = router;
