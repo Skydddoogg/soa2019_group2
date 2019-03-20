@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const timestamps = require('mongoose-timestamp');
-const shortUid = require('short-unique-id');
-const uid = new shortUid();
 
 const PostSchema = new mongoose.Schema({
   subject: {type: String, required: true},
@@ -16,6 +14,5 @@ const PostSchema = new mongoose.Schema({
   creatorType: {type: String, required: true}
 });
 PostSchema.plugin(timestamps);
-mongoose.model('Post', PostSchema);
 
-module.exports = mongoose.model('Post');
+module.exports = mongoose.model('Post', PostSchema);

@@ -1,31 +1,33 @@
-const Post = require('../models/post.model');
+const Post = require('./post.model');
 const { check, validationResult } = require('express-validator/check');
+const Controller = {};
 
-exports.postCreate = (req, res) => {
+Controller.postCreate = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ result: 'post not created', errors: errors.mapped() });
+    return res.status(400).json({ status: 'error', errors: errors.mapped() });
   }
   Post.create(req.body)
-  .then(post => res.status(201).json({ result: 'post created', detail: post }));
+  .then( post => res.status(201).json({ status: 'success', data: post }));
 }
 
-exports.postEdit = (req, res) => {
+Controller.postUpdate = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ result: 'post not updated', errors: errors.mapped() });
+    return res.status(400).json({ status: 'error', errors: errors.mapped() });
   }
   Post.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec()
-  .then(post => res.status(200).json({ result: 'post updated', detail: post }));
+  .then( (post) => res.status(200).json({ status: 'success', data: post }))
+  .catch( (err) => res.status(404).json({ status: 'error' , errors: 'Post doesn\'t exist' }));
 }
 
-exports.postDelete = (req, res) => {
+Controller.postDelete = (req, res) => {
   Post.findByIdAndDelete(req.params.id)
-  .then((post) => res.status(200).json({ result: 'post deleted' }))
-  .catch(err => res.status(400).json({ result: "post not deleted", errors: err }));
+  .then( (post) => res.status(200).json({ status: 'success', data: post }))
+  .catch( (err) => res.status(404).json({ status: 'error', errors: 'Post doesn\'t exist' }));
 }
 
-exports.validate = (method) => {
+Controller.validate = (method) => {
   switch (method) {
     case 'createAndUpdate': {
       return [
@@ -42,3 +44,5 @@ exports.validate = (method) => {
     }
   }
 }
+
+module.exports = Controller;
