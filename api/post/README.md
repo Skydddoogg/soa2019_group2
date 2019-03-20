@@ -1,6 +1,6 @@
-# How to Test APIs of Post Service
+### NOTE: Markdown need to update, the following detail was obsolated !!
 
-## Markdown need to update, the following detail was obsolated !!
+# How to Test APIs of Post Service
 
 ## Follow these steps
 * Step 1: Import mocked database by running this ```mongoimport --db post_service --collection posts --file post_service_mocked_db.json```
