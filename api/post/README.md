@@ -1,5 +1,7 @@
 # How to Test APIs of Post Service
 
+## Markdown need to update, the following detail was obsolated !!
+
 ## Follow these steps
 * Step 1: Import mocked database by running this ```mongoimport --db post_service --collection posts --file post_service_mocked_db.json```
    * Note that MongoDB need to be installed. You can easily install it via ```brew install mongodb``` and you will need to make connection befor you import.
