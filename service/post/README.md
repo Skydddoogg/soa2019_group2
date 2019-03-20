@@ -1,3 +1,5 @@
+### NOTE: Markdown need to update, the following detail was obsolated !!
+
 # How to Test APIs of Post Service
 
 ## Follow these steps
