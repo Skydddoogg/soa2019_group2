@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/post'
+const config = require('./config');
 
-mongoose.connect(url, { useNewUrlParser: true, useFindAndModify: false });
+const connectionString = `mongodb://${global.gConfig.db_host}:${global.gConfig.db_port}/${global.gConfig.db_name}`;
+console.log(connectionString);
+mongoose.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false });
