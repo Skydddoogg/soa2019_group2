@@ -16,7 +16,7 @@
 
 # Try to get tutor information from API that is not exist in the database
 
-## GET /search/5c95ec2cd371e61531032c89
+## GET /tutor/5c95ec2cd371e61531032c89
 
 ## Expectation
 
