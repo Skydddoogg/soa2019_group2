@@ -10,6 +10,7 @@ node_modules/
 
 # production
 /build
+service/post/data
 
 # misc
 .vscode/
