@@ -6,11 +6,11 @@
 
 | Assert | Expected |
 | - | - |
-| Data[0].name | mask |
-| Data[0].email | 59070156@it.kmitl.ac.th |
-| Data[0].posts | 5 |
-| Data[0].education | KMITL |
-| Data[0].profile_img_url | https://www.google.com |
+| Data.name | mask |
+| Data.email | 59070156@it.kmitl.ac.th |
+| Data.posts | 5 |
+| Data.education | KMITL |
+| Data.profile_img_url | https://www.google.com |
 
 
 
