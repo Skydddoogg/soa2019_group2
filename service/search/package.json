@@ -14,7 +14,6 @@
     "module-alias": "^2.2.0"
   },
   "_moduleAliases": {
-    "@conf": "conf",
-    "@util": "utility"
+    "@conf": "conf"
   }
 }

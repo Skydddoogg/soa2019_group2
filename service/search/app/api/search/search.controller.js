@@ -1,6 +1,6 @@
 const alias = require('module-alias/register');
 const Search = require('./search.model');
-const Util = require('@util/utility');
+const Util = require('./utility/util');
 const Controller = {};
 
 Controller.getByParam = (req, res) => {
