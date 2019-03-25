@@ -22,4 +22,4 @@
 
 | Assert | Expected |
 | - | - |
-| Data | should not exist |
+| Data | *should not exist* |
