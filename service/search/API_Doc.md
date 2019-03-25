@@ -1,6 +1,18 @@
+# Get all posts
+
+## GET /api/search/default/default/0/100000
+
+## Expectation
+
+| Assert | Expected |
+| - | - |
+| Data[0].creator_id | 3029185301 |
+| Data[1].creator_id | 4028192345 |
+| Data[2].creator_id | 0123456789 |
+
 # Get a post from API 
 
-## GET /search/math/High school/0/1000
+## GET /api/search/math/High school/0/1000
 
 ## Expectation
 
@@ -15,7 +27,7 @@
 
 # Get multiple posts from API
 
-## GET /search/math&English/High school/0/1000
+## GET /api/search/math&English/High school/0/1000
 
 ## Expectation
 
@@ -34,12 +46,12 @@
 | Data[1].creator_username | riariaria |
 | Data[1].creator_type | student |
 
-# Try to get post from API that is not exist in the database
+# Get a non-existing post
 
-## GET /search/math/M.4/500/1000
+## GET /api/search/science/High%20school/0/1000
 
 ## Expectation
 
 | Assert | Expected |
 | - | - |
-| Data | *should not exist* |
+| StatusCode | 400 |
