@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
-const db  = require('./conf/db');
+const alias = require('module-alias/register');
+const db  = require('@conf/db');
 
 const port = global.gConfig.port;
 
@@ -13,4 +14,4 @@ app.use(expressValidator());
 require('./app/routes')(app);
 
 app.listen(port);
-console.log('Listening on port: ' + port);
+console.log('Post service is listening on port: ' + port);

@@ -1,12 +1,8 @@
-process.env.NODE_ENV = 'test';
-
 const sinon = require('sinon');
 const request = require('request');
 const chai = require('chai');
 const should = chai.should();
 const posts = require('./fixtures/posts.json');
-
-// const base = 'http://localhost:1337';
 
 describe('post service', () => {
 

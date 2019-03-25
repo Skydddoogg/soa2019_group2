@@ -1,6 +1,15 @@
-var app = require('./app');
-var port = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const alias = require('module-alias/register');
+const db  = require('@conf/db');
 
-var server = app.listen(port, function() {
-  console.log('Express server listening on port ' + port);
-});
+const port = global.gConfig.port;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+require('./app/routes')(app);
+
+app.listen(port);
+console.log('Search service is listening on port: ' + port);

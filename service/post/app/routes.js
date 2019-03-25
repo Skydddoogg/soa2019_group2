@@ -1,3 +1,3 @@
 module.exports = function (app) {
-	app.use('/api/post', require('./api/post'));
+  app.use('/api/post', require('./api/post'));
 };
