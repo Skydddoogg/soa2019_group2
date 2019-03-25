@@ -1,7 +1,7 @@
 {
   "development": {
     "config_id": "development",
-    "port": 3000,
+    "port": 3001,
     "db_name": "search-dev",
     "db_host": "localhost",
     "db_port": "27017",

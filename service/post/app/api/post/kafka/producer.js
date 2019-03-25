@@ -1,5 +1,5 @@
-const alias = require('module-alias/register');
-const conf = require('@conf/config');
+require('module-alias/register');
+require('@conf/config');
 
 const kafka = require('kafka-node');
 const client = new kafka.KafkaClient({kafkaHost: `${global.gConfig.kafka_host}:${global.gConfig.kafka_port}`});

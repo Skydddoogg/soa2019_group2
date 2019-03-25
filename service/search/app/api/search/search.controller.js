@@ -1,5 +1,6 @@
-const alias = require('module-alias/register');
-const Search = require('./search.model');
+require('./kafka/consumer');
+
+const SearchPost = require('./search.post.model');
 const Util = require('./utility/util');
 const Controller = {};
 
@@ -11,11 +12,11 @@ Controller.getByParam = (req, res) => {
 
   var query = Util.checkNull(arraySubject, arrayLevel, startPrice, endPrice);
 
-  Search.find(query, function (err, posts) {
+  SearchPost.find(query, function (err, posts) {
     if (err) {
-        return res.status(400).json("There was a problem finding the posts");
+      return res.status(400).json("There was a problem finding the posts");
     } else {
-        res.status(201).json(posts);
+      res.status(201).json(posts);
     }
   });
 }
