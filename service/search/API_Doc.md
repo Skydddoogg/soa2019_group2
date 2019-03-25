@@ -1,6 +1,18 @@
+# Get all posts
+
+## GET /api/search/default/default/0/100000
+
+## Expectation
+
+| Assert | Expected |
+| - | - |
+| Data[0].creatorId | 3029185301 |
+| Data[1].creatorId | 4028192345 |
+| Data[2].creatorId | 0123456789 |
+
 # Get a post from API 
 
-## GET /search/math/High school/0/1000
+## GET /api/search/math/High school/0/1000
 
 ## Expectation
 
@@ -8,35 +20,35 @@
 | - | - |
 | Data[0].subject | math |
 | Data[0].level | High school |
-| Data[0].expect_price | 500 |
-| Data[0].creator_id | 0123456789 |
-| Data[0].creator_username | riariaria |
-| Data[0].creator_type | student |
+| Data[0].expectPrice | 500 |
+| Data[0].creatorId | 0123456789 |
+| Data[0].creatorUsername | riariaria |
+| Data[0].creatorType | student |
 
 # Get multiple posts from API
 
-## GET /search/math&English/High school/0/1000
+## GET /api/search/math&English/High school/0/1000
 
 ## Expectation
 
 | Assert | Expected |
 | - | - |
-| Data[0].subject | English |
+| Data[0].subject | math |
 | Data[0].level | High school |
-| Data[0].expect_price | 1000 |
-| Data[0].creator_id | 1239458711 |
-| Data[0].creator_username | muse |
-| Data[0].creator_type | tutor |
-| Data[1].subject | math |
+| Data[0].expectPrice | 500 |
+| Data[0].creatorId | 0123456789 |
+| Data[0].creatorUsername | riariaria |
+| Data[0].creatorType | student |
+| Data[1].subject | English |
 | Data[1].level | High school |
-| Data[1].expect_price | 500 |
-| Data[1].creator_id | 0123456789 |
-| Data[1].creator_username | riariaria |
-| Data[1].creator_type | student |
+| Data[1].expectPrice | 1000 |
+| Data[1].creatorId | 1239458711 |
+| Data[1].creatorUsername | muse |
+| Data[1].creatorType | tutor |
 
 # Try to get post from API that is not exist in the database
 
-## GET /search/math/M.4/500/1000
+## GET /api/search/math/M.4/500/1000
 
 ## Expectation
 

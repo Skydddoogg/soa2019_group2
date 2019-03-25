@@ -2,6 +2,11 @@ const Post = require('./post.model');
 const produce = require('./kafka/producer');
 const { check, validationResult } = require('express-validator/check');
 const Controller = {};
+const kafkaMethods = {
+  CREATE: 'create',
+  UPDATE: 'update',
+  DELETE: 'delete'
+}
 
 Controller.postCreate = (req, res) => {
   const errors = validationResult(req);
@@ -10,7 +15,7 @@ Controller.postCreate = (req, res) => {
   }
   Post.create(req.body)
   .then( post => {
-    produce.send(post);
+    produce.send(kafkaMethods.CREATE, post);
     return post;
   })
   .then( post => res.status(201).json({ status: 'success', data: post }))
@@ -21,12 +26,12 @@ Controller.postUpdate = (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ status: 'error', errors: errors.mapped() });
   }
-  Post.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec()
+  Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
   .then( (post, err) => {
     if (err) {
       return res.status(404).json({ status: 'error' , errors: 'Post doesn\'t exist' });
     } else {
-      produce.send(post);
+      produce.send(kafkaMethods.UPDATE, post);
       return post;
     }
   })
@@ -39,7 +44,7 @@ Controller.postDelete = (req, res) => {
     if (err) {
       return res.status(404).json({ status: 'error' , errors: 'Post doesn\'t exist' });
     } else {
-      produce.send(post);
+      produce.send(kafkaMethods.DELETE, post);
       return post;
     }
   })
