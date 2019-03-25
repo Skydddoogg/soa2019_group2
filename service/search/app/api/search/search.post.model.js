@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const SearchPostSchema = new mongoose.Schema({
   _id: {type: ObjectId, required: true},

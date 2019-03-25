@@ -15,8 +15,8 @@ producer.on('error', function (err) {
   console.log(err);
 })
 
-exports.send = (sentMessage) => {
-  var msg = JSON.stringify(sentMessage);
+exports.send = (method, sentMessage) => {
+  var msg = JSON.stringify({'method': method, 'data': sentMessage});
   var payloads = [{ topic: "post", messages: msg, partition: 0 }];
   producer.send(payloads, function (err, data) {
      console.log("send data ", sentMessage);
