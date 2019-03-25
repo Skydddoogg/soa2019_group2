@@ -4,13 +4,17 @@
     "port": 3000,
     "db_name": "post-dev",
     "db_host": "localhost",
-    "db_port": "27017"
+    "db_port": "27017",
+    "kafka_host": "localhost",
+    "kafka_port": "9092"
   },
   "production": {
     "config_id": "production",
     "port": 3000,
     "db_name": "post",
     "db_host": "mongo",
-    "db_port": "27017"
+    "db_port": "27017",
+    "kafka_host": "35.187.249.119",
+    "kafka_port": "9092"
   }
 }
