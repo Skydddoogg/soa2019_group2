@@ -10,10 +10,10 @@
   },
   "production": {
     "config_id": "production",
-    "port": 3000,
+    "port": 3001,
     "db_name": "search",
-    "db_host": "mongo",
-    "db_port": "27017",
+    "db_host": "searchdb",
+    "db_port": "27018",
     "kafka_host": "35.187.249.119",
     "kafka_port": "9092"
   }

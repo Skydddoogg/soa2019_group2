@@ -1,17 +1,17 @@
 version: "2"
 services:
   app:
-    container_name: post-service
+    container_name: search-service
     restart: always
     build: .
     ports:
       - "3000:3000"
     links:
-      - postdb
+      - searchdb
     depends_on:
-      - postdb
-  postdb:
-    container_name: postdb
+      - searchdb
+  searchdb:
+    container_name: searchdb
     image: mongo
     volumes:
       - ./data:/data/db

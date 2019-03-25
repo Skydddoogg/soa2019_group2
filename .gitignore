@@ -11,6 +11,7 @@ node_modules/
 # production
 /build
 service/post/data
+service/search/data
 
 # misc
 .vscode/
