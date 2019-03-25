@@ -33,25 +33,25 @@
 
 | Assert | Expected |
 | - | - |
-| Data[0].subject | English |
+| Data[0].subject | math |
 | Data[0].level | High school |
-| Data[0].expectPrice | 1000 |
-| Data[0].creatorId | 1239458711 |
-| Data[0].creatorUsername | muse |
-| Data[0].creatorType | tutor |
-| Data[1].subject | math |
+| Data[0].expectPrice | 500 |
+| Data[0].creatorId | 0123456789 |
+| Data[0].creatorUsername | riariaria |
+| Data[0].creatorType | student |
+| Data[1].subject | English |
 | Data[1].level | High school |
-| Data[1].expectPrice | 500 |
-| Data[1].creatorId | 0123456789 |
-| Data[1].creatorUsername | riariaria |
-| Data[1].creatorType | student |
+| Data[1].expectPrice | 1000 |
+| Data[1].creatorId | 1239458711 |
+| Data[1].creatorUsername | muse |
+| Data[1].creatorType | tutor |
 
-# Get a non-existing post
+# Try to get post from API that is not exist in the database
 
-## GET /api/search/science/High%20school/0/1000
+## GET /api/search/math/M.4/500/1000
 
 ## Expectation
 
 | Assert | Expected |
 | - | - |
-| StatusCode | 400 |
+| Data | *should not exist* |
