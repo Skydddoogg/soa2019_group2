@@ -16,7 +16,7 @@ Controller.getByParam = (req, res) => {
     if (err) {
       return res.status(400).json("There was a problem finding the posts");
     } else {
-      res.status(201).json(posts);
+      res.status(201).json({status: "success", data: posts});
     }
   });
 }

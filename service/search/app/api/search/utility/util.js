@@ -1,16 +1,16 @@
 module.exports = {
   checkNull: function (arraySubject, arrayLevel, startPrice, endPrice) {
     if (arraySubject.includes('default') && arrayLevel.includes('default')){
-      return {expect_price : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
+      return {expectPrice : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
     }
     else if (arraySubject.includes('default') && !arrayLevel.includes('default')){
-      return {level : arrayLevel, expect_price : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
+      return {level : arrayLevel, expectPrice : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
     }
     else if (!arraySubject.includes('default') && arrayLevel.includes('default')){
-      return {subject : arraySubject, expect_price : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
+      return {subject : arraySubject, expectPrice : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
     }
     else {
-      return {subject : arraySubject, level : arrayLevel, expect_price : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
+      return {subject : arraySubject, level : arrayLevel, expectPrice : {$gte:parseInt(startPrice), $lte:parseInt(endPrice)}};
     }
   }
 };
