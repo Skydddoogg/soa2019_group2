@@ -1,18 +1,19 @@
-version: "2"
+version: "3"
 services:
   app:
     container_name: search-service
+    image: gcr.io/soa-project-2/search-service
     restart: always
     build: .
     ports:
       - "3000:3000"
     links:
       - searchdb
-    depends_on:
+    depends_on: 
       - searchdb
   searchdb:
     container_name: searchdb
-    image: mongo
+    image: mongo:latest
     volumes:
       - ./data:/data/db
     ports:

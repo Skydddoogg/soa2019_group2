@@ -5,7 +5,7 @@
   "scripts": {
     "start": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server.js",
-    "test": "istanbul cover _mocha app/**/*.spec.js"
+    "test": "nyc mocha app/**/*.spec.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
     "request": "^2.83.0",
     "sinon": "^7.2.7"
   },
