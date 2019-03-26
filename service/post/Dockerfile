@@ -1,8 +1,7 @@
-FROM node:8.11.1-alpine
-WORKDIR /opt/app
-COPY package.json package-lock.json* ./
-RUN npm cache clean --force && npm install
-COPY . /opt/app
+FROM node:10.15.3-alpine
+WORKDIR /src
+COPY . .
+RUN npm install
 EXPOSE 3000
 
 CMD [ "npm", "run", "start" ]
