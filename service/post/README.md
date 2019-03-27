@@ -1,3 +1,13 @@
+# Deployment on Google Cloud
+
+```http://35.221.225.113:3000/api/post/{endpoint}```
+
+# APIs
+
+* ```POST /create```
+* ```PUT /update/:id```
+* ```DELETE /delete/:id```
+
 # How to run
 
 * Step 1: Follow step 1 (download the code) and step 2 (start the server) in [Quickstarting on Kafka](https://kafka.apache.org/quickstart)
