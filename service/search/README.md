@@ -1,3 +1,12 @@
+# Deployment on Google Cloud
+
+```http://35.187.217.184:3000/api/search/{endpoint}```
+
+# APIs
+
+* ```GET /:subject/:level/:startPrice/:endPrice```
+   * **Example:** ```/math&English/High school/0/1000```
+
 # How to run
 
 * Step 1: Import mocked database by running this ```mongoimport --db search_service --collection posts --file search_service_mocked_db.json```
