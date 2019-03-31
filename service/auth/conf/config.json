@@ -1,0 +1,22 @@
+{
+  "development": {
+    "config_id": "development",
+    "port": 3002,
+    "db_name": "auth-dev",
+    "db_host": "localhost",
+    "db_port": "27017",
+    "kafka_host": "localhost",
+    "kafka_port": "9092",
+    "secret_key": "SECRET1337"
+  },
+  "production": {
+    "config_id": "production",
+    "port": 3000,
+    "db_name": "auth",
+    "db_host": "authdb",
+    "db_port": "27017",
+    "kafka_host": "35.187.249.119",
+    "kafka_port": "9092",
+    "secret_key": "SECRET1337"
+  }
+}
