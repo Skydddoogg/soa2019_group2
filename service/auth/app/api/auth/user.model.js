@@ -9,14 +9,6 @@ const UserSchema = new mongoose.Schema({
   userType: {type: String, enum: ['student', 'tutor']}
 });
 
-UserSchema.methods.generateHash = (password) => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
-UserSchema.methods.validPassword = (password) => {
-  return bcrypt.compareSync(password, this.hashedPassword);
-};
-
 UserSchema.methods.getFullname = () => {
   return this.firstname + " " + this.lastname;
 };

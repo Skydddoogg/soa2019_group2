@@ -5,17 +5,14 @@ const bcrypt = require('bcrypt');
 const User = require('./user.model');
 const Controller = {};
 
-const keys = `${global.gConfig.secret_key}`;
+const secret = 'SECRET1234'
 
-Controller.signUp = (req, res) => {
-
-  const password = req.body.password;
+Controller.signup = (req, res) => {
   const saltRounds = 10;
-
   bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hashedPassword) => {
+    bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
       if (err) {
-        return res.status(400).json({ error: err });
+        return res.status(400).json({ err: err });
       }
       const user = new User({
         username: req.body.username,
@@ -36,37 +33,44 @@ Controller.signUp = (req, res) => {
   })
 };
 
-// Controller.signIn = (req, res) => {
-//   passport.authenticate('local', { session: false }, (error, user) => {
-//     if (error || !user) {
-//       res.status(400).json({ error });
-//     }
-//     const payload = {
-//       username: user.username,
-//       expires: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
-//     };
-//     req.login(payload, {session: false}, (error) => {
-//       if (error) {
-//         res.status(400).send({ error });
-//       }
+Controller.signin = (req, res) => {
+  passport.authenticate(
+    'local',
+    { session: false },
+    (err, user) => {
+      if (err || !user) {
+        console.log('err from 1');
+        return res.status(400).json({ err });
+      }
+      /** This is what ends up in our JWT */
+      const payload = {
+        'username': user.username,
+        'expires': Date.now() + parseInt(1800*1000),
+      };
 
-//       /** generate a signed json web token and return it in the response */
-//       const token = jwt.sign(JSON.stringify(payload), keys.secret);
+      /** assigns payload to req.user */
+      req.login(payload, {session: false}, (err) => {
+        if (err) {
+          console.log('err from 2');
+          return res.status(400).json({ err });
+        }
 
-//       /** assign our jwt to the cookie */
-//       res.cookie('jwt', jwt, { httpOnly: true, secure: true });
-//       res.status(200).send({ username });
-//     });
-//   },
-//   )(req, res);
-// };
+        /** generate a signed json web token and return it in the response */
+        const token = jwt.sign(JSON.stringify(payload), secret);
 
-// Controller.protectedPage = (req, res) => {
-//   passport.authenticate('jwt', {session: false}), (req, res) => {
-//     const { user } = req;
-//     res.status(200).send({ user });
-//   }
-// };
+        /** assign our jwt to the cookie */
+        // res.cookie('jwt', token, { httpOnly: true, secure: true });
+        return res.status(200).json({ payload, token });
+      });
+    }
+  )(req, res);
+};
+
+
+Controller.protectedPage = (req, res) => {
+  const { user } = req;
+  res.status(200).send({ user });
+};
 
 // Controller.validate = (method) => {
 //   switch (method) {
