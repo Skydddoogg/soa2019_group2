@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-// const { check, validationResult } = require('express-validator/check');
 const User = require('./user.model');
 const Controller = {};
 
-const secret = 'SECRET1234'
+const SECRET = 'SECRET1234'
+const JWT_EXPIRATION_MS = 1800*1000;
 
 Controller.signup = (req, res) => {
   const saltRounds = 10;
@@ -39,26 +39,17 @@ Controller.signin = (req, res) => {
     { session: false },
     (err, user) => {
       if (err || !user) {
-        console.log('err from 1');
         return res.status(400).json({ err });
       }
-      /** This is what ends up in our JWT */
       const payload = {
         'username': user.username,
-        'expires': Date.now() + parseInt(1800*1000),
+        'expires': Date.now() + parseInt(JWT_EXPIRATION_MS),
       };
-
-      /** assigns payload to req.user */
       req.login(payload, {session: false}, (err) => {
         if (err) {
-          console.log('err from 2');
           return res.status(400).json({ err });
         }
-
-        /** generate a signed json web token and return it in the response */
-        const token = jwt.sign(JSON.stringify(payload), secret);
-
-        /** assign our jwt to the cookie */
+        const token = jwt.sign(JSON.stringify(payload), SECRET);
         // res.cookie('jwt', token, { httpOnly: true, secure: true });
         return res.status(200).json({ payload, token });
       });
@@ -66,25 +57,9 @@ Controller.signin = (req, res) => {
   )(req, res);
 };
 
-
 Controller.protectedPage = (req, res) => {
   const { user } = req;
   res.status(200).send({ user });
 };
-
-// Controller.validate = (method) => {
-//   switch (method) {
-//     case 'signup': {
-//       return [
-//         check('username', 'username doesn\'t exists').exists({ checkFalsy: true }),
-//         check('password', 'hashedPassword doesn\'t exist').isLength({ min: 6 }),
-//         check('firstname', 'firstname doesn\'t exists').exists({ checkFalsy: true }),
-//         check('lastname', 'lastname doesn\'t exists').exists({ checkFalsy: true }),
-//         check('email', 'email is wrong format or doesn\'t exist').isEmail(),
-//         check('userType', 'userType is wrong format or doesn\'t exist').isIn(['student', 'tutor'])
-//       ]
-//     }
-//   }
-// }
 
 module.exports = Controller;

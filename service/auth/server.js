@@ -6,14 +6,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-// const expressValidator = require('express-validator');
 
 const port = global.gConfig.port;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-// app.use(expressValidator());
 
 // required for passport
 app.use(passport.initialize());

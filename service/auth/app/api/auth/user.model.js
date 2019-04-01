@@ -9,8 +9,4 @@ const UserSchema = new mongoose.Schema({
   userType: {type: String, enum: ['student', 'tutor']}
 });
 
-UserSchema.methods.getFullname = () => {
-  return this.firstname + " " + this.lastname;
-};
-
 module.exports = mongoose.model('User', UserSchema);
