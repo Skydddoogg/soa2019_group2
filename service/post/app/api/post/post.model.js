@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema({
   detail: {type: String, required: false},
   creatorId: {type: String, required: true},
   creatorUsername: {type: String, required: true},
-  creatorType: {type: String, required: true}
+  creatorType: {type: String, enum: ['student', 'tutor']}
 });
 PostSchema.plugin(timestamps);
 

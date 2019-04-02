@@ -1,72 +1,43 @@
 const Post = require('./post.model');
-const produce = require('./kafka/producer');
-const { check, validationResult } = require('express-validator/check');
-const Controller = {};
+// const kafkaProducer = require('./kafka/producer');
 const kafkaMethods = {
   CREATE: 'create',
   UPDATE: 'update',
   DELETE: 'delete'
 }
 
-Controller.postCreate = (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ status: 'error', errors: errors.mapped() });
+exports.postCreate = async (req, res) => {
+  const postObj = new Post({
+    subject: req.body.subject,
+    level: req.body.level,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
+    location: req.body.location,
+    expectPrice: req.body.expectPrice,
+    detail: req.body.detail,
+    creatorId: req.body.creatorId,
+    creatorUsername: req.body.creatorUsername,
+    creatorType: req.body.creatorType
+  });
+  const post = await postObj.save();
+  // kafkaProducer.send(kafkaMethods.CREATE, post)
+  res.status(201).json({ post })
+}
+
+exports.postUpdate = async (req, res) => {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
+  if (!post) {
+    res.status(404).json({ message: 'Not found' });
   }
-  Post.create(req.body)
-  .then( post => {
-    produce.send(kafkaMethods.CREATE, post);
-    return post;
-  })
-  .then( post => res.status(201).json({ status: 'success', data: post }))
+  // kafkaProducer.send(kafkaMethods.UPDATE, post);
+  res.status(200).json({ post });
 }
 
-Controller.postUpdate = (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ status: 'error', errors: errors.mapped() });
+exports.postDelete = async (req, res) => {
+  const post = await Post.findByIdAndDelete(req.params.id);
+  if (!post) {
+    res.status(404).json({ message: 'Not found' });
   }
-  Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
-  .then( (post, err) => {
-    if (err) {
-      return res.status(404).json({ status: 'error' , errors: 'Post doesn\'t exist' });
-    } else {
-      produce.send(kafkaMethods.UPDATE, post);
-      return post;
-    }
-  })
-  .then( post => res.status(200).json({ status: 'success', data: post }));
+  // kafkaProducer.send(kafkaMethods.DELETE, post);
+  res.status(200).json({ post });
 }
-
-Controller.postDelete = (req, res) => {
-  Post.findByIdAndDelete(req.params.id)
-  .then( (post, err) => {
-    if (err) {
-      return res.status(404).json({ status: 'error' , errors: 'Post doesn\'t exist' });
-    } else {
-      produce.send(kafkaMethods.DELETE, post);
-      return post;
-    }
-  })
-  .then( post => res.status(200).json({ status: 'success', data: post }));
-}
-
-Controller.validate = (method) => {
-  switch (method) {
-    case 'createAndUpdate': {
-      return [
-        check('subject', "subject doesn't exists").exists({ checkFalsy: true }),
-        check('level', "level is wrong format or doesn't exist").isIn(['elementary', 'lower-secondary', 'upper-secondary']),
-        check('startTime', "startTime doesn't exists").exists({ checkFalsy: true }),
-        check('endTime', "endTime doesn't exists").exists({ checkFalsy: true }),
-        check('location', "location doesn't exists").exists({ checkFalsy: true }),
-        check('expectPrice', "expectPrice is wrong format or doesn't exist").exists({ checkFalsy: true }).isNumeric(),
-        check('creatorId', "creatorId doesn't exists").exists({ checkFalsy: true }),
-        check('creatorUsername', "creatorUsername doesn't exists").exists({ checkFalsy: true }),
-        check('creatorType', "creatorType is wrong format or doesn't exist").isIn(['student', 'tutor'])
-      ]
-    }
-  }
-}
-
-module.exports = Controller;
