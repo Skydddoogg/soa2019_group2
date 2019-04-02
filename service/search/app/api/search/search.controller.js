@@ -1,10 +1,9 @@
-require('./kafka/consumer');
+// require('../../kafka/consumer');
 
 const SearchPost = require('./search.post.model');
-const Util = require('./utility/util');
-const Controller = {};
+const Util = require('../../utility/util');
 
-Controller.getByParam = (req, res) => {
+exports.getByParam = (req, res) => {
   var arraySubject = req.params.subject.split('&');
   var arrayLevel = req.params.level.split('&');
   var startPrice = req.params.startPrice;
@@ -20,5 +19,3 @@ Controller.getByParam = (req, res) => {
     }
   });
 }
-
-module.exports = Controller;

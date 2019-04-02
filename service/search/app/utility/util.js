@@ -14,5 +14,3 @@ module.exports = {
     }
   }
 };
-  
-var utility = function () {}

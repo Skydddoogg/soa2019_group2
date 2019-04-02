@@ -1,11 +1,8 @@
-require('module-alias/register');
-require('@conf/config');
-
 const mongoose = require('mongoose');
-const connectionString = `mongodb://${global.gConfig.db_host}:${global.gConfig.db_port}/${global.gConfig.db_name}`;
+const connectionString = process.env.MONGODB_URL || 'mongodb://localhost:27017/search-dev';
 
 var connectWithRetry = function() {
-  console.log('Search service is connecting database at: ' + connectionString);
+  console.log('Post service is connecting database at: ' + connectionString);
   return mongoose.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false }, function(err) {
     if (err) {
       console.error('Failed to connect to mongo on startup - retrying in 5 sec ', err);

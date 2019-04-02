@@ -1,11 +1,10 @@
-require('module-alias/register');
-require('@conf/db');
+require('custom-env').env(process.env.NODE_ENV || 'development')
+require('./conf/db');
 
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-const port = global.gConfig.port;
+const port = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
