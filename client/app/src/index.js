@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import RegisterForTutor from './registerForTutor';
+import Register from './register';
 import Login from './login';
 
 ReactDOM.render(<Login />, document.getElementById('root'));

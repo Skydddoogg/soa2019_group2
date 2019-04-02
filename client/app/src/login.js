@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Link, Redirect } from "react-router-dom";
+import RegisterForTutor from './registerForTutor';
 
 class Login extends Component {
+
+    state = {
+      redirect: false
+    }
+
+    setRedirect = () => {
+      this.setState({
+        redirect: true
+      })
+    }
+
+    renderRedirect = () => {
+      if (this.state.redirect) {
+        return <Redirect to='/register/' />
+      }
+    }
+
     render() {
       return (
         <div className="Login">
@@ -15,6 +34,10 @@ class Login extends Component {
   
                   <button type="submit" class="registerbtn">Login</button>
               </form>
+              <div>
+                {this.renderRedirect()}
+                <button onClick={this.setRedirect}>Register</button>
+              </div>
           </header>
         </div>
       );
