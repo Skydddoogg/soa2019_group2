@@ -1,8 +1,5 @@
-require('module-alias/register');
-require('@conf/config');
-
 const mongoose = require('mongoose');
-const connectionString = `mongodb://${global.gConfig.db_host}:${global.gConfig.db_port}/${global.gConfig.db_name}`;
+const connectionString = process.env.MONGODB_URL || 'mongodb://localhost:27017/post-dev';
 
 var connectWithRetry = function() {
   console.log('Post service is connecting database at: ' + connectionString);

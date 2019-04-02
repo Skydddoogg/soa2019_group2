@@ -2,7 +2,7 @@ const sinon = require('sinon');
 const request = require('request');
 const chai = require('chai');
 const should = chai.should();
-const posts = require('./fixtures/posts.json');
+const posts = require('../../fixtures/posts.json');
 
 describe('post service', () => {
 

@@ -1,13 +1,11 @@
-require('module-alias/register');
-require('@conf/config');
-
 const kafka = require('kafka-node');
-const client = new kafka.KafkaClient({kafkaHost: `${global.gConfig.kafka_host}:${global.gConfig.kafka_port}`});
+const host = process.env.KAFKA_URL || 'localhost:9092'
+const client = new kafka.KafkaClient({kafkaHost: host});
 const Producer = kafka.Producer
 const producer = new Producer(client);
 
 producer.on('ready', function () {
-  console.log('Producer is ready');
+  console.log('Producer is ready, Kafka host: ' + host);
 });
 
 producer.on('error', function (err) {

@@ -1,5 +1,5 @@
 const Post = require('./post.model');
-// const kafkaProducer = require('./kafka/producer');
+// const kafkaProducer = require('../../kafka/producer');
 const kafkaMethods = {
   CREATE: 'create',
   UPDATE: 'update',
