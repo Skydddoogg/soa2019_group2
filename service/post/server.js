@@ -1,5 +1,6 @@
 require('custom-env').env(process.env.NODE_ENV || 'development')
 require('./conf/db');
+require('module-alias/register')
 
 const express = require('express');
 const app = express();
@@ -13,3 +14,5 @@ require('./app/routes')(app);
 
 app.listen(port);
 console.log('Post service is listening on port: ' + port);
+
+module.exports = app;
