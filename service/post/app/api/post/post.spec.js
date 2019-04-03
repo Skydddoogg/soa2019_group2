@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 
 describe('Post-service', () => {
   
-  beforeEach((done) => {
+  afterEach((done) => {
     Post.deleteMany({}, (err) => { 
       done();
     });
