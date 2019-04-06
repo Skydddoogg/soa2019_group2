@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "custom-env": "^1.0.0",
+    "eureka-js-client": "^4.4.2",
     "express": "~4.16.0",
     "kafka-node": "^4.0.2",
     "mongoose": "^5.4.19"
