@@ -41,13 +41,18 @@ const client = new Eureka({
 
 client.logger.level('debug');
 client.start(error => {
-  console.log(error || 'NodeJS Eureka Started!');
+  console.log(error || 'Eureka client started');
 
   // Service discovery from Eureka server
   const postServiceInstance = client.getInstancesByAppId('post-service');  
   const postServiceUrl = `http://${postServiceInstance[0].hostName}:${postServiceInstance[0].port.$}`;
-  const postServiceProxy = httpProxy(postServiceUrl)
-  console.log(`Service 1: ${postServiceUrl}`)
+  const postServiceProxy = httpProxy(postServiceUrl);
+  console.log(`Post-service: ${postServiceUrl}`);
+
+  const searchServiceInstance = client.getInstancesByAppId('search-service');  
+  const searchServiceUrl = `http://${searchServiceInstance[0].hostName}:${searchServiceInstance[0].port.$}`;
+  const searchServiceProxy = httpProxy(searchServiceUrl);
+  console.log(`Search-service: ${searchServiceUrl}`);
 
   // Shared general logic: Authentication
   app.use((req, res, next) => {
@@ -59,9 +64,10 @@ client.start(error => {
   // Aggregate services after authentication
   app.get('/', async (req, res) => {
     const services = await Promise.all([
-      request({ uri: postServiceUrl, json: true })])
-
-    const response = { services }
+      request({ uri: postServiceUrl, json: true }),
+      request({ uri: searchServiceUrl, json: true })
+    ]);
+    const response = { services };
 
     // Format transformation: XML or JSON
     if (req.get('Content-Type') === 'application/xml') {
@@ -74,8 +80,12 @@ client.start(error => {
   });
 
   // Proxy request after authentication
-  app.use('/post', (req, res, next) => {
-    postServiceProxy(req, res, next)
+  app.use('/api/post', (req, res, next) => {
+    postServiceProxy(req, res, next);
+  });
+
+  app.use('/api/search', (req, res, next) => {
+    searchServiceProxy(req, res, next);
   });
 
 });

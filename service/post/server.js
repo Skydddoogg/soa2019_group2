@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 client.logger.level('debug');
 client.start(error => {
-  console.log(error || 'NodeJS Eureka Started!');
+  console.log(error || 'Eureka client started');
   require('./app/routes')(app);
 });
 
