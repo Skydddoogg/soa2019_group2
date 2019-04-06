@@ -5,4 +5,4 @@
 * :white_check_mark: [Tutor service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/tutor)
 * :white_check_mark: [Review service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/review)
 * Offer service
-* Authentication service
+* :white_check_mark: [Authentication service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/auth)
