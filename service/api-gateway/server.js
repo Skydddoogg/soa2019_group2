@@ -2,6 +2,7 @@ const express = require('express');
 const httpProxy = require('express-http-proxy');
 const request = require('request-promise-native');
 const xml = require('xml');
+const passport = require('passport');
 const Eureka = require('eureka-js-client').Eureka;
 
 // Constants
@@ -39,6 +40,11 @@ const client = new Eureka({
   },
 });
 
+// required for passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./conf/passport')(passport);
+
 client.logger.level('debug');
 client.start(error => {
   console.log(error || 'Eureka client started');
@@ -54,38 +60,48 @@ client.start(error => {
   const searchServiceProxy = httpProxy(searchServiceUrl);
   console.log(`Search-service: ${searchServiceUrl}`);
 
-  // Shared general logic: Authentication
-  app.use((req, res, next) => {
-    // TODO: authentication logic
-    console.log(`Authentication: ${req.path}`)
-    next()
-  });
+  const authServiceInstance = client.getInstancesByAppId('auth-service');  
+  const authServiceUrl = `http://${authServiceInstance[0].hostName}:${authServiceInstance[0].port.$}`;
+  const authServiceProxy = httpProxy(authServiceUrl);
+  console.log(`Auth-service: ${authServiceUrl}`);
 
-  // Aggregate services after authentication
-  app.get('/', async (req, res) => {
-    const services = await Promise.all([
-      request({ uri: postServiceUrl, json: true }),
-      request({ uri: searchServiceUrl, json: true })
-    ]);
-    const response = { services };
+  // // Shared general logic: Authentication
+  // app.use((req, res, next) => {
+  //   // TODO: authentication logic
+  //   console.log(`Authentication: ${req.path}`)
+  //   next()
+  // });
 
-    // Format transformation: XML or JSON
-    if (req.get('Content-Type') === 'application/xml') {
-      const xmlResponse = xml(response)
-      res.set('content-type', 'text/xml')
-      res.end(xmlResponse)
-    } else {
-      res.json(response)
-    }
-  });
+  // // Aggregate services after authentication
+  // app.get('/', async (req, res) => {
+  //   const services = await Promise.all([
+  //     request({ uri: postServiceUrl, json: true }),
+  //     request({ uri: searchServiceUrl, json: true }),
+  //     request({ uri: authServiceUrl, json: true })
+  //   ]);
+  //   const response = { services };
+
+  //   // Format transformation: XML or JSON
+  //   if (req.get('Content-Type') === 'application/xml') {
+  //     const xmlResponse = xml(response)
+  //     res.set('content-type', 'text/xml')
+  //     res.end(xmlResponse)
+  //   } else {
+  //     res.json(response)
+  //   }
+  // });
 
   // Proxy request after authentication
-  app.use('/api/post', (req, res, next) => {
+  app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     postServiceProxy(req, res, next);
   });
 
   app.use('/api/search', (req, res, next) => {
     searchServiceProxy(req, res, next);
+  });
+
+  app.use('/api/auth', (req, res, next) => {
+    authServiceProxy(req, res, next);
   });
 
 });

@@ -5,7 +5,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require('passport-local').Strategy;
 
-const User = require('../app/api/auth/user.model');
+const User = require('../app/api/user/user.model');
 
 const SECRET = 'SECRET1234'
 

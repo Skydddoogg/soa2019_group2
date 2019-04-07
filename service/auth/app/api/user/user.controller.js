@@ -22,6 +22,7 @@ Controller.signup = (req, res) => {
         email: req.body.email,
         userType: req.body.userType
       });
+      console.log(user);
       user.save()
       .then( user => {
         return res.status(201).json(user);
