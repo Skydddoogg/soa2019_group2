@@ -4,8 +4,9 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Register from './register';
 import Login from './login';
+import Post from './post';
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Post />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
