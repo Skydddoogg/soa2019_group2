@@ -36,7 +36,7 @@ describe('Post-service', () => {
         creatorType: "studentxyz"
       };
       chai.request(server)
-      .post('/api/post/create')
+      .post('/create')
       .send(post)
       .end((err, res) => {
         res.should.have.status(401);
@@ -59,7 +59,7 @@ describe('Post-service', () => {
         creatorType: "student"
       };
       chai.request(server)
-      .post('/api/post/create')
+      .post('/create')
       .send(post)
       .end((err, res) => {
         res.should.have.status(201);
@@ -88,7 +88,7 @@ describe('Post-service', () => {
         creatorType: "student"
       };
       chai.request(server)
-      .put('/api/post/update/nonexist1234')
+      .put('/update/nonexist1234')
       .send(editedPost)
       .end((err, res) => {
         res.should.have.status(404);
@@ -124,7 +124,7 @@ describe('Post-service', () => {
       }
       post.save((err, post) => {
         chai.request(server)
-        .put('/api/post/update/'+post.id)
+        .put('/update/'+post.id)
         .send(editedPost)
         .end((err, res) => {
           res.should.have.status(200);
@@ -146,7 +146,7 @@ describe('Post-service', () => {
   describe('/DELETE post', () => {
     it('Should not DELETE a post given non-exist ID', (done) => {
       chai.request(server)
-      .delete('/api/post/delete/nonexistid!!')
+      .delete('/delete/nonexistid!!')
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.be.a('object');
@@ -169,7 +169,7 @@ describe('Post-service', () => {
       });
       post.save((err, post) => {
         chai.request(server)
-        .delete('/api/post/delete/'+post.id)
+        .delete('/delete/'+post.id)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
