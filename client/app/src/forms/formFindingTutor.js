@@ -29,7 +29,7 @@ export default function FormForFindingTutor() {
       <input type="time" name="EndTime" ref={register({ required: true })} />
       <br />สถานที่เรียน:
       <input type="text" name="Location" ref={register({ required: true })} />
-      <br />ราคา (ต่อชั่วโมง):
+      <br />ราคาต่อชั่วโมง:
       <input type="number" name="Price" ref={register({ required: true })} />
       <br />รายละเอียดเพิ่มเติม:
       <textarea name="Details" ref={register({ required: true })} />

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "namor": "^1.1.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-hook-form": "^2.1.14",
@@ -10,6 +11,7 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "react-select": "^2.4.2",
+    "react-table": "^6.9.2",
     "react-time-picker": "^3.5.1"
   },
   "scripts": {
