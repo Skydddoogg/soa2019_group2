@@ -1,9 +1,10 @@
 import React from 'react';
 import useForm from 'react-hook-form';
+import { createFindingTutorPost } from '../actions/postActions';
 
 export default function FormForFindingTutor() {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => createFindingTutorPost(data);
   console.log(errors);
   
   return (
