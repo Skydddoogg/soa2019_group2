@@ -8,7 +8,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('Post-service', () => {
+describe('Post-service integration test', () => {
   
   afterEach((done) => {
     Post.deleteMany({}, (err) => { 
@@ -17,9 +17,111 @@ describe('Post-service', () => {
   });
 
   /*
+  * Test the /GET route
+  */
+  describe('/GET specific post by post ID', () => {
+    it('Should not GET a post with non-exists post ID', (done) => {
+      chai.request(server)
+      .get('/nonexistid!!')
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').eql('Not found');
+        done();
+      });
+    });
+    it('Should GET a post with exists post ID', (done) => {
+      let post = new Post({
+        subject: "science",
+        level: "upper-secondary",
+        startTime: "9:00",
+        endTime: "15:00",
+        location: "Seacon Square",
+        expectPrice: 1200,
+        detail: "Mock up detail",
+        creatorId: "xyz321",
+        creatorUsername: "ria123",
+        creatorType: "student"
+      });
+      post.save((err, post) => {
+        chai.request(server)
+        .get('/'+post.id)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('post');
+          done();
+        });
+      });
+    });
+  });
+
+  describe('/GET a list of all post by specific username', () => {
+    it('Should GET a empty list with non-exists username or exists username but doesn\'t have any post', (done) => {
+      chai.request(server)
+      .get('/nonexistid!!/allpost')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('array');
+        res.body.should.have.length(0);
+        done();
+      });
+    });
+    it('Should GET a post with exists post ID', (done) => {
+      let post1 = new Post({
+        subject: "science",
+        level: "upper-secondary",
+        startTime: "9:00",
+        endTime: "15:00",
+        location: "Seacon Square",
+        expectPrice: 1200,
+        detail: "Mock up detail",
+        creatorId: "xyz321",
+        creatorUsername: "ria123",
+        creatorType: "student"
+      });
+      let post2 = new Post({
+        subject: "math",
+        level: "upper-secondary",
+        startTime: "9:00",
+        endTime: "15:00",
+        location: "Paradise",
+        expectPrice: 1200,
+        detail: "Mock up detail",
+        creatorId: "xyz321",
+        creatorUsername: "ria123",
+        creatorType: "student"
+      });
+      let post3 = new Post({
+        subject: "biology",
+        level: "upper-secondary",
+        startTime: "9:00",
+        endTime: "15:00",
+        location: "Seacon Square",
+        expectPrice: 1200,
+        detail: "Mock up detail",
+        creatorId: "xyz321",
+        creatorUsername: "ria123",
+        creatorType: "student"
+      });
+      Promise.all([post1.save(), post2.save(), post3.save()])
+      .then( () => {
+        chai.request(server)
+        .get('/ria123/allpost')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.should.have.length(3);
+          done();
+        });
+      });
+    });
+  });
+
+  /*
   * Test the /POST route
   */
-  describe('/POST post', () => {
+  describe('/POST create post', () => {
     it('Should not POST a post with invalid fields', (done) => {
       let post = {
         // No subject
@@ -73,7 +175,7 @@ describe('Post-service', () => {
   /*
   * Test the /PUT route
   */
-  describe('/PUT post', () => {
+  describe('/PUT update post', () => {
     it('Should not UPDATE a post given non-exist ID', (done) => {
       let editedPost = {
         subject: "math",
@@ -136,14 +238,13 @@ describe('Post-service', () => {
           done();
         });
       });
-      
     });
   });
 
   /*
   * Test the /DELETE route
   */
-  describe('/DELETE post', () => {
+  describe('/DELETE delete post', () => {
     it('Should not DELETE a post given non-exist ID', (done) => {
       chai.request(server)
       .delete('/delete/nonexistid!!')
@@ -177,7 +278,6 @@ describe('Post-service', () => {
           done();
         });
       });
-      
     });
   });
 
