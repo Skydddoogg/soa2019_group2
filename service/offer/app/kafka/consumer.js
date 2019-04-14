@@ -1,8 +1,8 @@
 const Inbox = require('../api/inbox/inbox.model');
 
 const kafka = require('kafka-node')
-const KAFKAURL = process.env.KAFKA_URL || 'localhost:9092';
-const client = new kafka.KafkaClient({kafkaHost: KAFKAURL});
+const KAFKA_URL = process.env.KAFKA_URL || 'localhost:9092';
+const client = new kafka.KafkaClient({kafkaHost: KAFKA_URL});
 const Consumer = kafka.Consumer;
 const consumer = new Consumer(client, [{
   topic: 'initofferinbox',

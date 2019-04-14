@@ -3,6 +3,7 @@ require('module-alias/register');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const { check, validationResult } = require('express-validator/check');
 const User = require('./user.model');
 const kafkaProducer = require('@kafka/producer');
 const kafkaMethods = {
@@ -13,7 +14,14 @@ const kafkaMethods = {
 const SECRET = process.env.SECRET_KEY;
 const JWT_EXPIRATION_MS = 1800*1000; // 30 Minutes
 
-exports.signup = (req, res) => {
+exports.signup = async (req, res) => {
+
+  // Validate profile information
+  const errors = await validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(500).json({ error: errors.array() });
+  }
+
   const saltRounds = 10;
   bcrypt.genSalt(saltRounds, (error, salt) => {
     bcrypt.hash(req.body.password, salt, async (error, hashedPassword) => {
@@ -23,7 +31,6 @@ exports.signup = (req, res) => {
       const userAuthData = new User({
         username: req.body.username,
         hashedPassword: hashedPassword,
-        email: req.body.email,
         userType: req.body.userType
       });
       try {
@@ -31,13 +38,13 @@ exports.signup = (req, res) => {
         if (user.userType === 'student') {
           kafkaProducer.send(kafkaMethods.INITOFFERINBOX, user.id);
         }
-        // const userProfile = {
-        //   id: user.id,
-        //   firstname: req.body.firstname,
-        //   lastname: req.body.lastname,
-        //   email: req.body.email,
-        //   phoneNumber: req.body.phoneNumber
-        // }
+        const userProfile = {
+          id: user.id,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          email: req.body.email,
+          phoneNumber: req.body.phoneNumber
+        }
         // kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         return res.status(201).json({ user });
       } catch (error) {
@@ -53,7 +60,7 @@ exports.signin = (req, res) => {
     { session: false },
     (error, user) => {
       if (error || !user) {
-        return res.status(400).json({ error });
+        return res.status(500).json({ error });
       }
       const payload = {
         'username': user.username,
@@ -61,7 +68,7 @@ exports.signin = (req, res) => {
       };
       req.login(payload, {session: false}, (error) => {
         if (error) {
-          return res.status(400).json({ error });
+          return res.status(500).json({ error });
         }
         const token = jwt.sign(JSON.stringify(payload), SECRET);
         // res.cookie('jwt', token, { httpOnly: true, secure: true });
@@ -70,3 +77,12 @@ exports.signin = (req, res) => {
     }
   )(req, res);
 };
+
+exports.validate = () => {
+  return [
+    check('firstname').exists({ checkFalsy: true }),
+    check('lastname').exists({ checkFalsy: true }),
+    check('email').isEmail({ checkFalsy: true }),
+    check('phoneNumber').exists({ checkFalsy: true })
+  ]
+}

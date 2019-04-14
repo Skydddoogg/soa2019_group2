@@ -65,6 +65,11 @@ client.start(error => {
   const authServiceProxy = httpProxy(authServiceUrl);
   console.log(`Auth-service: ${authServiceUrl}`);
 
+  const offerServiceInstance = client.getInstancesByAppId('offer-service');  
+  const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
+  const offerServiceProxy = httpProxy(offerServiceUrl);
+  console.log(`Offer-service: ${offerServiceUrl}`);
+
   // Proxy request after authentication
   app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     postServiceProxy(req, res, next);
@@ -76,6 +81,10 @@ client.start(error => {
 
   app.use('/api/auth', (req, res, next) => {
     authServiceProxy(req, res, next);
+  });
+
+  app.use('/api/offer', (req, res, next) => {
+    offerServiceProxy(req, res, next);
   });
 
 });

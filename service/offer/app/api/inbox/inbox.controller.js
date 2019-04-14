@@ -4,6 +4,7 @@ require('@kafka/consumer');
 const Inbox = require('./inbox.model');
 const Offer = require('../offer/offer.model');
 
+// TODO: Student get offer
 // exports.getOffer = async (req, res) => {
 
 // };
