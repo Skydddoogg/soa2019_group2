@@ -1,7 +1,5 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('../app/api/user/user.model');

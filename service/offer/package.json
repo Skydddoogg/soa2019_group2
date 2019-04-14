@@ -1,17 +1,26 @@
 {
-  "name": "offer",
-  "version": "0.0.0",
-  "private": true,
+  "name": "offer-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "http-errors": "~1.6.2",
-    "jade": "~1.11.0",
-    "mongoose": "^5.4.19",
-    "morgan": "~1.9.0"
+    "body-parser": "^1.18.3",
+    "custom-env": "^1.0.0",
+    "eureka-js-client": "^4.4.2",
+    "express": "^4.16.4",
+    "kafka-node": "^4.1.0",
+    "module-alias": "^2.2.0",
+    "mongoose": "^5.5.1"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@kafka": "./app/kafka"
   }
 }
