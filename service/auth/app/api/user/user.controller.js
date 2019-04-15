@@ -5,6 +5,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const { check, validationResult } = require('express-validator/check');
 const User = require('./user.model');
+
 const kafkaProducer = require('@kafka/producer');
 const kafkaMethods = {
   INITOFFERINBOX: 'initofferinbox',
@@ -40,12 +41,13 @@ exports.signup = async (req, res) => {
         }
         const userProfile = {
           id: user.id,
+          userType: user.userType,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           email: req.body.email,
           phoneNumber: req.body.phoneNumber
-        }
-        // kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
+        };
+        kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         return res.status(201).json({ user });
       } catch (error) {
         return res.status(500).json({ error });
