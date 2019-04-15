@@ -1,7 +1,7 @@
+require('custom-env').env(process.env.NODE_ENV || 'development');
+
 const express = require('express');
 const httpProxy = require('express-http-proxy');
-const request = require('request-promise-native');
-const xml = require('xml');
 const passport = require('passport');
 const Eureka = require('eureka-js-client').Eureka;
 
@@ -65,31 +65,10 @@ client.start(error => {
   const authServiceProxy = httpProxy(authServiceUrl);
   console.log(`Auth-service: ${authServiceUrl}`);
 
-  // // Shared general logic: Authentication
-  // app.use((req, res, next) => {
-  //   // TODO: authentication logic
-  //   console.log(`Authentication: ${req.path}`)
-  //   next()
-  // });
-
-  // // Aggregate services after authentication
-  // app.get('/', async (req, res) => {
-  //   const services = await Promise.all([
-  //     request({ uri: postServiceUrl, json: true }),
-  //     request({ uri: searchServiceUrl, json: true }),
-  //     request({ uri: authServiceUrl, json: true })
-  //   ]);
-  //   const response = { services };
-
-  //   // Format transformation: XML or JSON
-  //   if (req.get('Content-Type') === 'application/xml') {
-  //     const xmlResponse = xml(response)
-  //     res.set('content-type', 'text/xml')
-  //     res.end(xmlResponse)
-  //   } else {
-  //     res.json(response)
-  //   }
-  // });
+  const offerServiceInstance = client.getInstancesByAppId('offer-service');  
+  const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
+  const offerServiceProxy = httpProxy(offerServiceUrl);
+  console.log(`Offer-service: ${offerServiceUrl}`);
 
   // Proxy request after authentication
   app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
@@ -102,6 +81,10 @@ client.start(error => {
 
   app.use('/api/auth', (req, res, next) => {
     authServiceProxy(req, res, next);
+  });
+
+  app.use('/api/offer', (req, res, next) => {
+    offerServiceProxy(req, res, next);
   });
 
 });

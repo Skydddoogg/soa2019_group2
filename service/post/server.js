@@ -52,8 +52,7 @@ if (ENV === 'test') {
   });
 }
 
-app.listen(PORT, function () {
-  console.log('Post service is listening on port: ' + PORT);
-});
+app.listen(PORT);
+console.log('Post service is listening on port: ' + PORT);
 
 module.exports = app;

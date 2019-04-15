@@ -11,12 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "custom-env": "^1.0.0",
     "eureka-js-client": "^4.4.2",
     "express": "^4.16.4",
     "express-http-proxy": "^1.5.1",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "request-promise-native": "^1.0.7",
-    "xml": "^1.0.1"
+    "passport-jwt": "^4.0.0"
   }
 }

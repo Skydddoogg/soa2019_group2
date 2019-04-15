@@ -6,7 +6,20 @@ const kafkaMethods = {
   DELETE: 'delete'
 }
 
-exports.postCreate = async (req, res) => {
+exports.getPostByPostId = async (req, res) => {
+  const post = await Post.findById(req.params.postid);
+  if (!post) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+  return res.status(200).json({ post });
+};
+
+exports.getAllPostByUsername = async (req, res) => {
+  const postlist = await Post.find({ creatorUsername: req.params.username });
+  return res.status(200).json(postlist);
+};
+
+exports.createPost = async (req, res) => {
   const postObj = new Post({
     subject: req.body.subject,
     level: req.body.level,
@@ -26,22 +39,22 @@ exports.postCreate = async (req, res) => {
   } catch(err) {
     return res.status(401).json({ err });
   }
-}
+};
 
-exports.postUpdate = async (req, res) => {
+exports.updatePost = async (req, res) => {
   const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
   if (!post) {
     return res.status(404).json({ message: 'Not found' });
   }
   // kafkaProducer.send(kafkaMethods.UPDATE, post);
   return res.status(200).json({ post });
-}
+};
 
-exports.postDelete = async (req, res) => {
+exports.deletePost = async (req, res) => {
   const post = await Post.findByIdAndDelete(req.params.id);
   if (!post) {
     return res.status(404).json({ message: 'Not found' });
   }
   // kafkaProducer.send(kafkaMethods.DELETE, post);
   return res.status(200).json({ post });
-}
+};

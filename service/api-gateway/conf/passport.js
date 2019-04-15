@@ -3,7 +3,7 @@ const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
-const SECRET = 'SECRET1234'
+const SECRET = process.env.SECRET_KEY;
 
 module.exports = function(passport) {
   passport.use(new JWTStrategy({
