@@ -70,8 +70,14 @@ client.start(error => {
   const offerServiceProxy = httpProxy(offerServiceUrl);
   console.log(`Offer-service: ${offerServiceUrl}`);
 
+  const profileServiceInstance = client.getInstancesByAppId('profile-service');  
+  const profileServiceUrl = `http://${profileServiceInstance[0].hostName}:${profileServiceInstance[0].port.$}`;
+  const profileServiceProxy = httpProxy(profileServiceUrl);
+  console.log(`Profile-service: ${profileServiceUrl}`);
+
   // Proxy request after authentication
-  app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  // app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  app.use('/api/post', (req, res, next) => {
     postServiceProxy(req, res, next);
   });
 
@@ -85,6 +91,10 @@ client.start(error => {
 
   app.use('/api/offer', (req, res, next) => {
     offerServiceProxy(req, res, next);
+  });
+
+  app.use('/api/profile', (req, res, next) => {
+    profileServiceProxy(req, res, next);
   });
 
 });

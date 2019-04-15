@@ -2,7 +2,6 @@ const ENV = process.env.NODE_ENV || 'development';
 
 require('custom-env').env(ENV);
 require('./conf/db');
-require('module-alias/register')
 
 const express = require('express');
 const app = express();

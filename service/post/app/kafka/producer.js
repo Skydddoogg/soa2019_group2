@@ -1,11 +1,11 @@
 const kafka = require('kafka-node');
-const host = process.env.KAFKA_URL || 'localhost:9092'
-const client = new kafka.KafkaClient({kafkaHost: host});
+const KAFKA_URL = process.env.KAFKA_URL || 'localhost:9092'
+const client = new kafka.KafkaClient({kafkaHost: KAFKA_URL});
 const Producer = kafka.Producer
 const producer = new Producer(client);
 
 producer.on('ready', function () {
-  console.log('Producer is ready, Kafka host: ' + host);
+  console.log('Producer is ready, Kafka host: ' + KAFKA_URL);
 });
 
 producer.on('error', function (err) {
