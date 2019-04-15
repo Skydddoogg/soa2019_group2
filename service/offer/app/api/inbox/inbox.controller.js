@@ -39,9 +39,9 @@ exports.createOffer = async (req, res) => {
     tutorUsername: req.body.tutorUsername
   });
   const offerInbox = await OfferInbox.findByIdAndUpdate(req.body.studentId, 
-    { "$push": { "offerlist": offer } });
+    { '$push': { 'offerlist': offer } });
   if (!offerInbox) {
     return res.status(404).json({ message: 'Not found' });
   }
-  return res.status(200).json({ offer });
+  return res.status(201).json({ offer });
 };
