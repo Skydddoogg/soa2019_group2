@@ -15,10 +15,10 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-// exports.editProfile = async (req, res) => {
-//   const profile = await profile.findByIdAndUpdate(req.params.userid, req.body, {new: true});
-//   if (!profile) {
-//     return res.status(404).json({ message: 'Not found' });
-//   }
-//   return res.status(200).json({ profile });
-// };
+exports.editProfile = async (req, res) => {
+  const profile = await Profile.findByIdAndUpdate(req.params.userid, req.body, {new: true});
+  if (!profile) {
+    return res.status(404).json({ message: 'Not found' });
+  }
+  return res.status(200).json({ profile });
+};
