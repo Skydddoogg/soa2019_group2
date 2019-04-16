@@ -43,7 +43,7 @@ const Search = props => (
 
 const Header = () => (
   <header className="content-wrapper">
-    {/* <ConnectedSearchBox /> */}
+    <ConnectedSearchBox />
   </header>
 );
 
