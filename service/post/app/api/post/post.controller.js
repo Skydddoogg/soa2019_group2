@@ -1,3 +1,5 @@
+require('module-alias/register');
+
 const Post = require('./post.model');
 // const kafkaProducer = require('@kafka/producer');
 const kafkaMethods = {
@@ -7,11 +9,15 @@ const kafkaMethods = {
 }
 
 exports.getPostByPostId = async (req, res) => {
-  const post = await Post.findById(req.params.postid);
-  if (!post) {
-    return res.status(404).json({ message: 'Not found' });
+  try {
+    const post = await Post.findById(req.params.postid);
+    if (!post) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    return res.status(200).json({ post });
+  } catch(error) {
+    return res.status(404).json({ message: 'Not found', error: error });
   }
-  return res.status(200).json({ post });
 };
 
 exports.getAllPostByUsername = async (req, res) => {
