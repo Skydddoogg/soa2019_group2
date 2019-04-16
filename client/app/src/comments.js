@@ -3,13 +3,13 @@ import Avatar from 'react-avatar';
 
 var commentData = [
   { 
-    author:"Shawn Spencer", 
-    text:"I've heard it both ways",
+    author:"Pleng Pongpanot", 
+    text:"อาจารย์สอนไม่ช้าและไม่เร็วเกินไป สุดยอดครับ แต่อยากให้อาจารย์หาโจทย์มาให้ทำเยอะ ๆ กว่านี้",
     imgUrl: "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
   },
   { 
-    author:"Burton Guster", 
-    text:"You hear about Pluto? That's messed up",
+    author:"Bank Mawin", 
+    text:"สุดยอดอาจารย์สอนคณิตศาสตร์เลย",
     imgUrl: "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
   }
 ];
@@ -59,13 +59,13 @@ class CommentForm extends Component {
     e.preventDefault();
 
     // TODO: Get username
-    var authorVal = "Sky"
+    var authorVal = "Thanawat Lodkaew"
 
     var textVal = e.target[0].value.trim();
 
     // TODO: Get image URL
     var imgVal = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
-    
+
     if (!textVal || !authorVal || !imgVal) {
       return;
     }
@@ -92,7 +92,7 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <div><Avatar size="100" src={this.props.imgUrl}/> <b>{this.props.author}</b></div>
+        <div><Avatar size="60" src={this.props.imgUrl} round={true}/> <b>{this.props.author}</b></div>
         {this.props.text}
       </div>
     );
