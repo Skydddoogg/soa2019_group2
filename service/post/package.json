@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "custom-env": "^1.0.0",
     "eureka-js-client": "^4.4.2",
     "express": "^4.16.4",

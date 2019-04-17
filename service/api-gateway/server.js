@@ -4,6 +4,7 @@ const express = require('express');
 const httpProxy = require('express-http-proxy');
 const passport = require('passport');
 const Eureka = require('eureka-js-client').Eureka;
+const cors = require('cors');
 
 // Constants
 const PORT = process.env.PORT || 3000
@@ -39,6 +40,8 @@ const client = new Eureka({
     servicePath: '/eureka/apps/',
   },
 });
+
+app.use(cors());
 
 // required for passport
 app.use(passport.initialize());
