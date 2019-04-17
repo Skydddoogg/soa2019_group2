@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
+import { createComment } from './actions/reviewActions';
 
 var commentData = [
   { 
@@ -58,19 +59,40 @@ class CommentForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: Get username
+    // TODO: Get author
     var authorVal = "Thanawat Lodkaew"
+    var authorIdVal = "1"
+    var authorTypeVal = "student"
+    var authorImgVal = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
+
+    // TODO: Get target
+    var targetIdVal = "2"
+    var targetVal = "Kevin Mawin"
+    var targetTypeVal = "tutor"
 
     var textVal = e.target[0].value.trim();
 
-    // TODO: Get image URL
-    var imgVal = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
 
-    if (!textVal || !authorVal || !imgVal) {
+    if (!textVal || !authorVal || !authorImgVal) {
       return;
     }
+
+    // TODO: Get information
+    var data = {
+      message: textVal,
+      ownerId: authorIdVal,
+      targetId: targetIdVal,
+      ownerUsername: authorVal,
+      targetUsername: targetVal,
+      ownerType: authorTypeVal,
+      targetType: targetTypeVal,
+      profileImg: authorImgVal
+    }
+
+    // Send data to API
+    createComment(data);
     
-    this.props.onCommentSubmit({author: authorVal, text: textVal, imgUrl: imgVal});
+    this.props.onCommentSubmit({author: authorVal, text: textVal, imgUrl: authorImgVal});
     e.target[0].value = '';
     e.target[1].value = '';
     return;

@@ -14,7 +14,8 @@ exports.reviewCreate = async (req, res) => {
       ownerUsername: req.body.ownerUsername,
       targetUsername: req.body.targetUsername,
       ownerType: req.body.ownerType,
-      targetType: req.body.targetType
+      targetType: req.body.targetType,
+      profileImg: req.body.profileImg
     });
     try {
       const review = await reviewObj.save();
