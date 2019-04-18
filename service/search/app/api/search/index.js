@@ -2,6 +2,7 @@ const Router = require('express').Router;
 const Controller = require('./search.controller');
 const router = new Router();
 
-router.get('/:subject/:level/:startPrice/:endPrice', Controller.getByParam);
+router.get('/searchPost', Controller.searchPost);
+// router.get('/searchTutor', Controller.searchTutor);
 
 module.exports = router;

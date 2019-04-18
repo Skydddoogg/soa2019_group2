@@ -13,7 +13,7 @@ const kafkaMethods = {
 }
 
 const SECRET = process.env.SECRET_KEY;
-const JWT_EXPIRATION_MS = 1800*1000; // 30 Minutes
+const JWT_EXPIRATION_MS = 18000*1000; // 300 Minutes
 
 exports.signup = async (req, res) => {
 
@@ -65,7 +65,9 @@ exports.signin = (req, res) => {
         return res.status(500).json({ error });
       }
       const payload = {
+        'userId': user.id,
         'username': user.username,
+        'userType': user.userType,
         'expires': Date.now() + parseInt(JWT_EXPIRATION_MS)
       };
       req.login(payload, {session: false}, (error) => {

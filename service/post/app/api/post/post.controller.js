@@ -6,7 +6,7 @@ const kafkaMethods = {
   CREATE: 'create',
   UPDATE: 'update',
   DELETE: 'delete'
-}
+};
 
 exports.getPostByPostId = async (req, res) => {
   try {
@@ -16,13 +16,17 @@ exports.getPostByPostId = async (req, res) => {
     }
     return res.status(200).json({ post });
   } catch(error) {
-    return res.status(404).json({ message: 'Not found', error: error });
+    return res.status(500).json({ error });
   }
 };
 
 exports.getAllPostByUsername = async (req, res) => {
-  const postlist = await Post.find({ creatorUsername: req.params.username });
-  return res.status(200).json(postlist);
+  try {
+    const postlist = await Post.find({ creatorUsername: req.params.username });
+    return res.status(200).json(postlist);
+  } catch(error) {
+    return res.status(500).json({ error });
+  }
 };
 
 exports.createPost = async (req, res) => {
@@ -34,33 +38,47 @@ exports.createPost = async (req, res) => {
     location: req.body.location,
     expectPrice: req.body.expectPrice,
     detail: req.body.detail,
-    creatorId: req.body.creatorId,
-    creatorUsername: req.body.creatorUsername,
-    creatorType: req.body.creatorType
+    creatorId: req.user.userId,
+    creatorUsername: req.user.username,
+    creatorType: req.user.userType
   });
   try {
     const post = await postObj.save();
     // kafkaProducer.send(kafkaMethods.CREATE, post)
     return res.status(201).json({ post });
-  } catch(err) {
-    return res.status(401).json({ err });
+  } catch(error) {
+    return res.status(500).json({ error });
   }
 };
 
 exports.updatePost = async (req, res) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
-  if (!post) {
-    return res.status(404).json({ message: 'Not found' });
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    if (!post) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    if (req.user.userId !== post.creatorId) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    // kafkaProducer.send(kafkaMethods.UPDATE, post);
+    return res.status(200).json({ post });
+  } catch(error) {
+    return res.status(500).json({ error });
   }
-  // kafkaProducer.send(kafkaMethods.UPDATE, post);
-  return res.status(200).json({ post });
 };
 
 exports.deletePost = async (req, res) => {
-  const post = await Post.findByIdAndDelete(req.params.id);
-  if (!post) {
-    return res.status(404).json({ message: 'Not found' });
+  try {
+    const post = await Post.findByIdAndDelete(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    if (req.user.userid !== post.creatorId) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    // kafkaProducer.send(kafkaMethods.DELETE, post);
+    return res.status(200).json({ post });
+  } catch(error) {
+    res.status(500).json({ error });
   }
-  // kafkaProducer.send(kafkaMethods.DELETE, post);
-  return res.status(200).json({ post });
 };

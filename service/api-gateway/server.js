@@ -2,7 +2,6 @@ require('custom-env').env(process.env.NODE_ENV || 'development');
 
 const express = require('express');
 const httpProxy = require('express-http-proxy');
-const passport = require('passport');
 const Eureka = require('eureka-js-client').Eureka;
 const cors = require('cors');
 
@@ -43,11 +42,6 @@ const client = new Eureka({
 
 app.use(cors());
 
-// required for passport
-app.use(passport.initialize());
-app.use(passport.session());
-require('./conf/passport')(passport);
-
 client.logger.level('debug');
 client.start(error => {
   console.log(error || 'Eureka client started');
@@ -68,6 +62,11 @@ client.start(error => {
   const authServiceProxy = httpProxy(authServiceUrl);
   console.log(`Auth-service: ${authServiceUrl}`);
 
+  const reviewServiceInstance = client.getInstancesByAppId('review-service');  
+  const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;
+  const reviewServiceProxy = httpProxy(reviewServiceUrl);
+  console.log(`Review-service: ${reviewServiceUrl}`);
+
   const offerServiceInstance = client.getInstancesByAppId('offer-service');  
   const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
   const offerServiceProxy = httpProxy(offerServiceUrl);
@@ -78,8 +77,7 @@ client.start(error => {
   const profileServiceProxy = httpProxy(profileServiceUrl);
   console.log(`Profile-service: ${profileServiceUrl}`);
 
-  // Proxy request after authentication
-  // app.use('/api/post', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+  // Proxy request
   app.use('/api/post', (req, res, next) => {
     postServiceProxy(req, res, next);
   });
@@ -90,6 +88,10 @@ client.start(error => {
 
   app.use('/api/auth', (req, res, next) => {
     authServiceProxy(req, res, next);
+  });
+
+  app.use('/api/review', (req, res, next) => {
+    reviewServiceProxy(req, res, next);
   });
 
   app.use('/api/offer', (req, res, next) => {

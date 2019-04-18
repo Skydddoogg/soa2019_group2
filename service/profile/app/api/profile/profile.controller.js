@@ -11,14 +11,22 @@ exports.getProfile = async (req, res) => {
     }
     return res.status(200).json({ profile });
   } catch(error) {
-    return res.status(404).json({ message: 'Not found', error: error });
+    return res.status(500).json({ error });
   }
 };
 
 exports.editProfile = async (req, res) => {
-  const profile = await Profile.findByIdAndUpdate(req.params.userid, req.body, {new: true});
-  if (!profile) {
-    return res.status(404).json({ message: 'Not found' });
+  try {
+    const profile = await Profile.findByIdAndUpdate(req.params.userid, req.body, {new: true});
+    if (!profile) {
+      return res.status(404).json({ message: 'Not found' });
+    }
+    if (req.user.userId !== profile.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+    return res.status(200).json({ profile });
+  } catch(error) {
+    return res.status(500).json({ error });
   }
-  return res.status(200).json({ profile });
+  
 };
