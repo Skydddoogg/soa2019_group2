@@ -8,7 +8,8 @@ const ReviewSchema = new mongoose.Schema({
     ownerUsername: {type: String, required: true},
     targetUsername: {type: String, required: true},
     ownerType: {type: String, required: true},
-    targetType: {type: String, enum: ['student', 'tutor']}
+    targetType: {type: String, enum: ['student', 'tutor']},
+    profileImg: {type: String, required: true}
 });
 ReviewSchema.plugin(timestamps);
 
