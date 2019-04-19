@@ -4,7 +4,17 @@ const Post = require('./post.model');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('@root/server');
+const jwt = require('jsonwebtoken');
 const should = chai.should();
+const SECRET = process.env.SECRET_KEY;
+const JWT_EXPIRATION_MS = 60*1000;
+
+const PAYLOAD = {
+  'userId': '5cb440108941028067e414be',
+  'username': 'test1234',
+  'userType': 'student',
+  'expires': Date.now() + parseInt(JWT_EXPIRATION_MS)
+};
 
 chai.use(chaiHttp);
 
@@ -32,16 +42,16 @@ describe('Post-service integration test', () => {
     });
     it('Should GET a post with exists post ID', (done) => {
       let post = new Post({
-        subject: "science",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'science',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: 'xyz321',
+        creatorUsername: 'ria123',
+        creatorType: 'student'
       });
       post.save((err, post) => {
         chai.request(server)
@@ -69,40 +79,40 @@ describe('Post-service integration test', () => {
     });
     it('Should GET a post with exists post ID', (done) => {
       let post1 = new Post({
-        subject: "science",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'science',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: 'xyz321',
+        creatorUsername: 'ria123',
+        creatorType: 'student'
       });
       let post2 = new Post({
-        subject: "math",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Paradise",
+        subject: 'math',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Paradise',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: 'xyz321',
+        creatorUsername: 'ria123',
+        creatorType: 'student'
       });
       let post3 = new Post({
-        subject: "biology",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'biology',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: 'xyz321',
+        creatorUsername: 'ria123',
+        creatorType: 'student'
       });
       Promise.all([post1.save(), post2.save(), post3.save()])
       .then( () => {
@@ -125,43 +135,40 @@ describe('Post-service integration test', () => {
     it('Should not POST a post with invalid fields', (done) => {
       let post = {
         // No subject
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         // Incorrect format of expectPrice
         expectPrice: '100xyz',
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "lieselottezz",
-        // Incorrect format of creatorType
-        creatorType: "studentxyz"
+        detail: 'Mock up detail'
       };
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       chai.request(server)
       .post('/create')
+      .set('Authorization', 'Bearer ' + token)
       .send(post)
       .end((err, res) => {
-        res.should.have.status(401);
+        res.should.have.status(500);
         res.body.should.be.a('object');
-        res.body.should.have.property('err');
+        res.body.should.have.property('error');
         done();
       });
     });
     it('Should POST a post with valid fields', (done) => {
       let post = {
-        subject: "science",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'science',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
       };
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       chai.request(server)
       .post('/create')
+      .set('Authorization', 'Bearer ' + token)
       .send(post)
       .end((err, res) => {
         res.should.have.status(201);
@@ -178,19 +185,18 @@ describe('Post-service integration test', () => {
   describe('/PUT update post', () => {
     it('Should not UPDATE a post given non-exist ID', (done) => {
       let editedPost = {
-        subject: "math",
-        level: "upper-secondary",
-        startTime: "10:00",
-        endTime: "17:00",
-        location: "Seacon Square",
+        subject: 'math',
+        level: 'upper-secondary',
+        startTime: '10:00',
+        endTime: '17:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
       };
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       chai.request(server)
       .put('/update/nonexist1234')
+      .set('Authorization', 'Bearer ' + token)
       .send(editedPost)
       .end((err, res) => {
         res.should.have.status(404);
@@ -201,32 +207,31 @@ describe('Post-service integration test', () => {
     });
     it('Should UPDATE a post given exist ID', (done) => {
       let post = new Post({
-        subject: "science",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'science',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: '5cb440108941028067e414be',
+        creatorUsername: 'test1234',
+        creatorType: 'student'
       });
       let editedPost = {
-        subject: "math",
-        level: "upper-secondary",
-        startTime: "10:00",
-        endTime: "17:00",
-        location: "Seacon Square",
+        subject: 'math',
+        level: 'upper-secondary',
+        startTime: '10:00',
+        endTime: '17:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
       }
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       post.save((err, post) => {
         chai.request(server)
         .put('/update/'+post.id)
+        .set('Authorization', 'Bearer ' + token)
         .send(editedPost)
         .end((err, res) => {
           res.should.have.status(200);
@@ -246,8 +251,10 @@ describe('Post-service integration test', () => {
   */
   describe('/DELETE delete post', () => {
     it('Should not DELETE a post given non-exist ID', (done) => {
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       chai.request(server)
       .delete('/delete/nonexistid!!')
+      .set('Authorization', 'Bearer ' + token)
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.be.a('object');
@@ -257,20 +264,22 @@ describe('Post-service integration test', () => {
     });
     it('Should DELETE a post given ID', (done) => {
       let post = new Post({
-        subject: "science",
-        level: "upper-secondary",
-        startTime: "9:00",
-        endTime: "15:00",
-        location: "Seacon Square",
+        subject: 'science',
+        level: 'upper-secondary',
+        startTime: '9:00',
+        endTime: '15:00',
+        location: 'Seacon Square',
         expectPrice: 1200,
-        detail: "Mock up detail",
-        creatorId: "xyz321",
-        creatorUsername: "ria123",
-        creatorType: "student"
+        detail: 'Mock up detail',
+        creatorId: '5cb440108941028067e414be',
+        creatorUsername: 'test1234',
+        creatorType: 'student'
       });
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       post.save((err, post) => {
         chai.request(server)
         .delete('/delete/'+post.id)
+        .set('Authorization', 'Bearer ' + token)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
