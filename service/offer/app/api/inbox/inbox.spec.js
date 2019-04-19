@@ -98,7 +98,7 @@ describe('Offer-service integration test', () => {
     });
     it('Should not get non-exists offer', (done) => {
       let offerInbox = new OfferInbox({
-        _id: '5cb440108941028067e414be',
+        _id: '5cb440108941028067e414be'
       });
       let token = jwt.sign(JSON.stringify(STUDENTPAYLOAD), SECRET);
       offerInbox.save((err, offerInbox) => {
@@ -123,7 +123,6 @@ describe('Offer-service integration test', () => {
       let offer = {
         studentId: '5cb440108941028067e414bf',
         postId: '5c99b60908aa5a2eb7c2f196',
-        tutorId: '5cb365b5fb61c836316035ff',
       };
       let token = jwt.sign(JSON.stringify(TUTORPAYLOAD), SECRET);
       chai.request(server)
@@ -141,7 +140,6 @@ describe('Offer-service integration test', () => {
       let offer = {
         studentId: '5cb440108941028067e414bf',
         postId: '5c99b60908aa5a2eb7c2f196',
-        tutorId: '5cb365b5fb61c836316035ff',
       };
       let offerInbox = new OfferInbox({
         _id: '5cb440108941028067e414bf'
