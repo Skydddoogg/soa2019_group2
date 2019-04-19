@@ -1,7 +1,6 @@
 require('module-alias/register')
 
 const OfferInbox = require('./inbox.model');
-const Offer = require('../offer/offer.model');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('@root/server');
