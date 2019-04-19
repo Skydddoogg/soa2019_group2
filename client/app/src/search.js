@@ -33,7 +33,6 @@ const Search = props => (
     onSearchStateChange={props.onSearchStateChange}
   >
     <Configure hitsPerPage={16} />
-    <Header />
     <div className="content-wrapper">
       <Facets />
       <CustomResults />
@@ -55,17 +54,7 @@ const Facets = () => (
       }}
     />
 
-    {/* <section className="facet-wrapper">
-      <div className="facet-category-title facet">Show results for</div>
-      <HierarchicalMenu
-        attributes={[
-          'level',
-        ]}
-      />
-    </section> */}
-
     <section className="facet-wrapper">
-      {/* <div className="facet-category-title facet">Refine By</div> */}
 
       <Panel header={<h5>วิชา</h5>}>
         <RefinementList attribute="subject" operator="or" limit={5} />
@@ -112,23 +101,7 @@ function CustomHits({ hits }) {
 }
 
 const Hit = ({ item }) => {
-  // const icons = [];
-  // for (let i = 0; i < 5; i++) {
-  //   const suffixClassName = i >= item.expectPrice ? '--empty' : '';
-  //   const suffixXlink = i >= item.expectPrice ? 'Empty' : '';
 
-  //   icons.push(
-  //     <svg
-  //       key={i}
-  //       className={`ais-RatingMenu-starIcon ais-RatingMenu-starIcon${suffixClassName}`}
-  //       aria-hidden="true"
-  //       width="24"
-  //       height="24"
-  //     >
-  //       <use xlinkHref={`#ais-RatingMenu-star${suffixXlink}Symbol`} />
-  //     </svg>
-  //   );
-  // }
   return (
     <article className="hit">
       <div className="product-desc-wrapper">
@@ -163,9 +136,9 @@ const CustomResults = connectStateResults(({ searchState, searchResult }) => {
           <Stats />
         </section>
         <ConnectedHits />
-        <footer>
+        {/* <footer>
           <Pagination showLast={true} />
-        </footer>
+        </footer> */}
       </div>
     );
   }

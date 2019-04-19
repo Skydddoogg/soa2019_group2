@@ -6,7 +6,7 @@ import Comments from './comments';
 
 // TODO: fetch real data
 var data = {
-  username: "สกาย",
+  nickname: "สกาย",
   emailAddress: "meme@whatever.com",
   highSchool: "โรงเรียนเลิงนกทา",
   bachelor: "Carnegie Mellon University",

@@ -5,7 +5,7 @@ import Avatar from 'react-avatar';
 const TutorProfileArea = (props) => {
   return (
     <div>
-        <h1>อาจารย์ {props.profileInfor.username}</h1>
+        <h1>อาจารย์ {props.profileInfor.nickname}</h1>
         <Avatar size="150" src={props.profileInfor.image} round={true}/>
 
         <h3>Email</h3> 
