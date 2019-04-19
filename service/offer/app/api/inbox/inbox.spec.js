@@ -94,7 +94,6 @@ describe('Offer-service integration test', () => {
         });
       });
 
-
     });
     it('Should not get non-exists offer', (done) => {
       let offerInbox = new OfferInbox({
