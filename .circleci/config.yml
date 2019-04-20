@@ -8,7 +8,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout:
-          path: ~/soa2019_group2/service
+          path: ~/soa2019_group2
       - run:
           name: Config gcloud credentials
           command: |
@@ -20,7 +20,6 @@ jobs:
           command: |
             docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/api-gateway:${CIRCLE_SHA1} .
             docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/api-gateway:${CIRCLE_SHA1}
-
 workflows:
   version: 2
   deploy:
