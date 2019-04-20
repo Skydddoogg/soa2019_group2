@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Skydddoogg/soa2019_group2.svg?style=svg)](https://circleci.com/gh/Skydddoogg/soa2019_group2)
+
 # Back-end services
 ##### Back-end services are under construction, core service for each service is ready for deployment.
 ##### TODO: Create new API Documents, Final check before integrate with client-side, Build container image for deployment.
