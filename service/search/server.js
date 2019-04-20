@@ -41,12 +41,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-client.logger.level('debug');
-client.start(error => {
-  console.log(error || 'Eureka client started');
-  require('./app/routes')(app);
-});
-// require('./app/routes')(app);
+// client.logger.level('debug');
+// client.start(error => {
+//   console.log(error || 'Eureka client started');
+//   require('./app/routes')(app);
+// });
+require('./app/routes')(app);
 
 app.listen(PORT);
 console.log('Search service is listening on port: ' + PORT);
