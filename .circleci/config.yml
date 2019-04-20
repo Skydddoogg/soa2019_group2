@@ -8,7 +8,7 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout:
-          path: ~/soa2019_group2/service
+          path: ~/soa2019_group2
       - run:
           name: Config gcloud credentials
           command: |
@@ -20,12 +20,186 @@ jobs:
           command: |
             docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/api-gateway:${CIRCLE_SHA1} .
             docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/api-gateway:${CIRCLE_SHA1}
-
+  post-service:
+    working_directory: ~/soa2019_group2/service/post
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/post-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/post-service:${CIRCLE_SHA1}
+  search-service:
+    working_directory: ~/soa2019_group2/service/search
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/search-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/search-service:${CIRCLE_SHA1}
+  auth-service:
+    working_directory: ~/soa2019_group2/service/auth
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/auth-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/auth-service:${CIRCLE_SHA1}
+  review-service:
+    working_directory: ~/soa2019_group2/service/review
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/review-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/review-service:${CIRCLE_SHA1}
+  offer-service:
+    working_directory: ~/soa2019_group2/service/offer
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/offer-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/offer-service:${CIRCLE_SHA1}
+  profile-service:
+    working_directory: ~/soa2019_group2/service/profile
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/profile-service:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/profile-service:${CIRCLE_SHA1}
+  eureka-server:
+    working_directory: ~/soa2019_group2/service/eureka-server
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - checkout:
+          path: ~/soa2019_group2
+      - run:
+          name: Config gcloud credentials
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud auth configure-docker
+      - run:
+          name: Build and Push docker image to asia.gcr.io
+          command: |
+            docker build -t asia.gcr.io/${GCLOUD_PROJECT_ID}/eureka-server:${CIRCLE_SHA1} .
+            docker push asia.gcr.io/${GCLOUD_PROJECT_ID}/eureka-server:${CIRCLE_SHA1}
 workflows:
   version: 2
   deploy:
     jobs:
       - api-gateway:
+          filters:
+            branches:
+              only:
+                - master
+      - post-service:
+          filters:
+            branches:
+              only:
+                - master
+      - search-service:
+          filters:
+            branches:
+              only:
+                - master
+      - auth-service:
+          filters:
+            branches:
+              only:
+                - master
+      - review-service:
+          filters:
+            branches:
+              only:
+                - master
+      - offer-service:
+          filters:
+            branches:
+              only:
+                - master
+      - profile-service:
+          filters:
+            branches:
+              only:
+                - master
+      - eureka-server:
           filters:
             branches:
               only:
