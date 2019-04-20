@@ -7,7 +7,7 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
-       - checkout:
+      - checkout:
           path: ~/soa2019_group2/service
       - run:
           name: Config gcloud credentials
