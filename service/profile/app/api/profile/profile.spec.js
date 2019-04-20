@@ -4,7 +4,17 @@ const Profile = require('./profile.model');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('@root/server');
+const jwt = require('jsonwebtoken');
 const should = chai.should();
+const SECRET = process.env.SECRET_KEY;
+const JWT_EXPIRATION_MS = 60*1000;
+
+const PAYLOAD = {
+  'userId': '5cb440108941028067e414be',
+  'username': 'test1234',
+  'userType': 'student',
+  'expires': Date.now() + parseInt(JWT_EXPIRATION_MS)
+};
 
 chai.use(chaiHttp);
 
@@ -31,7 +41,7 @@ describe('Profile-service integration test', () => {
       });
       profile.save((err, profile) => {
         chai.request(server)
-        .get('/5cb440108941028067e414be')
+        .get('/5cb440108941028067e414be')  
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -71,9 +81,11 @@ describe('Profile-service integration test', () => {
         email: 'username@edited.com',
         phoneNumber: '0898765432'
       };
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       profile.save((err, profile) => {
         chai.request(server)
         .put('/5cb440108941028067e414be/edit')
+        .set('Authorization', 'Bearer ' + token)
         .send(editedProfile)
         .end((err, res) => {
           res.should.have.status(200);
@@ -91,8 +103,10 @@ describe('Profile-service integration test', () => {
         email: 'username@edited.com',
         phoneNumber: '0898765432'
       };
+      let token = jwt.sign(JSON.stringify(PAYLOAD), SECRET);
       chai.request(server)
       .put('/5cb440108941028067e414be/edit')
+      .set('Authorization', 'Bearer ' + token)
       .send(editedProfile)
       .end((err, res) => {
         res.should.have.status(404);

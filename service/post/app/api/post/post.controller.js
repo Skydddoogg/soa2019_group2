@@ -73,7 +73,7 @@ exports.deletePost = async (req, res) => {
     if (!post) {
       return res.status(404).json({ message: 'Not found' });
     }
-    if (req.user.userid !== post.creatorId) {
+    if (req.user.userId !== post.creatorId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
     // kafkaProducer.send(kafkaMethods.DELETE, post);
