@@ -3,6 +3,8 @@
 const SearchPost = require('./search.post.model');
 const Util = require('../../utility/util');
 
+SearchPost.SyncToAlgolia();
+
 exports.getAllPostsByUserId = async (req, res) => {
   try {
     const posts = await SearchPost.find({ creatorId: req.params.userid });
