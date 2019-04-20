@@ -169,3 +169,52 @@ workflows:
             branches:
               only:
                 - master
+  deploy:
+    jobs:
+      - post-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - search-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - auth-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - review-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - offer-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - profile-service:
+          filters:
+            branches:
+              only:
+                - master
+  deploy:
+    jobs:
+      - eureka-server:
+          filters:
+            branches:
+              only:
+                - master
