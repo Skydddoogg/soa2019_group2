@@ -1,0 +1,49 @@
+version: "3"
+services:
+  api-gateway:
+    image: asia.gcr.io/soa-project-2/api-gateway
+    ports:
+      - "3000:3000"
+  post:
+    image: asia.gcr.io/soa-project-2/post-service
+    ports:
+      - "3001:3001"
+  search:
+    image: asia.gcr.io/soa-project-2/search-service
+    ports:
+      - "3002:3002"
+  auth:
+    image: asia.gcr.io/soa-project-2/auth-service
+    ports:
+      - "3003:3003"
+  review:
+    image: asia.gcr.io/soa-project-2/review-service
+    ports:
+      - "3004:3004"
+  offer:
+    image: asia.gcr.io/soa-project-2/offer-service
+    ports:
+      - "3005:3005"
+  profile:
+    image: asia.gcr.io/soa-project-2/profile-service
+    ports:
+      - "3006:3006"
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    environment:
+      KAFKA_CREATE_TOPICS: "initprofile:1:1,initofferinbox:1:1,post:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    ports:
+      - "9092:9092"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
