@@ -178,7 +178,7 @@ services:
   kafka:
     image: wurstmeister/kafka
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "initprofile:1:1,initofferinbox:1:1,post:1:1"
     ports:
