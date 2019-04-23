@@ -1,6 +1,6 @@
 const ENV = process.env.NODE_ENV || 'development';
-
 require('custom-env').env(ENV);
+
 require('module-alias/register');
 require('@conf/db');
 

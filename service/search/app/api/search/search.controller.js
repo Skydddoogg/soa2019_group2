@@ -1,4 +1,4 @@
-require('../../kafka/consumer');
+require('@kafka/consumer');
 
 const SearchPost = require('./search.post.model');
 

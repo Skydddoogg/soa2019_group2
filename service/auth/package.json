@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "dev": "NODE_ENV=development nodemon server.js",
     "test": "NODE_ENV=test nyc mocha app/**/*.spec.js --exit"
   },
@@ -28,6 +28,7 @@
   },
   "_moduleAliases": {
     "@root": ".",
+    "@conf": "./conf",
     "@kafka": "./app/kafka"
   },
   "devDependencies": {

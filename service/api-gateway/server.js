@@ -1,5 +1,4 @@
 const ENV = process.env.NODE_ENV || 'development'
-
 require('custom-env').env(ENV);
 
 const express = require('express');
@@ -54,15 +53,15 @@ client.start(error => {
   const postServiceProxy = httpProxy(postServiceUrl);
   console.log(`Post-service: ${postServiceUrl}`);
 
-  // const searchServiceInstance = client.getInstancesByAppId('search-service');  
-  // const searchServiceUrl = `http://${searchServiceInstance[0].hostName}:${searchServiceInstance[0].port.$}`;
-  // const searchServiceProxy = httpProxy(searchServiceUrl);
-  // console.log(`Search-service: ${searchServiceUrl}`);
+  const searchServiceInstance = client.getInstancesByAppId('search-service');  
+  const searchServiceUrl = `http://${searchServiceInstance[0].hostName}:${searchServiceInstance[0].port.$}`;
+  const searchServiceProxy = httpProxy(searchServiceUrl);
+  console.log(`Search-service: ${searchServiceUrl}`);
 
-  // const authServiceInstance = client.getInstancesByAppId('auth-service');  
-  // const authServiceUrl = `http://${authServiceInstance[0].hostName}:${authServiceInstance[0].port.$}`;
-  // const authServiceProxy = httpProxy(authServiceUrl);
-  // console.log(`Auth-service: ${authServiceUrl}`);
+  const authServiceInstance = client.getInstancesByAppId('auth-service');  
+  const authServiceUrl = `http://${authServiceInstance[0].hostName}:${authServiceInstance[0].port.$}`;
+  const authServiceProxy = httpProxy(authServiceUrl);
+  console.log(`Auth-service: ${authServiceUrl}`);
 
   // const reviewServiceInstance = client.getInstancesByAppId('review-service');  
   // const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;

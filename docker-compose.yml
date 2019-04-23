@@ -1,15 +1,20 @@
+# docker-compose.yml for running in local
+# Please change every KEY environment variables before using it
+
 version: "3"
 services:
   api-gateway:
-    image: asia.gcr.io/soa-project-2/api-gateway:latest
+    build: ./service/api-gateway
+    image: api-gateway
     restart: on-failure
     ports:
       - "3000:3000"
     depends_on:
       - eureka-server
       - post
+      - search
+      - auth
     environment:
-      NODE_ENV: production
       PORT: 3000
       EUREKA_CLIENT_HOST: api-gateway
       EUREKA_CLIENT_URL: 'http://api-gateway:'
@@ -17,7 +22,8 @@ services:
       EUREKA_SERVER_PORT: 8761
     command: ["./wait-for-it.sh", "post:3001", "-t", "60", "--", "npm", "start"]
   post:
-    image: asia.gcr.io/soa-project-2/post-service:latest
+    build: ./service/post
+    image: post-service
     restart: on-failure
     ports:
       - "3001:3001"
@@ -27,12 +33,53 @@ services:
       - eureka-server
       - zookeeper
     environment:
-      NODE_ENV: production
       PORT: 3001
       MONGODB_URL: mongodb://mongo:27017/post-service
-      KAFKA_URL: kafka:9092
+      KAFKA_URL: localhost:9092
       EUREKA_CLIENT_HOST: post
       EUREKA_CLIENT_URL: 'http://post:'
+      EUREKA_SERVER_HOST: eureka-server
+      EUREKA_SERVER_PORT: 8761
+      SECRET_KEY: SECRET1234
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--", "npm", "start"]
+  search:
+    build: ./service/search
+    image: search-service:latest
+    restart: on-failure
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongo
+      - kafka
+      - eureka-server
+      - zookeeper
+    environment:
+      PORT: 3002
+      MONGODB_URL: mongodb://mongo:27017/search-service
+      KAFKA_URL: localhost:9092
+      EUREKA_CLIENT_HOST: search
+      EUREKA_CLIENT_URL: 'http://search:'
+      EUREKA_SERVER_HOST: eureka-server
+      EUREKA_SERVER_PORT: 8761
+      ALGOLIA_API_KEY: SECRET1234
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--", "npm", "start"]
+  auth:
+    build: ./service/auth
+    image: auth-service
+    restart: on-failure
+    ports:
+      - "3003:3003"
+    depends_on:
+      - mongo
+      - kafka
+      - eureka-server
+      - zookeeper
+    environment:
+      PORT: 3003
+      MONGODB_URL: mongodb://mongo:27017/auth-service
+      KAFKA_URL: localhost:9092
+      EUREKA_CLIENT_HOST: auth
+      EUREKA_CLIENT_URL: 'http://auth:'
       EUREKA_SERVER_HOST: eureka-server
       EUREKA_SERVER_PORT: 8761
       SECRET_KEY: SECRET1234
