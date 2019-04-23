@@ -63,20 +63,20 @@ client.start(error => {
   const authServiceProxy = httpProxy(authServiceUrl);
   console.log(`Auth-service: ${authServiceUrl}`);
 
-  // const reviewServiceInstance = client.getInstancesByAppId('review-service');  
-  // const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;
-  // const reviewServiceProxy = httpProxy(reviewServiceUrl);
-  // console.log(`Review-service: ${reviewServiceUrl}`);
+  const reviewServiceInstance = client.getInstancesByAppId('review-service');  
+  const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;
+  const reviewServiceProxy = httpProxy(reviewServiceUrl);
+  console.log(`Review-service: ${reviewServiceUrl}`);
 
-  // const offerServiceInstance = client.getInstancesByAppId('offer-service');  
-  // const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
-  // const offerServiceProxy = httpProxy(offerServiceUrl);
-  // console.log(`Offer-service: ${offerServiceUrl}`);
+  const offerServiceInstance = client.getInstancesByAppId('offer-service');  
+  const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
+  const offerServiceProxy = httpProxy(offerServiceUrl);
+  console.log(`Offer-service: ${offerServiceUrl}`);
 
-  // const profileServiceInstance = client.getInstancesByAppId('profile-service');  
-  // const profileServiceUrl = `http://${profileServiceInstance[0].hostName}:${profileServiceInstance[0].port.$}`;
-  // const profileServiceProxy = httpProxy(profileServiceUrl);
-  // console.log(`Profile-service: ${profileServiceUrl}`);
+  const profileServiceInstance = client.getInstancesByAppId('profile-service');  
+  const profileServiceUrl = `http://${profileServiceInstance[0].hostName}:${profileServiceInstance[0].port.$}`;
+  const profileServiceProxy = httpProxy(profileServiceUrl);
+  console.log(`Profile-service: ${profileServiceUrl}`);
 
   // Proxy request
   app.use('/api/post', (req, res, next) => {

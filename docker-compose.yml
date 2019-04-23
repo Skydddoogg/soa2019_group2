@@ -14,13 +14,22 @@ services:
       - post
       - search
       - auth
+      - review
+      - offer
+      - profile
     environment:
       PORT: 3000
       EUREKA_CLIENT_HOST: api-gateway
       EUREKA_CLIENT_URL: 'http://api-gateway:'
       EUREKA_SERVER_HOST: eureka-server
       EUREKA_SERVER_PORT: 8761
-    command: ["./wait-for-it.sh", "post:3001", "-t", "60", "--", "npm", "start"]
+    command: ["./wait-for-it.sh", "post:3001", "-t", "60", "--",
+    "./wait-for-it.sh", "search:3002", "-t", "60", "--",
+    "./wait-for-it.sh", "auth:3003", "-t", "60", "--",
+    "./wait-for-it.sh", "review:3004", "-t", "60", "--",
+    "./wait-for-it.sh", "offer:3005", "-t", "60", "--",
+    "./wait-for-it.sh", "profile:3006", "-t", "60", "--",
+    "npm", "start"]
   post:
     build: ./service/post
     image: post-service
@@ -35,13 +44,15 @@ services:
     environment:
       PORT: 3001
       MONGODB_URL: mongodb://mongo:27017/post-service
-      KAFKA_URL: localhost:9092
+      KAFKA_URL: kafka:9092
       EUREKA_CLIENT_HOST: post
       EUREKA_CLIENT_URL: 'http://post:'
       EUREKA_SERVER_HOST: eureka-server
       EUREKA_SERVER_PORT: 8761
       SECRET_KEY: SECRET1234
-    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--", "npm", "start"]
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
   search:
     build: ./service/search
     image: search-service:latest
@@ -56,13 +67,15 @@ services:
     environment:
       PORT: 3002
       MONGODB_URL: mongodb://mongo:27017/search-service
-      KAFKA_URL: localhost:9092
+      KAFKA_URL: kafka:9092
       EUREKA_CLIENT_HOST: search
       EUREKA_CLIENT_URL: 'http://search:'
       EUREKA_SERVER_HOST: eureka-server
       EUREKA_SERVER_PORT: 8761
       ALGOLIA_API_KEY: SECRET1234
-    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--", "npm", "start"]
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
   auth:
     build: ./service/auth
     image: auth-service
@@ -77,13 +90,81 @@ services:
     environment:
       PORT: 3003
       MONGODB_URL: mongodb://mongo:27017/auth-service
-      KAFKA_URL: localhost:9092
+      KAFKA_URL: kafka:9092
       EUREKA_CLIENT_HOST: auth
       EUREKA_CLIENT_URL: 'http://auth:'
       EUREKA_SERVER_HOST: eureka-server
       EUREKA_SERVER_PORT: 8761
       SECRET_KEY: SECRET1234
-    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--", "npm", "start"]
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
+  review:
+    build: ./service/review
+    image: review-service
+    restart: on-failure
+    ports:
+      - "3004:3004"
+    depends_on:
+      - mongo
+      - eureka-server
+    environment:
+      PORT: 3004
+      MONGODB_URL: mongodb://mongo:27017/review-service
+      EUREKA_CLIENT_HOST: review
+      EUREKA_CLIENT_URL: 'http://review:'
+      EUREKA_SERVER_HOST: eureka-server
+      EUREKA_SERVER_PORT: 8761
+      SECRET_KEY: SECRET1234
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
+  offer:
+    build: ./service/offer
+    image: offer-service
+    restart: on-failure
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+      - kafka
+      - eureka-server
+      - zookeeper
+    environment:
+      PORT: 3005
+      MONGODB_URL: mongodb://mongo:27017/offer-service
+      KAFKA_URL: kafka:9092
+      EUREKA_CLIENT_HOST: offer
+      EUREKA_CLIENT_URL: 'http://offer:'
+      EUREKA_SERVER_HOST: eureka-server
+      EUREKA_SERVER_PORT: 8761
+      SECRET_KEY: SECRET1234
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
+  profile:
+    build: ./service/profile
+    image: profile-service
+    restart: on-failure
+    ports:
+      - "3006:3006"
+    depends_on:
+      - mongo
+      - kafka
+      - eureka-server
+      - zookeeper
+    environment:
+      PORT: 3006
+      MONGODB_URL: mongodb://mongo:27017/profile-service
+      KAFKA_URL: kafka:9092
+      EUREKA_CLIENT_HOST: profile
+      EUREKA_CLIENT_URL: 'http://profile:'
+      EUREKA_SERVER_HOST: eureka-server
+      EUREKA_SERVER_PORT: 8761
+      SECRET_KEY: SECRET1234
+    command: ["./wait-for-it.sh", "eureka-server:8761", "-t", "60", "--",
+    "./wait-for-it.sh", "kafka:9092", "-t", "60", "--",
+    "npm", "start"]
   mongo:
     image: mongo
     volumes:
@@ -97,7 +178,7 @@ services:
   kafka:
     image: wurstmeister/kafka
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CREATE_TOPICS: "initprofile:1:1,initofferinbox:1:1,post:1:1"
     ports:
