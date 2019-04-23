@@ -20,7 +20,7 @@ const SearchPostSchema = new mongoose.Schema({
 
 SearchPostSchema.plugin(mongooseAlgolia,{
   appId: 'P8OW22R5NQ',
-  apiKey: 'a985170bc1483d2b8ba621bf8d5be32a',
+  apiKey: process.env.ALGOLIA_API_KEY || 'SECRETKEY1234',
   indexName: 'dev_posts',
   filter: function(doc) {
     return !doc.softdelete
