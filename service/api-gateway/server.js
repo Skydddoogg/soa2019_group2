@@ -1,4 +1,6 @@
-require('custom-env').env(process.env.NODE_ENV || 'development');
+const ENV = process.env.NODE_ENV || 'development'
+
+require('custom-env').env(ENV);
 
 const express = require('express');
 const httpProxy = require('express-http-proxy');
@@ -15,9 +17,9 @@ const client = new Eureka({
   // application instance information
   instance: {
     app: 'api-gateway',
-    hostName: 'localhost',
+    hostName: process.env.EUREKA_CLIENT_HOST || 'localhost',
     ipAddr: '127.0.0.1',
-    statusPageUrl: 'http://localhost:' + PORT,
+    statusPageUrl: (process.env.EUREKA_CLIENT_URL || 'http://localhost:') + PORT,
     vipAddress: 'api-gateway',
     port: {
       $: PORT,
@@ -34,8 +36,8 @@ const client = new Eureka({
   },
   eureka: {
     // Eureka server
-    host: 'localhost',
-    port: 8761,
+    host: process.env.EUREKA_SERVER_HOST || 'localhost',
+    port: process.env.EUREKA_SERVER_PORT || 8761,
     servicePath: '/eureka/apps/',
   },
 });
@@ -52,30 +54,30 @@ client.start(error => {
   const postServiceProxy = httpProxy(postServiceUrl);
   console.log(`Post-service: ${postServiceUrl}`);
 
-  const searchServiceInstance = client.getInstancesByAppId('search-service');  
-  const searchServiceUrl = `http://${searchServiceInstance[0].hostName}:${searchServiceInstance[0].port.$}`;
-  const searchServiceProxy = httpProxy(searchServiceUrl);
-  console.log(`Search-service: ${searchServiceUrl}`);
+  // const searchServiceInstance = client.getInstancesByAppId('search-service');  
+  // const searchServiceUrl = `http://${searchServiceInstance[0].hostName}:${searchServiceInstance[0].port.$}`;
+  // const searchServiceProxy = httpProxy(searchServiceUrl);
+  // console.log(`Search-service: ${searchServiceUrl}`);
 
-  const authServiceInstance = client.getInstancesByAppId('auth-service');  
-  const authServiceUrl = `http://${authServiceInstance[0].hostName}:${authServiceInstance[0].port.$}`;
-  const authServiceProxy = httpProxy(authServiceUrl);
-  console.log(`Auth-service: ${authServiceUrl}`);
+  // const authServiceInstance = client.getInstancesByAppId('auth-service');  
+  // const authServiceUrl = `http://${authServiceInstance[0].hostName}:${authServiceInstance[0].port.$}`;
+  // const authServiceProxy = httpProxy(authServiceUrl);
+  // console.log(`Auth-service: ${authServiceUrl}`);
 
-  const reviewServiceInstance = client.getInstancesByAppId('review-service');  
-  const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;
-  const reviewServiceProxy = httpProxy(reviewServiceUrl);
-  console.log(`Review-service: ${reviewServiceUrl}`);
+  // const reviewServiceInstance = client.getInstancesByAppId('review-service');  
+  // const reviewServiceUrl = `http://${reviewServiceInstance[0].hostName}:${reviewServiceInstance[0].port.$}`;
+  // const reviewServiceProxy = httpProxy(reviewServiceUrl);
+  // console.log(`Review-service: ${reviewServiceUrl}`);
 
-  const offerServiceInstance = client.getInstancesByAppId('offer-service');  
-  const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
-  const offerServiceProxy = httpProxy(offerServiceUrl);
-  console.log(`Offer-service: ${offerServiceUrl}`);
+  // const offerServiceInstance = client.getInstancesByAppId('offer-service');  
+  // const offerServiceUrl = `http://${offerServiceInstance[0].hostName}:${offerServiceInstance[0].port.$}`;
+  // const offerServiceProxy = httpProxy(offerServiceUrl);
+  // console.log(`Offer-service: ${offerServiceUrl}`);
 
-  const profileServiceInstance = client.getInstancesByAppId('profile-service');  
-  const profileServiceUrl = `http://${profileServiceInstance[0].hostName}:${profileServiceInstance[0].port.$}`;
-  const profileServiceProxy = httpProxy(profileServiceUrl);
-  console.log(`Profile-service: ${profileServiceUrl}`);
+  // const profileServiceInstance = client.getInstancesByAppId('profile-service');  
+  // const profileServiceUrl = `http://${profileServiceInstance[0].hostName}:${profileServiceInstance[0].port.$}`;
+  // const profileServiceProxy = httpProxy(profileServiceUrl);
+  // console.log(`Profile-service: ${profileServiceUrl}`);
 
   // Proxy request
   app.use('/api/post', (req, res, next) => {
