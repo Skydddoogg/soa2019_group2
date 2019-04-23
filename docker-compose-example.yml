@@ -17,7 +17,7 @@ services:
       EUREKA_SERVER_PORT: 8761
     command: ["./wait-for-it.sh", "post:3001", "-t", "60", "--", "npm", "start"]
   post:
-    image: asia.gcr.io/soa-project-2/post:latest
+    image: asia.gcr.io/soa-project-2/post-service:latest
     restart: on-failure
     ports:
       - "3001:3001"
