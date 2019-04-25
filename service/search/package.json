@@ -1,9 +1,9 @@
 {
   "name": "search-service",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "dev": "NODE_ENV=development nodemon server.js"
   },
   "dependencies": {
@@ -15,6 +15,12 @@
     "kafka-node": "^4.0.2",
     "mongoolia": "^1.0.3",
     "mongoose": "^5.4.19",
-    "mongoose-algolia": "^1.8.0"
+    "mongoose-algolia": "^1.8.0",
+    "module-alias": "^2.2.0"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@kafka": "./app/kafka",
+    "@conf": "./conf"
   }
 }

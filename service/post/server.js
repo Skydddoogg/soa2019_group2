@@ -1,6 +1,6 @@
 const ENV = process.env.NODE_ENV || 'development';
-
 require('custom-env').env(ENV);
+
 require('module-alias/register');
 require('@conf/db');
 
@@ -8,10 +8,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const Eureka = require('eureka-js-client').Eureka;
-const cors = require('cors');
+// const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,9 +23,9 @@ if (ENV === 'test') {
     // Application instance information
     instance: {
       app: 'post-service',
-      hostName: 'localhost',
+      hostName: process.env.EUREKA_CLIENT_HOST || 'localhost',
       ipAddr: '127.0.0.1',
-      statusPageUrl: 'http://localhost:' + PORT,
+      statusPageUrl: (process.env.EUREKA_CLIENT_URL || 'http://localhost:') + PORT,
       vipAddress: 'post-service',
       port: {
         $: PORT,
@@ -42,8 +42,8 @@ if (ENV === 'test') {
     },
     eureka: {
       // Eureka server
-      host: 'localhost',
-      port: 8761,
+      host: process.env.EUREKA_SERVER_HOST || 'localhost',
+      port: process.env.EUREKA_SERVER_PORT || 8761,
       servicePath: '/eureka/apps/',
     },
   });

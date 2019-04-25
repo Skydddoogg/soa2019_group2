@@ -1,10 +1,8 @@
-require('module-alias/register');
-require('@conf/config');
-
-const PostSearch = require('../search.post.model');
+const KAFKA_URL = process.env.KAFKA_URL || 'localhost:9092'
+const PostSearch = require('../api/search/search.post.model');
 
 const kafka = require('kafka-node')
-const client = new kafka.KafkaClient({kafkaHost: `${global.gConfig.kafka_host}:${global.gConfig.kafka_port}`})
+const client = new kafka.KafkaClient({kafkaHost: KAFKA_URL})
 const Consumer = kafka.Consumer
 const consumer = new Consumer(client, [{
   topic: 'post',

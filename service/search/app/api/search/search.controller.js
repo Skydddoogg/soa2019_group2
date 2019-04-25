@@ -1,7 +1,6 @@
-// require('../../kafka/consumer');
+require('@kafka/consumer');
 
 const SearchPost = require('./search.post.model');
-const Util = require('../../utility/util');
 
 SearchPost.SyncToAlgolia();
 

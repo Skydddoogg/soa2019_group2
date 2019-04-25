@@ -1,7 +1,7 @@
 require('module-alias/register');
 
 const Post = require('./post.model');
-// const kafkaProducer = require('@kafka/producer');
+const kafkaProducer = require('@kafka/producer');
 const kafkaMethods = {
   CREATE: 'create',
   UPDATE: 'update',
@@ -44,7 +44,7 @@ exports.createPost = async (req, res) => {
   });
   try {
     const post = await postObj.save();
-    // kafkaProducer.send(kafkaMethods.CREATE, post)
+    kafkaProducer.send(kafkaMethods.CREATE, post)
     return res.status(201).json({ post });
   } catch(error) {
     return res.status(500).json({ error });
@@ -60,7 +60,7 @@ exports.updatePost = async (req, res) => {
     if (req.user.userId !== post.creatorId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
-    // kafkaProducer.send(kafkaMethods.UPDATE, post);
+    kafkaProducer.send(kafkaMethods.UPDATE, post);
     return res.status(200).json({ post });
   } catch(error) {
     return res.status(500).json({ error });
@@ -76,7 +76,7 @@ exports.deletePost = async (req, res) => {
     if (req.user.userId !== post.creatorId) {
       return res.status(403).json({ message: 'Forbidden' });
     }
-    // kafkaProducer.send(kafkaMethods.DELETE, post);
+    kafkaProducer.send(kafkaMethods.DELETE, post);
     return res.status(200).json({ post });
   } catch(error) {
     res.status(500).json({ error });
