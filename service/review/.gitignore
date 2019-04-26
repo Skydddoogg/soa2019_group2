@@ -1,4 +1,9 @@
-node_modules/
-bin/
-data/
+node_modules
+coverage
+npm-debug.log
+.env
 .env.production
+data
+.vscode
+coverage
+.nyc_output
