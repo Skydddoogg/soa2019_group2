@@ -20,14 +20,14 @@ exports.getPostByPostId = async (req, res) => {
   }
 };
 
-exports.getAllPostByUsername = async (req, res) => {
-  try {
-    const postlist = await Post.find({ creatorUsername: req.params.username });
-    return res.status(200).json(postlist);
-  } catch(error) {
-    return res.status(500).json({ error });
-  }
-};
+// exports.getAllPostByUsername = async (req, res) => {
+//   try {
+//     const postlist = await Post.find({ creatorUsername: req.params.username });
+//     return res.status(200).json(postlist);
+//   } catch(error) {
+//     return res.status(500).json({ error });
+//   }
+// };
 
 exports.createPost = async (req, res) => {
   const postObj = new Post({
