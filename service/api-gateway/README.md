@@ -1,7 +1,9 @@
 # Running
-1. Install Node.js, Mongo before running or testing
-2. Run the service with the development environment
+1. Install Node.js before running
+2. Please run all services before running the API Gateway
+3. Install all dependencies
 * ```npm install```
+4. Run the service with the development environment
 * ```npm run dev```
 
 __Note:__ Run the service with the production environment, please run via docker-compose

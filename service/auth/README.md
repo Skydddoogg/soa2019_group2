@@ -1,7 +1,8 @@
 # Running
 1. Install Node.js, Mongo before running or testing
-2. Run the service with the development environment
+2. Install all dependencies
 * ```npm install```
+3. Run the service with the development environment
 * ```npm run dev```
 
 __Note:__ Run the service with the production environment, please run via docker-compose
