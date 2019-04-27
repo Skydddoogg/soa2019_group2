@@ -55,8 +55,8 @@ Running test with Chai and Mocha
     ```
     /* Example of request body */
     {
-        postId: <ObjectId>,
-        studentId: <ObjectId>
+        postId: '<ObjectId>',
+        studentId: '<ObjectId>'
     }
     ```
  
