@@ -48,4 +48,4 @@ __Note:__ Run the service with the production environment, please run via docker
 
 * ```/api/profile/{any_endpoints_in_profile_service}```
 
-  For more information about Profile Service endpoints, Please go to [Orofile Service Markdown](https://github.com/Skydddoogg/soa2019_group2/blob/master/service/profile/README.md)
+  For more information about Profile Service endpoints, Please go to [Profile Service Markdown](https://github.com/Skydddoogg/soa2019_group2/blob/master/service/profile/README.md)

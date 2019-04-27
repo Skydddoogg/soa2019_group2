@@ -10,7 +10,7 @@ require('@conf/passport')(passport)
 router.get('/:postid', Controller.getPostByPostId);
 // router.get('/:username/allpost', Controller.getAllPostByUsername);
 router.post('/create', passport.authenticate('jwt', {session: false}), Controller.createPost);
-router.put('/update/:id', passport.authenticate('jwt', {session: false}), Controller.updatePost);
-router.delete('/delete/:id', passport.authenticate('jwt', {session: false}), Controller.deletePost);
+router.put('/update/:postid', passport.authenticate('jwt', {session: false}), Controller.updatePost);
+router.delete('/delete/:postid', passport.authenticate('jwt', {session: false}), Controller.deletePost);
 
 module.exports = router;
