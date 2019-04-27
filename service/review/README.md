@@ -12,7 +12,7 @@ Running test with Chai and Mocha
 * ```npm run test```
 
 # Endpoints
-1. Create a new review with an information from request body
+1. Create a new review with information from request body
 
     __*Require valid bearer token on HTTP header before using__
 
@@ -31,7 +31,7 @@ Running test with Chai and Mocha
     }
     ```
     
-    Return ```201 CREATED``` with an information of new review
+    Return ```201 CREATED``` with information of new review
 
     Return ```401 UNAUTHORIZED``` if there is no bearer token on HTTP header
 
@@ -43,7 +43,5 @@ Running test with Chai and Mocha
 
  * ```GET /reviews/:targetid```
 
-   Return ```200 OK``` with a list of review, when given an exists target ID that having some review on the database
-
-   Return ```200 OK```  with an empty list, when given non-exists target ID or an exists target ID but haven't any review
+   Return ```200 OK``` with a list of review when given an exists target ID that having some review on the database or return with an empty list when given non-exists target ID or an exists target ID but haven't any review
 ---

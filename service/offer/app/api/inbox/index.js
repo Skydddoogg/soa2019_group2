@@ -8,7 +8,7 @@ const router = new Router();
 require('@conf/passport')(passport)
 
 router.get('/:studentid', passport.authenticate('jwt', {session: false}), Controller.getOfferInbox);
-router.get('/:studentid/:offerindex/', passport.authenticate('jwt', {session: false}), Controller.markAsReadedOffer);
+router.get('/:studentid/:offerindex/', passport.authenticate('jwt', {session: false}), Controller.markAsReadOffer);
 router.post('/create', passport.authenticate('jwt', {session: false}), Controller.createOffer);
 
 module.exports = router;

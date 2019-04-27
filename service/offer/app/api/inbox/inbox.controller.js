@@ -19,7 +19,7 @@ exports.getOfferInbox = async (req, res) => {
   }
 };
 
-exports.markAsReadedOffer = async (req, res) => {
+exports.markAsReadOffer = async (req, res) => {
   const studentId = req.params.studentid;
   const offerIndex = req.params.offerindex;
   try {

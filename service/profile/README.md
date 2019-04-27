@@ -12,3 +12,38 @@ Running test with Chai and Mocha
 * ```npm run test```
 
 # Endpoints
+1. Get a user profile by user ID
+
+ * ```GET /:userid```
+
+   Return ```200 OK``` with information of user profile when given an exists user ID
+
+   Return ```404 NOT FOUND```  when given non-exists user ID
+---
+2. Update an exists user profile with information from request body
+
+    __*Require valid bearer token on HTTP header before using__
+
+    __*Only profile owner can update__
+
+* ```PUT /:userid/edit```
+
+    ```
+    /* Example of request body */
+    {
+        firstname: 'miona'
+        lastname: 'hori'
+        email: 'horichan@example.com'
+        phoneNumber: '0846464646'
+    }
+    ```
+    Return ```200 OK``` with information of edited user profile
+
+    Return ```401 UNAUTHORIZED``` if there is no bearer token on HTTP header
+
+    Return ```403 FORBIDDEN``` if there is bearer token on HTTP header but it's not profile owner
+
+    Return ```404 NOT FOUND``` if user ID is not exists
+
+    Return ```500 INTERNAL SERVER ERROR``` with an error message if the request body is missing required key value or something went wrong on the server
+---

@@ -12,7 +12,7 @@ Running test with Chai and Mocha
 * ```npm run test```
 
 # Endpoints
-1. Sign up new user with an information from request body
+1. Sign up new user with information from request body
 
  * ```POST /signup```
 
@@ -29,7 +29,7 @@ Running test with Chai and Mocha
     }
     ```
 
-   Return ```201 CREATED``` with an information of new user
+   Return ```201 CREATED``` with information of new user
 
    Return ```500 INTERNAL SERVER ERROR```  with an error message if the request body is missing required key value or something went wrong on the server
 ---

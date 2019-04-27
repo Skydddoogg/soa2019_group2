@@ -16,6 +16,5 @@ Running test with Chai and Mocha
 
 * ```GET /:userid/allposts```
 
-   Return ```200 OK``` with a list of post, when given an exists user ID that having some post on the database
-
-   Return ```200 OK```  with an empty list, when given non-exists user ID or an exists user ID but haven't any post
+   Return ```200 OK``` with a list of post when given an exists user ID that having some post on the database or return with an empty list when given non-exists user ID or an exists user ID but haven't any post
+---
