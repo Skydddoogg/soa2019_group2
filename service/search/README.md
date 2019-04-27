@@ -1,21 +1,20 @@
-# Deployment on Google Cloud
+# Running
+1. Install Node.js, Mongo before running or testing
+2. Run the service with the development environment
+* ```npm install```
+* ```npm run dev```
 
-```http://35.187.217.184:3000/api/search/{endpoint}```
+__Note:__ Run the service with the production environment, please run via docker-compose
 
-# APIs
+# Testing
+Running test with Chai and Mocha
+* ```npm run test```
 
-* ```GET /:subject/:level/:startPrice/:endPrice```
-   * **Example:** ```/math&English/High school/0/1000```
+# Endpoints
+1. Get all post by user ID
 
-# How to run
+* ```GET /:userid/allposts```
 
-* Step 1: Import mocked database by running this ```mongoimport --db search_service --collection posts --file search_service_mocked_db.json```
-   * Note that MongoDB need to be installed. You can easily install it via ```brew install mongodb``` and you will need to make connection befor you import.
-* Step 2: Install node modules via ```npm install```
-* Step 3: Run the server with ```npm run start```
+   Return ```200 OK``` with a list of posts, when given an exists user ID with some post on the database
 
-# How to Test APIs (service must be running)
-
-* Step 1: Run the test with ```cotton -u http://localhost:3000 API_Doc.md```
-   * Note that [Cotton](https://github.com/chonla/cotton) (Markdown Test Specification Runner) need to be installed.
-   * In [API document](https://github.com/Skydddoogg/soa2019_group2/blob/master/service/search/API_Doc.md) you can see API information of this service.
+   Return ```200 OK```  with an empty list, when given non-exists user ID or an exists user ID but haven't any post
