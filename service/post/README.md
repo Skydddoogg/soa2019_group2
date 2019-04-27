@@ -29,13 +29,13 @@ Running test with Chai and Mocha
     ```
     /* Example of request body */
     {
-        subject: "math",
-        level: "upper-secondary",
-        startTime: "8.00",
-        endTime: "12.00",
-        location: "Mega Bangna",
-        expectPrice: "300",
-        detail: "This is an example of detail",
+        subject: 'math',
+        level: 'upper-secondary',
+        startTime: '8.00',
+        endTime: '12.00',
+        location: 'Mega Bangna',
+        expectPrice: '300',
+        detail: 'This is an example of detail',
     }
     ```
     Return ```201 CREATED``` with an information of created post
@@ -55,13 +55,13 @@ Running test with Chai and Mocha
     ```
     /* Example of request body */
     {
-        subject: "science",
-        level: "lower-secondary",
-        startTime: "9.00",
-        endTime: "13.00",
-        location: "KMITL",
-        expectPrice: "400",
-        detail: "This is an example of detail",
+        subject: 'science',
+        level: 'lower-secondary',
+        startTime: '9.00',
+        endTime: '13.00',
+        location: 'KMITL',
+        expectPrice: '400',
+        detail: 'This is an example of detail',
     }
     ```
     Return ```200 OK``` with an information of edited post
