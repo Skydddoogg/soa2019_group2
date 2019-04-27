@@ -11,3 +11,10 @@
 * :white_check_mark: [Review Service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/review) Running via port 3004
 * :white_check_mark: [Offer Service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/offer) Running via port 3005
 * :white_check_mark: [Profile Service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/profile) Running via port 3006
+
+### Running
+1. Install Docker and Docker Compose
+2. Clone this repositories
+3. Use
+```docker-compose up``` to run all services
+4. For more information about endpoint, please go to [API Gateway Markdown](https://github.com/Skydddoogg/soa2019_group2/blob/master/service/api-gateway/README.md)
