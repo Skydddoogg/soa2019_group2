@@ -1,26 +1,92 @@
-# Deployment on Google Cloud
+# Running
+1. Install Node.js, Mongo before running or testing
+2. Install all dependencies
+* ```npm install```
+3. Run the service with the development environment
+* ```npm run dev```
 
-```http://35.221.225.113:3000/api/post/{endpoint}```
+__Note:__ Run the service with the production environment, please run via docker-compose
 
-# APIs
+# Testing
+Running test with Chai and Mocha
+* ```npm run test```
+
+# Endpoints
+1. Get a post by post ID
+
+ * ```GET /:postid```
+
+   Return ```200 OK``` with information of post when given an exists post ID
+
+   Return ```404 NOT FOUND```  when given non-exists post ID
+---
+2. Create a post with information from request body
+
+    __*Require valid bearer token on HTTP header before using__
 
 * ```POST /create```
-* ```PUT /update/:id```
-* ```DELETE /delete/:id```
 
-# How to run
+    ```
+    /* Example of request body */
+    {
+        subject: 'math',
+        level: 'upper-secondary',
+        startTime: '8.00',
+        endTime: '12.00',
+        location: 'Mega Bangna',
+        expectPrice: '300',
+        detail: 'This is an example of detail',
+    }
+    ```
+    Return ```201 CREATED``` with information of created post
 
-* Step 1: ดาวน์โหลด Kafka code จาก https://www-us.apache.org/dist/kafka/2.2.0/kafka_2.12-2.2.0.tgz
-* Step 2: แตกไฟล์ที่โหลดมาไว้ที่ใดก็ได้
-* Step 3: ใช้ command line เข้าไปที่โฟล์เดอร์ที่แตกไฟล์ออกมาแล้วรันคำสั่ง ```bin/zookeeper-server-start.sh config/zookeeper.properties```
-* Step 4: เปิดแท็ปใหม่ของ command line แล้วเข้าที่โฟล์เดอร์นั้นเหมือนเดิม จากนั้นรันคำสั่ง ```bin/kafka-server-start.sh config/server.properties```
-* Step 5: เปิดแท็ปใหม่ของ command line แล้วเข้าที่โฟล์เดอร์นั้นเหมือนเดิม จากนั้นรันคำสั่ง ```bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic post``` เพื่อสร้าง Topic
-* Step 6: เปิดแท็ปใหม่ของ command line แล้วเข้ามาที่โฟล์เดอร์ของ Post service แล้วรันคำสั่ง ```npm run dev``` เพื่อรันเซิฟเวอร์
+    Return ```401 UNAUTHORIZED``` if there is no bearer token on HTTP header
 
-# How to Test APIs
+    Return ```500 INTERNAL SERVER ERROR``` with an error message if the request body is missing required key value or something went wrong on the server
+---
+3. Update an exists post with information from request body
 
-To test this service just perform this ```npm run test```
+    __*Require valid bearer token on HTTP header before using__
 
-Note that you need to install node modules for the first time you test. You can perform ```npm install``` to do so.
+    __*Only post owner can update__
 
-This is [API document](https://github.com/Skydddoogg/soa2019_group2/blob/master/service/post/API_Doc.md) for this service.
+* ```PUT /update/:postid```
+
+    ```
+    /* Example of request body */
+    {
+        subject: 'science',
+        level: 'lower-secondary',
+        startTime: '9.00',
+        endTime: '13.00',
+        location: 'KMITL',
+        expectPrice: '400',
+        detail: 'This is an example of detail',
+    }
+    ```
+    Return ```200 OK``` with information of edited post
+
+    Return ```401 UNAUTHORIZED``` if there is no bearer token on HTTP header
+
+    Return ```403 FORBIDDEN``` if there is bearer token on HTTP header but it's not post owner
+
+    Return ```404 NOT FOUND``` if post ID is not exists
+
+    Return ```500 INTERNAL SERVER ERROR``` with an error message if the request body is missing required key value or something went wrong on the server
+---
+4. Delete an exists post
+
+    __*Require valid bearer token on HTTP header before using__
+
+    __*Only post owner can delete__
+
+* ```DELETE /delete/:postid```
+
+    Return ```200 OK``` with information of deleted post
+
+    Return ```401 UNAUTHORIZED``` if there is no bearer token on HTTP header
+
+    Return ```403 FORBIDDEN``` if there is bearer token on HTTP header but it's not post owner
+
+    Return ```404 NOT FOUND``` if post ID is not exists
+---

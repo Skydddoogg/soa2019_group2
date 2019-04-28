@@ -20,14 +20,14 @@ exports.getPostByPostId = async (req, res) => {
   }
 };
 
-exports.getAllPostByUsername = async (req, res) => {
-  try {
-    const postlist = await Post.find({ creatorUsername: req.params.username });
-    return res.status(200).json(postlist);
-  } catch(error) {
-    return res.status(500).json({ error });
-  }
-};
+// exports.getAllPostByUsername = async (req, res) => {
+//   try {
+//     const postlist = await Post.find({ creatorUsername: req.params.username });
+//     return res.status(200).json(postlist);
+//   } catch(error) {
+//     return res.status(500).json({ error });
+//   }
+// };
 
 exports.createPost = async (req, res) => {
   const postObj = new Post({
@@ -53,7 +53,7 @@ exports.createPost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    const post = await Post.findByIdAndUpdate(req.params.postid, req.body, {new: true});
     if (!post) {
       return res.status(404).json({ message: 'Not found' });
     }
@@ -69,7 +69,7 @@ exports.updatePost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndDelete(req.params.id);
+    const post = await Post.findByIdAndDelete(req.params.postid);
     if (!post) {
       return res.status(404).json({ message: 'Not found' });
     }

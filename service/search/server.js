@@ -56,3 +56,5 @@ if (ENV === 'test') {
 
 app.listen(PORT);
 console.log('Search service is listening on port: ' + PORT);
+
+module.exports = app;
