@@ -6,11 +6,11 @@ const TutorProfileArea = (props) => {
   return (
     <div>
         <h1>อาจารย์ {props.profileInfor.nickname}</h1>
-        <Avatar size="150" src={props.profileInfor.image} round={true}/>
+        <Avatar size="150" src={props.profileInfor.profileImg} round={true}/>
 
         <h3>Email</h3> 
         
-        {props.profileInfor.emailAddress}
+        {props.profileInfor.email}
 
         <h3>ประวัติการศึกษา</h3>
         <div>
@@ -34,7 +34,7 @@ const TutorProfileArea = (props) => {
 };
 
 TutorProfileArea.propTypes = {
-  profileInfor: PropTypes.shape.isRequired
+  profileInfor: PropTypes.object.isRequired
 };
 
 export default TutorProfileArea;
