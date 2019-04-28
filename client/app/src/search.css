@@ -40,15 +40,6 @@
     min-width: 620px;
   }
   
-  header {
-    position: absolute;
-    z-index: 99;
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-    background: #222f3f;
-  }
-  
   header .is-logo {
     float: left;
     margin-right: 12px;
