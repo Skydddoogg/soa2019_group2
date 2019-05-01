@@ -4,8 +4,10 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import TutorProfile from './tutorProfile';
 import Search from './search';
+import Register from './Pages/Register'
+import './Assets/css/animate.css'
 
-ReactDOM.render(<TutorProfile/>, document.getElementById('root'));
+ReactDOM.render(<Register/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
