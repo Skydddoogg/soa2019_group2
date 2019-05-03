@@ -4,6 +4,7 @@ import Wrapper from './Wrapper'
 import Button, { ActiveButton } from './Button/Button'
 var NavbarOutside = styled.div`
 border-bottom:1px solid #E8EEF2;
+background-color:#fff;
 `
 
 
@@ -18,7 +19,7 @@ var NavbarWrapper = styled.div`
 
 
 var Logo = styled.div`
-    font-size:1.6em;
+    font-size:1.9em;
     padding-top:20px;
     padding-bottom:20px;
     font-family:'Prompt', sans-serif;
@@ -43,7 +44,7 @@ var LeftMenu = styled.div`
     & > ul >li >a{
         color:#7A90A8;
         text-decoration: none;
-        font-size:0.9em;
+        font-size:1.1em;
         font-family:'Prompt', sans-serif;
     }
 `
@@ -71,7 +72,7 @@ var RightMenu = styled.div`
     & > ul > li > a{
         color:#7A90A8;
         text-decoration: none;
-        font-size:0.9em;
+        font-size:1.1em;
         font-family:'Prompt', sans-serif;
     }
 `
