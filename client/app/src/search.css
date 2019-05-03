@@ -437,15 +437,19 @@
   .hit {
     width: 24%;
     float: left;
-    padding: 10px 20px 20px;
+    padding: 20px 20px 20px;
     margin-bottom: 10px;
     border-bottom: solid 1px #eee;
     margin: 0.5%;
     border: solid 1px #eee;
     box-shadow: 0 0 3px #f6f6f6;
     position: relative;
+    cursor: pointer;
+    transition: all .1s ease;
   }
-  
+  .hit:hover{
+    border-color:#008FF6;
+  }
   @media (max-width: 960px) {
     .hit {
       width: 49%;
