@@ -3,7 +3,7 @@ import TutorProfileArea from '../tutorProfileArea';
 import {Link, Route, BrowserRouter} from 'react-router-dom';
 import PostHistory from '../postHistory';
 import Comments from '../comments';
-import { getProfile } from '../actions/profileActions'
+import { getProfile } from '../Actions/profileActions'
 import Navbar from '../Components/Navbar'
 import Wrapper from '../Components/Wrapper'
 

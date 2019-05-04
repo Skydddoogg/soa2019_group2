@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function createFindingTutorPost(data) {
-    return fetch('http://localhost:3000/api/post/create', {
+    return fetch('http://localhost:3001/create', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {

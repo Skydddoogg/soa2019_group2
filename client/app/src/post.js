@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormForFindingTutor from './forms/formFindingTutor';
+import FormForFindingTutor from './Forms/formFindingTutor';
 
 class Post extends Component {
     render() {
