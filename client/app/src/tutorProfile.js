@@ -3,9 +3,7 @@ import TutorProfileArea from './tutorProfileArea';
 import {Link, Route, BrowserRouter} from 'react-router-dom';
 import PostHistory from './postHistory';
 import Comments from './comments';
-import { getProfile } from './actions/profileActions'
-import axios from 'axios';
-import { stat } from 'fs';
+import { getProfile } from './Actions/profileActions'
 
 class TutorProfile extends Component {
 

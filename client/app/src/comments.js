@@ -1,25 +1,12 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
-import { createComment } from './actions/reviewActions';
-
-var commentData = [
-  { 
-    author:"Pleng Pongpanot", 
-    text:"อาจารย์สอนไม่ช้าและไม่เร็วเกินไป สุดยอดครับ แต่อยากให้อาจารย์หาโจทย์มาให้ทำเยอะ ๆ กว่านี้",
-    imgUrl: "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
-  },
-  { 
-    author:"Bank Mawin", 
-    text:"สุดยอดอาจารย์สอนคณิตศาสตร์เลย",
-    imgUrl: "https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
-  }
-];
+import { createComment, getReviews } from './Actions/reviewActions';
 
 class CommentBox extends Component {
 
   getInitialState() {
     return {
-      data: commentData
+      data: this.props.data
     }
   }
 
@@ -44,10 +31,10 @@ class CommentList extends Component {
   render() {
     return (
       <div className="comment-list">
-        {this.props.data.map(function(c){
-          return (
-            <Comment author={c.author} text={c.text} imgUrl={c.imgUrl}/>
-          );
+        {this.props.data.map(function(c, i){
+          return <div key={i}>
+                  <Comment author={c.ownerUsername} text={c.message} imgUrl={c.profileImg}/>
+                </div>;
         })}
       </div>
     );
@@ -122,7 +109,27 @@ class Comment extends Component {
 }
 
 class Comments extends Component {
+
+    constructor(props) {
+      super(props)
+      this.state = {
+        commentData: []
+      }
+    }
+
+    componentDidMount() {
+      var targetId = '2';
+      var reviews = getReviews(targetId)
+      reviews.then(result => {
+        console.log(result)
+        this.setState({
+          commentData: result,
+        })
+      })
+    }
+
     render() {
+      const { commentData } = this.state
       return (
         <div className="Comments">
           <header className="Comments-header">
