@@ -90,17 +90,17 @@ class StuedntRegisterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
                         <input type="email" name="email" required />
                     </RegisterInputElement>
-                    <TwoColumnRegisterInputElement>
+                    <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
                             <input type="text" name="firstname" required />
                         </RegisterInputElement>
 
-                        <RegisterInputElement width="45">
+                        <RegisterInputElement width="45" >
                             <label>นามสกุล </label>
                             <input type="text" name="lastname" required />
                         </RegisterInputElement>
@@ -108,7 +108,7 @@ class StuedntRegisterForm extends Component {
 
 
 
-                    <RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>รหัสผ่าน</label>
                         <input type="password" onChange={this.handlePasswordValidation} value={this.state.passwordValue} required />
                         <ConfirmationAlert show={this.state.validationPasswordStatus}>
@@ -116,7 +116,7 @@ class StuedntRegisterForm extends Component {
                         </ConfirmationAlert>
                     </RegisterInputElement>
 
-                    <PasswordValidationElement>
+                    <PasswordValidationElement >
                         <div>
                             <PasswordStatus show={this.state.lowerCaseStatus} ></PasswordStatus>
                             <span>ตัวอักษรพิมพ์เล็ก (a-z)</span>
@@ -138,7 +138,7 @@ class StuedntRegisterForm extends Component {
                         </div>
                     </PasswordValidationElement>
 
-                    <RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>ยืนยันรหัสผ่าน</label>
                         <input type="password" name="re_password" onChange={this.handleConfirmPassword} value={this.state.confirmPasswordValue} required />
                         <ConfirmationAlert show={this.state.confirmPasswordStatus}>

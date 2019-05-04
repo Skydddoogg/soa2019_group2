@@ -445,7 +445,6 @@
     box-shadow: 0 0 3px #f6f6f6;
     position: relative;
     cursor: pointer;
-    transition: all .1s ease;
   }
   .hit:hover{
     border-color:#008FF6;

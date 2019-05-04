@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const RegisterInputElement = styled.div`
 display:flex;
 flex-direction:column;
-margin-bottom:5%;
+margin-bottom:${props => props.marginBottom}%;
 width:${props => props.width}%;
   & > label{
     font-size:14px;
@@ -16,6 +16,24 @@ width:${props => props.width}%;
     width:100%;
     height:45px;
     padding:10px;
+    font-size:12px;
+    font-family:Bai Jamjuree;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    &::placeholder{
+      color:#ccc;
+    }
+    background-color:#fff;
+    border:1px solid #E8EEF2;
+  }
+
+  & > textarea{
+    width:100%;
+    height:45px;
+    padding:10px;
+    font-size:12px;
+    font-family:Bai Jamjuree;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -29,6 +47,8 @@ width:${props => props.width}%;
   & > select{
     width:100%;
     height:45px;
+    font-size:12px;
+    font-family:Bai Jamjuree;
     background-color:#fff;
     border:1px solid #E8EEF2;
     -webkit-box-sizing: border-box;
@@ -40,6 +60,7 @@ width:${props => props.width}%;
 export var TwoColumnRegisterInputElement = styled.div`
 display:flex;
 width:100%;
+margin-bottom:${props => props.marginBottom}%;
   & > div:nth-child(2){
     margin-left:7%;
   }
