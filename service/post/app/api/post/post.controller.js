@@ -38,9 +38,9 @@ exports.createPost = async (req, res) => {
     location: req.body.location,
     expectPrice: req.body.expectPrice,
     detail: req.body.detail,
-    creatorId: req.body.userId,
-    creatorUsername: req.body.username,
-    creatorType: req.body.userType
+    creatorId: req.user.userId,
+    creatorUsername: req.user.username,
+    creatorType: req.user.userType
   });
   try {
     const post = await postObj.save();

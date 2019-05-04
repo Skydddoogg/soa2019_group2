@@ -33,7 +33,7 @@ class CommentList extends Component {
       <div className="comment-list">
         {this.props.data.map(function(c, i){
           return <div key={i}>
-                  <Comment author={c.ownerUsername} text={c.message} imgUrl={c.profileImg}/>
+                  <Comment ownerUsername={c.ownerUsername} message={c.message} profileImg={c.profileImg}/>
                 </div>;
         })}
       </div>
@@ -76,10 +76,11 @@ class CommentForm extends Component {
       profileImg: authorImgVal
     }
 
+    console.log(data)
     // Send data to API
     createComment(data);
     
-    this.props.onCommentSubmit({author: authorVal, text: textVal, imgUrl: authorImgVal});
+    this.props.onCommentSubmit({ownerUsername: authorVal, message: textVal, profileImg: authorImgVal});
     e.target[0].value = '';
     e.target[1].value = '';
     return;
@@ -101,8 +102,8 @@ class Comment extends Component {
   render() {
     return (
       <div className="comment">
-        <div><Avatar size="60" src={this.props.imgUrl} round={true}/> <b>{this.props.author}</b></div>
-        {this.props.text}
+        <div><Avatar size="60" src={this.props.profileImg} round={true}/> <b>{this.props.ownerUsername}</b></div>
+        {this.props.message}
       </div>
     );
   }
