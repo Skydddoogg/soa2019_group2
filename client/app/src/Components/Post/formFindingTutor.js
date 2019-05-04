@@ -1,20 +1,31 @@
 import React from 'react';
 import useForm from 'react-hook-form';
-import { createFindingTutorPost } from '../Actions/postActions';
+import { createFindingTutorPost } from '../../Actions/postActions';
+import { RegisterInputElement } from '../FormElements/RegisterInputElement'
+import {ActiveButton} from '../Button/Button'
+import styled from 'styled-components'
 
+
+
+const PostWrapper = styled.div`
+  width:50%;
+  margin:auto;
+`
 export default function FormForFindingTutor() {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => {
-    data.userId = "10";
-    data.username = "Fah Ang";
+    data.userId = "13";
+    data.username = "Ang Ang";
     data.userType = "student";
     createFindingTutorPost(data)
   };
   console.log(errors);
   
   return (
+    <PostWrapper>
     <form onSubmit={handleSubmit(onSubmit)}>
-      ต้องการเรียนวิชา:
+      <RegisterInputElement marginBottom={2}>
+      <label>ต้องการเรียนวิชา:</label>
       <select name="subject" ref={register({ required: true })}>
         <option value="คณิตศาสตร์">คณิตศาสตร์</option>
         <option value="ภาษาอังกฤษ">ภาษาอังกฤษ</option>
@@ -23,24 +34,47 @@ export default function FormForFindingTutor() {
         <option value="เคมี">เคมี</option>
         <option value="ชีววิทยา">ชีววิทยา</option>
       </select>
-      <br />เลือกระดับชั้น:
+      </RegisterInputElement>
+
+      <RegisterInputElement marginBottom={2}>
+      <label>เลือกระดับชั้น:</label>
       <select name="level" ref={register({ required: true })}>
         <option value="ประถม">ประถม</option>
         <option value="มัธยมต้น">มัธยมต้น</option>
         <option value="มัธยมปลาย">มัธยมปลาย</option>
       </select>
-      <br />เวลาที่เริ่มเรียน:
-      <input type="time" name="startTime" ref={register({ required: true })} />
-      <br />เวาลที่เลิกเรียน:
-      <input type="time" name="endTime" ref={register({ required: true })} />
-      <br />สถานที่เรียน:
-      <input type="text" name="location" ref={register({ required: true })} />
-      <br />ราคาต่อชั่วโมง:
-      <input type="number" name="expectPrice" ref={register({ required: true })} />
-      <br />รายละเอียดเพิ่มเติม:
-      <textarea name="detail" ref={register({ required: true })} />
+      </RegisterInputElement>
 
-      <br /><input type="submit" value="สร้างประกาศ"/>
+      <RegisterInputElement marginBottom={2}>
+      <label>เวลาที่เริ่มเรียน</label>
+      <input type="time" name="startTime" ref={register({ required: true })} />
+      </RegisterInputElement>
+      
+      <RegisterInputElement marginBottom={2}>
+      <label>เวาลที่เลิกเรียน</label>
+      <input type="time" name="endTime" ref={register({ required: true })} />
+      </RegisterInputElement>
+
+      <RegisterInputElement marginBottom={2}>
+      <label>สถานที่เรียน</label>
+      <input type="text" name="location" ref={register({ required: true })} />
+      </RegisterInputElement>
+
+      <RegisterInputElement marginBottom={2}>
+      <label>ราคาต่อชั่วโมง</label>
+      <input type="number" name="expectPrice" ref={register({ required: true })} />
+      </RegisterInputElement>
+
+      <RegisterInputElement marginBottom={2}>
+      <label>รายละเอียดเพิ่มเติม</label>
+      <textarea name="detail" ref={register({ required: true })} />
+      </RegisterInputElement>
+
+      
+      <RegisterInputElement>
+      <ActiveButton width={40} type="submit">สร้างประกาศ</ActiveButton>
+      </RegisterInputElement>
     </form>
+    </PostWrapper>
   );
 }

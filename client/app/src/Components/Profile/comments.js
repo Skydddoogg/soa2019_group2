@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
-import { createComment, getReviews } from './Actions/reviewActions';
+import { createComment, getReviews } from '../../Actions/reviewActions';
 
 class CommentBox extends Component {
 

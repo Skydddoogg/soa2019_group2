@@ -64,7 +64,7 @@ var RightMenu = styled.div`
 
     & > ul > li{
         list-style:none;
-        margin-left:35px;
+        margin-left:30px;
         
     }
 
@@ -77,8 +77,31 @@ var RightMenu = styled.div`
     }
 `
 
+const LoggedInMenu = () => (
+    <ul>
+        <li><a href="#">โปรไฟล์</a></li>
+        <li><a href="#">
+            <ActiveButton width="146px">ลงประกาศ</ActiveButton>
+        </a></li>
+    </ul>
+)
+
+const LoggedOutMenu = () => (
+    <ul>
+        <li><a href="#">เข้าสู่ระบบ</a></li>
+        <li><a href="#">
+            <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
+        </a></li>
+    </ul>
+)
 
 class Navbar extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            loginStatus:false
+        }
+    }
     render() {
         return (
             <NavbarOutside>
@@ -88,21 +111,14 @@ class Navbar extends Component {
                         <LeftMenu>
                             <Logo>Tutor Finder</Logo>
                             <ul>
-                                <li><a href="#">dd</a></li>
-                                <li><a href="#">dd</a></li>
-                                <li><a href="#">dd</a></li>
-                                <li><a href="#">dd</a></li>
-                                <li><a href="#">dd</a></li>
+                                <li><a href="#">หาติวเตอร์</a></li>
+                                <li><a href="#">หานักเรียน</a></li>
                             </ul>
 
                         </LeftMenu>
                         <RightMenu>
-                            <ul>
-                                <li><a href="#">เข้าสู่ระบบ</a></li>
-                                <li><a href="#">
-                                    <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
-                                </a></li>
-                            </ul>
+                            {this.state.loginStatus ? <LoggedInMenu/> : <LoggedOutMenu />}
+                            
                         </RightMenu>
                     </NavbarWrapper>
                 </Wrapper>
