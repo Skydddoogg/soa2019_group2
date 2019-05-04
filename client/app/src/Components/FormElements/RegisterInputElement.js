@@ -8,6 +8,7 @@ width:${props => props.width}%;
   & > label{
     font-size:14px;
     margin-bottom:1%;
+    color:#24292E;
     font-family:'Prompt', sans-serif;
   }
 

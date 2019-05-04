@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import TutorProfileArea from './tutorProfileArea';
+import TutorProfileArea from '../tutorProfileArea';
 import {Link, Route, BrowserRouter} from 'react-router-dom';
-import PostHistory from './postHistory';
-import Comments from './comments';
-import { getProfile } from './Actions/profileActions'
+import PostHistory from '../postHistory';
+import Comments from '../comments';
+import { getProfile } from '../actions/profileActions'
+import Navbar from '../Components/Navbar'
+import Wrapper from '../Components/Wrapper'
 
 class TutorProfile extends Component {
 
@@ -29,6 +31,8 @@ class TutorProfile extends Component {
       const { data } = this.state
       return (
         <div className="TutorProfile">
+        <Navbar />
+        <Wrapper>
           <header className="TutorProfile-header">
             <TutorProfileArea
                 profileInfor={data}
@@ -40,6 +44,7 @@ class TutorProfile extends Component {
                     <Route path="/tutor-profile/comments/" component={Comments} />
               </BrowserRouter>
           </header>
+          </Wrapper>
         </div>
       );
     }

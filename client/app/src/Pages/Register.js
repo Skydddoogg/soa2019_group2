@@ -104,10 +104,10 @@ class Register extends Component {
             <ToggleButton toggle={this.state.toggleButtonFlag} onClick={this.handleClick}>ติวเตอร์</ToggleButton>
           </ToggleButtonWrapper>
           <FormWrapper>
-            <StudentTab toggle={!this.state.toggleButtonFlag} className="animated fadeInUp" onSubmit={this.handleSubmit}>
+            <StudentTab toggle={!this.state.toggleButtonFlag} className="animated bounceInUp" onSubmit={this.handleSubmit}>
               <StuedntRegisterForm />
             </StudentTab>
-            <TutorForm toggle={this.state.toggleButtonFlag} className="animated fadeInUp">
+            <TutorForm toggle={this.state.toggleButtonFlag} className="animated bounceInUp">
               <TutorRegisterForm />
             </TutorForm>
 
