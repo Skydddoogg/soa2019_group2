@@ -145,12 +145,10 @@ jobs:
       - run:
         command: |
           echo ${PRIVATE_KEY} > private_key
-          ssh ${SSH_USER}@${SSH_HOST} -i private_key "export IMAGE_VERSION=${CIRCLE_SHA1} &&\
-          docker-compose stop && docker-compose rm -f && docker-compose pull &&\
-          docker-compose up -d"
+          ssh ${SSH_USER}@${SSH_HOST} -i private_key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
 workflows:
   version: 2
-  deployment:
+  deploy:
     jobs:
       - api-gateway:
           filters:
