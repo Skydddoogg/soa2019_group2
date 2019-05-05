@@ -144,16 +144,12 @@ jobs:
     machine:
       enabled: true
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:vmtNTfuvq3YOQCn2cvE2DdVFL25aVQRtsOIp47zd6lo"
       - run:
           name: Deploy Over SSH
           command: |
             echo ${PRIVATE_KEY} > private_key
             chmod 600 private_key
-            ssh-add private_key
-            ssh ${SSH_USER}@${SSH_HOST} -i private_key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
+            ssh -oStrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} -i private_key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
 workflows:
   version: 2
   deploy:
