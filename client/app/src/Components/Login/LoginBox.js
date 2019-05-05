@@ -29,13 +29,13 @@ export default class LoginBox extends Component {
         return (
             <LoginForm>
                 <h1>เข้าสู่ระบบ</h1>
-                <RegisterInputElement width="100">
+                <RegisterInputElement width="100" marginBottom={5}>
                     <label>อีเมล์ </label>
-                    <input type="text" name="lastname" required />
+                    <input type="text" name="email" required />
                 </RegisterInputElement>
-                <RegisterInputElement width="100">
+                <RegisterInputElement width="100" marginBottom={5}>
                     <label>รหัสผ่าน </label>
-                    <input type="text" name="lastname" required />
+                    <input type="password" name="password" required />
                 </RegisterInputElement>
                 <NonActiveButton width="100" style={{marginBottom:15}}>เข้าสู่ระบบ</NonActiveButton>
                 <ActiveButton width="100">สมัครสมาชิก</ActiveButton>
