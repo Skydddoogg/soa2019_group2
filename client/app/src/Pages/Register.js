@@ -72,10 +72,6 @@ transition:all .3s ease;
 cursor:pointer;
 `
 
-
-
-
-
 class Register extends Component {
   constructor(props) {
     super(props)
@@ -88,6 +84,7 @@ class Register extends Component {
       toggleButtonFlag: !prevState.toggleButtonFlag
     }));
   }
+
 
 
   render() {

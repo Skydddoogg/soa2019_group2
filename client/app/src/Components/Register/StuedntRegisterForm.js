@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { TwoColumnRegisterInputElement, RegisterInputElement, PasswordValidationElement, PasswordStatus, ConfirmationAlert } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
+import { createUser } from '../../Actions/registerActions'
 class StuedntRegisterForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
+            email: '',
+            firstname: '',
+            lastname: '',
+            userType: 'student',
             passwordValue: "",
             confirmPasswordValue: "",
             lowerCaseStatus: false,
@@ -13,7 +18,7 @@ class StuedntRegisterForm extends Component {
             numberCaseStatus: false,
             lengthOfPasswordState: false,
             confirmPasswordStatus: false,
-            validationPasswordStatus:false
+            validationPasswordStatus: false
         }
     }
 
@@ -57,23 +62,45 @@ class StuedntRegisterForm extends Component {
         })
     }
 
+    handleEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    handleFirstname = (e) => {
+        this.setState({
+            firstname: e.target.value
+        })
+    }
+
+    handleLastName = (e) => {
+        this.setState({
+            lastname: e.target.value
+        })
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(event.target.value)
         if (this.state.lowerCaseStatus &&
             this.state.upperCaseStatus &&
             this.state.numberCaseStatus &&
             this.state.lengthOfPasswordState
         ) {
             this.setState({
-                validationPasswordStatus:false
+                validationPasswordStatus: false
             })
             if (this.state.confirmPasswordValue === this.state.passwordValue) {
                 this.setState({
                     confirmPasswordStatus: false
-                    //call api here
-
 
                 })
+                
+                //call api here
+                console.log(this.state.firstname)
+                console.log(this.state.lastname)
+                console.log(this.state.email)
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -92,17 +119,17 @@ class StuedntRegisterForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
-                        <input type="email" name="email" required />
+                        <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
                     </RegisterInputElement>
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
-                            <input type="text" name="firstname" required />
+                            <input type="text" name="firstname" onChange={this.handleFirstname} value={this.state.firstname} required />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>นามสกุล </label>
-                            <input type="text" name="lastname" required />
+                            <input type="text" name="lastname" onChange={this.handleLastName} value={this.state.lastname} required />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 

@@ -6,6 +6,11 @@ class TutorRegisterForm extends Component {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
+            email: '',
+            firstname: '',
+            lastname: '',
+            userType: 'tutor',
+            degree: '',
             passwordValue: "",
             confirmPasswordValue: "",
             lowerCaseStatus: false,
@@ -57,6 +62,32 @@ class TutorRegisterForm extends Component {
         })
     }
 
+    handleEmail = (e) => {
+        this.setState({
+            email: e.target.value
+        })
+    }
+
+    handleFirstname = (e) => {
+        this.setState({
+            firstname: e.target.value
+        })
+    }
+
+    handleLastName = (e) => {
+        this.setState({
+            lastname: e.target.value
+        })
+    }
+
+    handleDegree = (e) => {
+        console.log(e.target.value)
+        this.setState({
+            degree: e.target.value
+        })
+    }
+
+
     handleSubmit = (event) => {
         event.preventDefault();
         if (this.state.lowerCaseStatus &&
@@ -70,10 +101,8 @@ class TutorRegisterForm extends Component {
             if (this.state.confirmPasswordValue === this.state.passwordValue) {
                 this.setState({
                     confirmPasswordStatus: false
-                    //call api here
-
-                    
                 })
+                //call api here
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -90,25 +119,26 @@ class TutorRegisterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <RegisterInputElement>
+                <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
-                        <input type="email" name="email" required />
+                        <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
                     </RegisterInputElement>
-                    <TwoColumnRegisterInputElement>
+                    <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
-                            <input type="text" name="firstname" required />
+                            <input type="text" name="firstname" onChange={this.handleFirstname} value={this.state.firstname} required />
                         </RegisterInputElement>
 
-                        <RegisterInputElement width="45">
+                        <RegisterInputElement width="45" >
                             <label>นามสกุล </label>
-                            <input type="text" name="lastname" required />
+                            <input type="text" name="lastname" onChange={this.handleLastName} value={this.state.lastname} required />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
 
 
-                    <RegisterInputElement>
+
+                    <RegisterInputElement marginBottom={5}>
                         <label>รหัสผ่าน</label>
                         <input type="password" onChange={this.handlePasswordValidation} value={this.state.passwordValue} required />
                         <ConfirmationAlert show={this.state.validationPasswordStatus}>
@@ -138,7 +168,7 @@ class TutorRegisterForm extends Component {
                         </div>
                     </PasswordValidationElement>
 
-                    <RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>ยืนยันรหัสผ่าน</label>
                         <input type="password" name="re_password" onChange={this.handleConfirmPassword} value={this.state.confirmPasswordValue} required />
                         <ConfirmationAlert show={this.state.confirmPasswordStatus}>
@@ -146,10 +176,10 @@ class TutorRegisterForm extends Component {
                         </ConfirmationAlert>
                     </RegisterInputElement>
 
-                    <RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>ระดับการศึกษา</label>
-                        <select name="degree">
-                            <option value="">ปริญญาตรี</option>
+                        <select name="degree" onChange={this.handleDegree} required >
+                            <option value="">โปรดเลือกระดับการศึกษา</option>
                             <option value="ปริญญาตรี">ปริญญาตรี</option>
                             <option value="ปริญญาโท">ปริญญาโท</option>
                             <option value="ปริญญาเอก">ปริญญาเอก</option>
