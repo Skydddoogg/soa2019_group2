@@ -104,7 +104,7 @@ class Navbar extends Component {
     }
     render() {
         return (
-            <NavbarOutside>
+            <NavbarOutside className={this.props.animationClassName}>
                 <Wrapper>
                     <NavbarWrapper>
 

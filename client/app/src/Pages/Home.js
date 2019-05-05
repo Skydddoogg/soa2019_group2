@@ -55,7 +55,7 @@ class Home extends Component {
       <div>
         
         <HomeSection>
-        <Navbar />
+        <Navbar animationClassName="animated bounceInDown" />
           <Wrapper>
             <InsideHomeSection className="animated bounceInUp">
               <LeftContent>
