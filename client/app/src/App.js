@@ -6,6 +6,7 @@ import TutorProfile from './Pages/TutorProfile'
 import Search from './Pages/Search';
 import Offer from './Pages/Offer'
 import Post from './Pages/Post'
+import Logout from './Pages/Logout'
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
         <Route path="/offer" component={Offer} />
         <Route path="/search" component={Search} />
         <Route path="/profile" component={TutorProfile} />
+        <Route path="/logout" component={Logout} />
       </div>
     )
   }
