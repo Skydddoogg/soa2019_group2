@@ -18,7 +18,6 @@ import {
 } from 'react-instantsearch-dom';
 import '../search.css';
 import algoliasearch from 'algoliasearch/lite';
-import Navbar from '../Components/Navbar'
 import styled from 'styled-components'
 import Wrapper from '../Components/Wrapper'
 import bg_pattern from '../Assets/images/home_bg_pattern.svg'
@@ -46,7 +45,6 @@ const Search = props => (
       createURL={props.createURL}
       onSearchStateChange={props.onSearchStateChange}
     >
-      <Navbar />
       <Wrapper>
         <Configure hitsPerPage={16} />
         <div className="content-wrapper">

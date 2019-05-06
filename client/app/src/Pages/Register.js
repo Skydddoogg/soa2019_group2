@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../Components/Navbar'
 import Wrapper from '../Components/Wrapper'
 import styled from 'styled-components'
 import StuedntRegisterForm from '../Components/Register/StuedntRegisterForm'
@@ -91,7 +90,6 @@ class Register extends Component {
 
     return (
       <div>
-        <Navbar />
 
         <Wrapper>
 

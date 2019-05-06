@@ -19,13 +19,14 @@ var NavbarWrapper = styled.div`
 `
 
 
-var Logo = styled.div`
+var Logo = styled.a`
     font-size:1.9em;
     padding-top:20px;
     padding-bottom:20px;
     font-family:'Prompt', sans-serif;
     font-weight: bold;
     color:#008FF6;
+    cursor:pointer;
     
     
 `
@@ -80,8 +81,8 @@ var RightMenu = styled.div`
 
 const LoggedInMenu = () => (
     <ul>
-        <li><a href="#">โปรไฟล์</a></li>
-        <li><a href="#">
+        <li><a href="/profile">โปรไฟล์</a></li>
+        <li><a href="/post">
             <ActiveButton width="146px">ลงประกาศ</ActiveButton>
         </a></li>
     </ul>
@@ -89,8 +90,8 @@ const LoggedInMenu = () => (
 
 const LoggedOutMenu = () => (
     <ul>
-        <li><a href="#">เข้าสู่ระบบ</a></li>
-        <li><a href="#">
+        <li><a href="/">เข้าสู่ระบบ</a></li>
+        <li><a href="/signup">
             <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
         </a></li>
     </ul>
@@ -110,9 +111,9 @@ class Navbar extends Component {
                     <NavbarWrapper>
 
                         <LeftMenu>
-                            <Logo>Tutor Finder</Logo>
+                            <Logo a href="/">Tutor Finder</Logo>
                             <ul>
-                                <li><a href="#">หาติวเตอร์</a></li>
+                                <li><a href="/search">หาติวเตอร์</a></li>
                             </ul>
 
                         </LeftMenu>
