@@ -44,15 +44,7 @@ exports.signup = async (req, res) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
-            highSchool: req.body.highSchool,
-            bachelor: req.body.bachelor,
-            master: req.body.master,
-            doctoral: req.body.doctoral,
-            majorInBachelor: req.body.majorInBachelor,
-            majorInMaster: req.body.majorInMaster,
-            majorInDoctoral: req.body.majorInDoctoral,
-            majorInHighSchool: req.body.majorInHighSchool
+            phoneNumber: req.body.phoneNumber
           };
           kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         } else {
@@ -62,7 +54,15 @@ exports.signup = async (req, res) => {
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             email: req.body.email,
-            phoneNumber: req.body.phoneNumber
+            phoneNumber: req.body.phoneNumber,
+            highSchool: req.body.highSchool,
+            bachelor: req.body.bachelor,
+            master: req.body.master,
+            doctoral: req.body.doctoral,
+            majorInBachelor: req.body.majorInBachelor,
+            majorInMaster: req.body.majorInMaster,
+            majorInDoctoral: req.body.majorInDoctoral,
+            majorInHighSchool: req.body.majorInHighSchool
           };
           kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         }

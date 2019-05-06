@@ -13,7 +13,7 @@ class TutorRegisterForm extends Component {
             firstname: '',
             lastname: '',
             phoneNumber: '',
-            userType: 'student',
+            userType: 'tutor',
             passwordValue: "",
             confirmPasswordValue: "",
             lowerCaseStatus: false,
