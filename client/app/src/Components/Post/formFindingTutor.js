@@ -26,7 +26,7 @@ export default function FormForFindingTutor() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <RegisterInputElement marginBottom={2}>
       <label>ต้องการเรียนวิชา:</label>
-      <select name="subject" ref={register({ required: true })}>
+      <select name="subject" data-cy="postSubject" ref={register({ required: true })}>
         <option value="คณิตศาสตร์">คณิตศาสตร์</option>
         <option value="ภาษาอังกฤษ">ภาษาอังกฤษ</option>
         <option value="ภาษาไทย">ภาษาไทย</option>
@@ -38,7 +38,7 @@ export default function FormForFindingTutor() {
 
       <RegisterInputElement marginBottom={2}>
       <label>เลือกระดับชั้น:</label>
-      <select name="level" ref={register({ required: true })}>
+      <select name="level" data-cy="postLevel" ref={register({ required: true })}>
         <option value="ประถม">ประถม</option>
         <option value="มัธยมต้น">มัธยมต้น</option>
         <option value="มัธยมปลาย">มัธยมปลาย</option>
@@ -47,32 +47,32 @@ export default function FormForFindingTutor() {
 
       <RegisterInputElement marginBottom={2}>
       <label>เวลาที่เริ่มเรียน</label>
-      <input type="time" name="startTime" ref={register({ required: true })} />
+      <input type="time" name="startTime" data-cy="postStartTime" ref={register({ required: true })} />
       </RegisterInputElement>
       
       <RegisterInputElement marginBottom={2}>
       <label>เวาลที่เลิกเรียน</label>
-      <input type="time" name="endTime" ref={register({ required: true })} />
+      <input type="time" name="endTime" data-cy="postEndTime" ref={register({ required: true })} />
       </RegisterInputElement>
 
       <RegisterInputElement marginBottom={2}>
       <label>สถานที่เรียน</label>
-      <input type="text" name="location" ref={register({ required: true })} />
+      <input type="text" name="location" data-cy="postLocation" ref={register({ required: true })} />
       </RegisterInputElement>
 
       <RegisterInputElement marginBottom={2}>
       <label>ราคาต่อชั่วโมง</label>
-      <input type="number" name="expectPrice" ref={register({ required: true })} />
+      <input type="number" name="expectPrice" data-cy="postExpectPrice" ref={register({ required: true })} />
       </RegisterInputElement>
 
       <RegisterInputElement marginBottom={2}>
       <label>รายละเอียดเพิ่มเติม</label>
-      <textarea name="detail" ref={register({ required: true })} />
+      <textarea name="detail" data-cy="postDetail" ref={register({ required: true })} />
       </RegisterInputElement>
 
       
       <RegisterInputElement>
-      <ActiveButton width={40} type="submit">สร้างประกาศ</ActiveButton>
+      <ActiveButton width={40} type="submit" data-cy="postSubmit_btn">สร้างประกาศ</ActiveButton>
       </RegisterInputElement>
     </form>
     </PostWrapper>
