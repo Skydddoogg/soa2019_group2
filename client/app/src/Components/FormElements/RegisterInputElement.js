@@ -107,8 +107,9 @@ export var PasswordStatus = styled.div`
 
 export var ConfirmationAlert = styled.div`
   width:100%;
-  padding:10px;
+  padding:18px;
   margin-top:3%;
+  margin-bottom:${props => props.marginBottom}%;
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;

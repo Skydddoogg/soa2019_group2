@@ -62,6 +62,11 @@ justify-content:center;
     margin-left:0.5%;
   }
 `
+
+
+const Status = styled.div`
+`
+
 class Offers extends Component {
   componentDidMount() {
     getStudentOffer(localStorage.getItem('userId'));
@@ -80,6 +85,7 @@ class Offers extends Component {
             <OfferTable>
               <thead>
                 <tr>
+                <th>สถานะ</th>
                   <th>AA</th>
                   <th>BB</th>
                   <th>CC</th>
@@ -89,6 +95,7 @@ class Offers extends Component {
               <tbody>
                 {offerInbox.map(function (c, i) {
                   return <tr key={i}>
+                  <td><Status>ยืนยัน</Status></td>
                     <td>{c.postId}</td>
                     <td>{c.tutorId}</td>
                     <td>{c.tutorUsername}</td>
