@@ -19,7 +19,7 @@ export default function FormForFindingTutor() {
     data.userType = "student";
     createFindingTutorPost(data)
   };
-  console.log(errors);
+  
   
   return (
     <PostWrapper>

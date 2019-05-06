@@ -43,7 +43,9 @@ export default class LoginBox extends Component {
             username: this.state.username,
             password: this.state.password
         }
+        
         handleLogin(data).then(res => {
+            
             if (res == 500) {
                 this.setState({
                     validationStatus: false,

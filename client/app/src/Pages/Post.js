@@ -16,7 +16,7 @@ class Post extends Component {
       return (
         <div className="Post">
         <Wrapper>
-          <header className="Post-header">
+          <header className="Post-header animated bounceInUp">
             <PostLayout>
                 <h1>ลงประกาศหาติวเตอร์</h1>
                 <FormForFindingTutor />
