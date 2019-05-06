@@ -1,14 +1,14 @@
 import fetch from 'isomorphic-fetch';
 
 export function createUser(data) {
-    console.log(data)
-    return fetch('http://35.240.240.164:3000/api/auth/signup', {
+    return fetch('http://localhost:3003/signup', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json'
         }
     }).then(res => {
+        console.log(res)
         return res;
     }).catch(err => {
         console.log(err)

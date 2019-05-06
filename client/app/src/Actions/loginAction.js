@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function handleLogin(data){
-    return fetch('http://35.240.240.164:3000/api/auth/signin', {
+    return fetch('http://localhost:3003/signin', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -10,7 +10,8 @@ export function handleLogin(data){
     }).then(res => {
         res.json().then((responseData) => {
             localStorage.setItem('token', responseData.token);
-        }) 
+            localStorage.setItem('userId', responseData.payload.userId);
+        })
     }).catch(err => {
         console.log(err)
     });

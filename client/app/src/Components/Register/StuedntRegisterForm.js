@@ -7,11 +7,11 @@ class StuedntRegisterForm extends Component {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
-            username:'',
+            username: '',
             email: '',
             firstname: '',
             lastname: '',
-            phoneNumber:'',
+            phoneNumber: '',
             userType: 'student',
             passwordValue: "",
             confirmPasswordValue: "",
@@ -110,17 +110,17 @@ class StuedntRegisterForm extends Component {
                     confirmPasswordStatus: false
 
                 })
-                
+
                 //call api here
                 const data = {
-                    'username' : this.state.username,
-                    'password' : this.state.passwordValue,
-                    'firstname' : this.state.firstname,
-                    'lastname' : this.state.lastname,
-                    'email' : this.state.email,
-                    'userType' : this.state.userType,
+                    'username': this.state.username,
+                    'password': this.state.passwordValue,
+                    'firstname': this.state.firstname,
+                    'lastname': this.state.lastname,
+                    'email': this.state.email,
+                    'userType': this.state.userType,
                     'phoneNumber': this.state.phoneNumber
-                    
+
                 };
                 createUser(data)
             } else {
@@ -139,7 +139,7 @@ class StuedntRegisterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                <RegisterInputElement marginBottom={5}>
+                    <RegisterInputElement marginBottom={5}>
                         <label>ชื่อผู้ใช้ </label>
                         <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
                     </RegisterInputElement>
@@ -164,7 +164,7 @@ class StuedntRegisterForm extends Component {
 
                     <RegisterInputElement marginBottom={5}>
                         <label>เบอร์โทรศัพท์ </label>
-                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber}  required />
+                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
                     </RegisterInputElement>
 
 
