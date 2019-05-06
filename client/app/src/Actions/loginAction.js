@@ -11,6 +11,7 @@ export function handleLogin(data){
         res.json().then((responseData) => {
             localStorage.setItem('token', responseData.token);
             localStorage.setItem('userId', responseData.payload.userId);
+            console.log(localStorage.getItem('userId'))
         })
     }).catch(err => {
         console.log(err)

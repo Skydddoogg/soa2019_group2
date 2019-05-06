@@ -48,7 +48,7 @@ const Search = props => (
       <Wrapper>
         <Configure hitsPerPage={16} />
         <div className="content-wrapper">
-          <SearchWrapper>
+          <SearchWrapper >
             <Facets />
             <CustomResults />
           </SearchWrapper>
@@ -157,7 +157,7 @@ transition:all .2s ease;
 `
 
 const Facets = () => (
-  <FacetsWrapper>
+  <FacetsWrapper className="animated bounceInUp">
     <Panel header={<h5>วิชา</h5>}>
       <RefinementList attribute="subject" operator="or" limit={5} />
     </Panel>
@@ -195,7 +195,7 @@ function CustomHits({ hits }) {
   return (
     <main id="hits">
       {hits.map(hit => (
-        <Hit item={hit} key={hit.objectID} />
+        <Hit item={hit} key={hit.objectID}  />
       ))}
     </main>
   );
@@ -204,7 +204,7 @@ function CustomHits({ hits }) {
 const Hit = ({ item }) => {
 
   return (
-    <article className="hit">
+    <article className="hit animated bounceInUp">
       <div className="product-desc-wrapper">
         <div className="product-name">
           <Highlight attribute="subject" hit={item} />
