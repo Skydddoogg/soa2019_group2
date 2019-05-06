@@ -159,7 +159,7 @@ transition:all .2s ease;
 const Facets = () => (
   <FacetsWrapper className="animated bounceInUp">
     <Panel header={<h5>วิชา</h5>}>
-      <RefinementList attribute="subject" operator="or" limit={5} />
+      <RefinementList attribute="subject" operator="or"  limit={5} />
     </Panel>
 
     <Panel header={<h5>ระดับชั้น</h5>}>
@@ -204,8 +204,8 @@ function CustomHits({ hits }) {
 const Hit = ({ item }) => {
 
   return (
-    <article className="hit animated bounceInUp">
-      <div className="product-desc-wrapper">
+    <article className="hit animated bounceInUp" >>
+      <div className="product-desc-wrapper" data-cy="searchHitObject">
         <div className="product-name">
           <Highlight attribute="subject" hit={item} />
         </div>

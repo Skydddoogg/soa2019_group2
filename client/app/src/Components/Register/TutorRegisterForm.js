@@ -302,24 +302,24 @@ class TutorRegisterForm extends Component {
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>โรงเรียนมัธยมปลาย</label>
-                            <input type="text" name="highSchool" onChange={this.handleHighSchool} value={this.state.highSchool} />
+                            <input type="text" name="highSchool" data-cy="tutorFormHighschool" onChange={this.handleHighSchool} value={this.state.highSchool} />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>สาขา</label>
-                            <input type="text" name="majorInHighSchool" onChange={this.handleMajorInHighSchool} value={this.state.majorInHighSchool} />
+                            <input type="text" name="majorInHighSchool" data-cy="tutorFormHighschoolMajor" onChange={this.handleMajorInHighSchool} value={this.state.majorInHighSchool} />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>สถาบันการศึกษาระดับปริญาตรี</label>
-                            <input type="text" name="bachelor" onChange={this.handleBachelor} value={this.state.bachelor} />
+                            <input type="text" name="bachelor" data-cy="tutorFormBachelor" onChange={this.handleBachelor} value={this.state.bachelor} />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>สาขา</label>
-                            <input type="text" name="majorInBachelor" onChange={this.handleMajorInBachelor} value={this.state.majorInBachelor} />
+                            <input type="text" name="majorInBachelor" data-cy="tutorFormBachelorMajor"onChange={this.handleMajorInBachelor} value={this.state.majorInBachelor} />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
@@ -327,24 +327,24 @@ class TutorRegisterForm extends Component {
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>สถาบันการศึกษาระดับปริญาโท</label>
-                            <input type="text" name="master" onChange={this.handleMaster} value={this.state.master} />
+                            <input type="text" name="master" data-cy="tutorFormMaster" onChange={this.handleMaster} value={this.state.master} />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>สาขา </label>
-                            <input type="text" name="majorInMaster" onChange={this.handleMajorInMaster} value={this.state.majorInMaster} />
+                            <input type="text" name="majorInMaster" data-cy="tutorFormMasterMajor" onChange={this.handleMajorInMaster} value={this.state.majorInMaster} />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>สถาบันการศึกษาระดับปริญาเอก</label>
-                            <input type="text" name="doctoral" onChange={this.handleDoctoral} value={this.state.doctoral} />
+                            <input type="text" name="doctoral"  data-cy="tutorFormDoctor" onChange={this.handleDoctoral} value={this.state.doctoral} />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>สาขา</label>
-                            <input type="text" name="majorInDoctoral" onChange={this.handlemMjorInHighSchool} value={this.state.majorInDoctoral} />
+                            <input type="text" name="majorInDoctoral" data-cy="tutorFormDoctorMajor" onChange={this.handlemMjorInHighSchool} value={this.state.majorInDoctoral} />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
