@@ -193,12 +193,12 @@ workflows:
       #       branches:
       #         only:
       #           - master
-      - service-deploy:
-          requires:
-            - api-gateway
-            - post-service
-            - search-service
-            - auth-service
-            - review-service
-            - offer-service
-            - profile-service
+      - service-deploy
+          # requires:
+          #   - api-gateway
+          #   - post-service
+          #   - search-service
+          #   - auth-service
+          #   - review-service
+          #   - offer-service
+          #   - profile-service
