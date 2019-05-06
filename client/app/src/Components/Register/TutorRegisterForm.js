@@ -156,7 +156,7 @@ class TutorRegisterForm extends Component {
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
-                            <input type="text" name="firstname" onChange={this.handleFirstname} value={this.state.firstname} required />
+                            <input type="text" name="firstname"  onChange={this.handleFirstname} value={this.state.firstname} required />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >

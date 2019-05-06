@@ -141,36 +141,36 @@ class StuedntRegisterForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <RegisterInputElement marginBottom={5}>
                         <label>ชื่อผู้ใช้ </label>
-                        <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
+                        <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" data-cy="username" required />
                     </RegisterInputElement>
                     <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
-                        <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
+                        <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" data-cy="email" required />
                     </RegisterInputElement>
 
 
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
-                            <input type="text" name="firstname" onChange={this.handleFirstname} value={this.state.firstname} required />
+                            <input type="text" name="firstname" data-cy="firstname"onChange={this.handleFirstname} value={this.state.firstname} required />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
                             <label>นามสกุล </label>
-                            <input type="text" name="lastname" onChange={this.handleLastName} value={this.state.lastname} required />
+                            <input type="text" name="lastname" data-cy="lastname" onChange={this.handleLastName} value={this.state.lastname} required />
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
 
                     <RegisterInputElement marginBottom={5}>
                         <label>เบอร์โทรศัพท์ </label>
-                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
+                        <input type="text" name="telephone" data-cy="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
                     </RegisterInputElement>
 
 
                     <RegisterInputElement marginBottom={5}>
                         <label>รหัสผ่าน</label>
-                        <input type="password" onChange={this.handlePasswordValidation} value={this.state.passwordValue} required />
+                        <input type="password" data-cy="password" onChange={this.handlePasswordValidation} value={this.state.passwordValue} required />
                         <ConfirmationAlert show={this.state.validationPasswordStatus}>
                             <span>รหัสผ่านไม่ถูกต้อง</span>
                         </ConfirmationAlert>
@@ -200,7 +200,7 @@ class StuedntRegisterForm extends Component {
 
                     <RegisterInputElement marginBottom={5}>
                         <label>ยืนยันรหัสผ่าน</label>
-                        <input type="password" name="re_password" onChange={this.handleConfirmPassword} value={this.state.confirmPasswordValue} required />
+                        <input type="password" name="re_password" data-cy="re_password" onChange={this.handleConfirmPassword} value={this.state.confirmPasswordValue} required />
                         <ConfirmationAlert show={this.state.confirmPasswordStatus}>
                             <span>รหัสผ่านไม่ตรงกัน</span>
                         </ConfirmationAlert>
@@ -209,7 +209,7 @@ class StuedntRegisterForm extends Component {
 
 
                     <RegisterInputElement>
-                        <ActiveButton type="submit" width="30">สมัครสมาชิก</ActiveButton>
+                        <ActiveButton type="submit" data-cy="register_btn" width="30">สมัครสมาชิก</ActiveButton>
                     </RegisterInputElement>
                 </form>
             </div>
