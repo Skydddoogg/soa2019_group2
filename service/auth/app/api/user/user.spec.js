@@ -47,7 +47,7 @@ describe('Auth-service integration test', () => {
         email: "username@email.com",
         userType: "student",
         firstname: "firstname",
-        lastname: "lastname",
+        lastname: "lastname"
         // Phone number is blank
       };
       chai.request(server)
@@ -65,13 +65,13 @@ describe('Auth-service integration test', () => {
   describe('/POST signin', () => {
     it('Should signin with exists ID and corrected password', (done) => {
       let user = {
-        username: 'usernamex123',
-        password: 'password',
-        email: 'username@email.com',
-        userType: 'student',
-        firstname: 'firstname',
-        lastname: 'lastname',
-        phoneNumber: '0801234567'
+        username: "usernamex123",
+        password: "password",
+        email: "username@email.com",
+        userType: "student",
+        firstname: "firstname",
+        lastname: "lastname",
+        phoneNumber: "0801234567"
       };
       let loginInfo = {
         username: 'usernamex123',
