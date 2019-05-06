@@ -151,9 +151,12 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            echo ${PRIVATE_KEY} > private_key
-            chmod 600 private_key
-            ssh -vv -o "StrictHostKeyChecking=no" ${SSH_USER}@${SSH_HOST} -i private_key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
+            echo ${PRIVATE_KEY} > key
+            chmod 600 key
+            ssh-agent
+            eval `ssh-agent -s`
+            ssh-add key
+            ssh ${SSH_USER}@${SSH_HOST} -i key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d" -vvv
 workflows:
   version: 2
   deploy:
