@@ -20,41 +20,25 @@ class Offers extends Component {
           <header className="Offers-header">
               <h1>ข้อเสนอจากอาจารย์</h1>
               <table>
+                <thead>
                     <tr>
                         <th>AA</th>
                         <th>BB</th>
                         <th>CC</th>
                     </tr>
-                    <OfferList data={offerInbox} />
+                </thead>
+                {offerInbox.map(function(c, i){
+                  return <tbody key={i}>
+                    <tr>
+                      <td>{c.postId}</td>
+                      <td>{c.tutorId}</td>
+                      <td>{c.tutorUsername}</td>
+                    </tr>
+                  </tbody>
+                })}
               </table>
           </header>
         </div>
-      );
-    }
-  }
-
-class OfferList extends Component {
-    render() {
-        return (
-          <div>
-            {this.props.data.map(function(c, i){
-              return <div key={i}>
-                        <Offer postId={c.postId} tutorId={c.tutorId} tutorUsername={c.tutorUsername}/>
-                    </div>;
-            })}
-          </div>
-        );
-      }
-}
-
-class Offer extends Component {
-    render() {
-      return (
-        <tr>
-            <td>{this.props.postId}</td>
-            <td>{this.props.postId}</td>
-            <td>{this.props.postId}</td>
-        </tr>
       );
     }
   }
