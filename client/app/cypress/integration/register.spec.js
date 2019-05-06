@@ -15,7 +15,7 @@ describe("Register Page", () => {
     });
 
     it("Tutor register successfully", () => {
-        cy.get('button[class="sc-jzJRlG vZcgY"]').click()
+        cy.get('button[class="sc-cSHVUG kcKijI"]').click()
         cy.get('[data-cy=tutorFormUsername]').type('PlengMath')
         cy.get('[data-cy=tutorFormEmail]').type('Plengcritical@gmail.com')
         cy.get('[data-cy=tutorFormFirstname]').type('Pongpanot')
@@ -44,7 +44,7 @@ describe("Register Page", () => {
     });
 
     it("Tutor register with invalid password", () => {
-        cy.get('button[class="sc-jzJRlG vZcgY"]').click()
+        cy.get('button[class="sc-cSHVUG kcKijI"]').click()
         cy.get('[data-cy=tutorFormUsername]').type('PlengMath')
         cy.get('[data-cy=tutorFormEmail]').type('Plengcritical@gmail.com')
         cy.get('[data-cy=tutorFormFirstname]').type('Pongpanot')
