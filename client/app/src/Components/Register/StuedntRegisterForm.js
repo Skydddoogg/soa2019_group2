@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TwoColumnRegisterInputElement, RegisterInputElement, PasswordValidationElement, PasswordStatus, ConfirmationAlert } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
 import { createUser } from '../../Actions/registerActions'
+import { Redirect, Link } from 'react-router-dom'
 class StuedntRegisterForm extends Component {
     constructor(props) {
         super(props)
@@ -20,7 +21,9 @@ class StuedntRegisterForm extends Component {
             numberCaseStatus: false,
             lengthOfPasswordState: false,
             confirmPasswordStatus: false,
-            validationPasswordStatus: false
+            validationPasswordStatus: false,
+            duplicationStatus: false,
+            duplicationDialog:false
         }
     }
 
@@ -94,9 +97,8 @@ class StuedntRegisterForm extends Component {
         })
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(event.target.value)
+    handleSubmit = (e) => {
+        e.preventDefault();
         if (this.state.lowerCaseStatus &&
             this.state.upperCaseStatus &&
             this.state.numberCaseStatus &&
@@ -108,7 +110,6 @@ class StuedntRegisterForm extends Component {
             if (this.state.confirmPasswordValue === this.state.passwordValue) {
                 this.setState({
                     confirmPasswordStatus: false
-
                 })
 
                 //call api here
@@ -122,7 +123,20 @@ class StuedntRegisterForm extends Component {
                     'phoneNumber': this.state.phoneNumber
 
                 };
-                createUser(data)
+                createUser(data).then(res =>{
+                    if (res == 500) {
+                        this.setState({
+                            duplicationStatus: false,
+                            duplicationDialog: true
+                        })
+                        window.scrollTo(0, 0);
+                    } else {
+                        this.setState({
+                            duplicationStatus: true
+                        })
+                    }
+                })
+
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -136,10 +150,16 @@ class StuedntRegisterForm extends Component {
     }
 
     render() {
+        if (this.state.duplicationStatus) {
+            return <Redirect to='/' />;
+        }
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form action="/" method="POST" onSubmit={this.handleSubmit} >
                     <RegisterInputElement marginBottom={5}>
+                        <ConfirmationAlert show={this.state.duplicationDialog} marginBottom="3">
+                            <span>ชื่อผู้ใช้ มีอยู่ในระบบแล้ว</span>
+                        </ConfirmationAlert>
                         <label>ชื่อผู้ใช้ </label>
                         <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" data-cy="studentFormUsername" required />
                     </RegisterInputElement>
