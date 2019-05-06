@@ -3,7 +3,6 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const ProfileSchema = new mongoose.Schema({
   _id: {type: ObjectId, required: true},
-  username: {tpye: String, required: true},
   userType: {type: String, enum: ['student', 'tutor']},
   firstname: {type: String, required: true},
   lastname: {type: String, required: true},
