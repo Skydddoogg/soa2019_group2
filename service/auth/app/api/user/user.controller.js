@@ -40,23 +40,24 @@ exports.signup = async (req, res) => {
           kafkaProducer.send(kafkaMethods.INITOFFERINBOX, user.id);
         }
         const userProfile = {
-          _id: user.id,
+          id: user.id,
           userType: user.userType,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
           email: req.body.email,
           phoneNumber: req.body.phoneNumber,
-          // highSchool: req.body.highSchool,
-          // bachelor: req.body.bachelor,
-          // master: req.body.master,
-          // doctoral: req.body.doctoral,
-          // majorInBachelor: req.body.majorInBachelor,
-          // majorInMaster: req.body.majorInMaster,
-          // majorInDoctoral: req.body.majorInDoctoral,
-          // majorInHighSchool: req.body.majorInHighSchool
+          highSchool: req.body.highSchool,
+          bachelor: req.body.bachelor,
+          master: req.body.master,
+          doctoral: req.body.doctoral,
+          majorInBachelor: req.body.majorInBachelor,
+          majorInMaster: req.body.majorInMaster,
+          majorInDoctoral: req.body.majorInDoctoral,
+          majorInHighSchool: req.body.majorInHighSchool
         };
         kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
-        return res.status(201).json({ user });
+      
+        return res.status(201).json({ userProfile });
       } catch (error) {
         return res.status(500).json({ error });
       }
