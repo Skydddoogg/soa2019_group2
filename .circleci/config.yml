@@ -1,4 +1,3 @@
-# Ignore image building for deployment
 version: 2
 jobs:
   # api-gateway:
@@ -196,6 +195,7 @@ workflows:
       #         only:
       #           - master
       - service-deploy
+      # - service-deploy:
           # requires:
           #   - api-gateway
           #   - post-service
