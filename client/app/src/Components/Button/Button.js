@@ -77,3 +77,25 @@ transition:all .2s ease;
     background-color:#E00303;
 }
 `
+
+export const ActiveLink = styled.a`
+width:${props => props.width}%;
+height:45px;
+float: left;
+display: flex;
+justify-content: center;
+align-items: center;
+color:#fff;
+font-size:1.1em;
+padding:0 20px 0 20px;
+background-color:#008FF6;
+font-family:'Prompt', sans-serif;
+border-radius:3px;
+border:none;
+margin:auto;
+cursor:pointer;
+transition:all .2s ease;
+&:hover{
+    background-color:#006dbf;
+}
+`

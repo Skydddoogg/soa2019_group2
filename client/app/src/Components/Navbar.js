@@ -81,6 +81,7 @@ var RightMenu = styled.div`
 
 const LoggedInMenu = () => (
     <ul>
+        <li><a href="/offer">ข้อเสนอ</a></li>
         <li><a href="/profile">โปรไฟล์</a></li>
         <li><a href="/post">
             <ActiveButton width="146px">ลงประกาศ</ActiveButton>
@@ -101,7 +102,7 @@ class Navbar extends Component {
     constructor(props){
         super(props)
         this.state = {
-            loginStatus:false
+            loginStatus:true
         }
     }
     render() {

@@ -9,15 +9,15 @@ export default function RegisterFormForStudent() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
         <br />Email:
-        <input type="text" name="Email" ref={register({ required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} />
+        <input type="text" name="Email" data-cy="Email"ref={register({ required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} />
         <br />First name:
-        <input type="text" name="First name" ref={register({ required: true, maxLength: 80 })} />
+        <input type="text" name="First name" data-cy="First name" ref={register({ required: true, maxLength: 80 })} />
         <br />Last name:
-        <input type="text" name="Last name" ref={register({ required: true, maxLength: 100 })} />
+        <input type="text" name="Last name" data-cy="Last name"ref={register({ required: true, maxLength: 100 })} />
         <br />รหัสผ่าน
-        <input type="text" name="Password" ref={register({ required: true })} />
+        <input type="text" name="Password" data-cy="Password" ref={register({ required: true })} />
         <br />ยืนยันรหัสผ่าน
-        <input type="text" name="Repeat Password" ref={register({ required: true })} />
+        <input type="text" name="Repeat Password" data-cy="Repeat password" ref={register({ required: true })} />
 
         <br /><input type="submit" value="สมัครสมาชิก"/>
     </form>

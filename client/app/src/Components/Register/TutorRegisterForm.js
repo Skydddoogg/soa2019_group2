@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TwoColumnRegisterInputElement, RegisterInputElement, PasswordValidationElement, PasswordStatus, ConfirmationAlert } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
+import {Redirect} from 'react-router-dom'
 import { createUser } from '../../Actions/registerActions'
 class TutorRegisterForm extends Component {
     constructor(props) {
@@ -20,7 +21,9 @@ class TutorRegisterForm extends Component {
             numberCaseStatus: false,
             lengthOfPasswordState: false,
             confirmPasswordStatus: false,
-            validationPasswordStatus: false
+            validationPasswordStatus: false,
+            duplicationStatus:false,
+            duplicationDialog:false
         }
     }
 
@@ -115,7 +118,6 @@ class TutorRegisterForm extends Component {
                 this.setState({
                     confirmPasswordStatus: false
                 })
-                //call api here
 
                 //call api here
                 const data = {
@@ -128,7 +130,19 @@ class TutorRegisterForm extends Component {
                     'phoneNumber': this.state.phoneNumber
 
                 };
-                createUser(data)
+                createUser(data).then(res =>{
+                    if (res == 500) {
+                        this.setState({
+                            duplicationStatus: false,
+                            duplicationDialog: true
+                        })
+                        window.scrollTo(0, 0);
+                    } else {
+                        this.setState({
+                            duplicationStatus: true
+                        })
+                    }
+                })
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -142,10 +156,16 @@ class TutorRegisterForm extends Component {
     }
 
     render() {
+        if (this.state.duplicationStatus) {
+            return <Redirect to='/' />;
+        }
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form action="/" method="POST" onSubmit={this.handleSubmit} >
                     <RegisterInputElement marginBottom={5}>
+                    <ConfirmationAlert show={this.state.duplicationDialog} marginBottom="3">
+                            <span>ชื่อผู้ใช้ มีอยู่ในระบบแล้ว</span>
+                    </ConfirmationAlert>
                         <label>ชื่อผู้ใช้ </label>
                         <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
                     </RegisterInputElement>
@@ -156,7 +176,7 @@ class TutorRegisterForm extends Component {
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
-                            <input type="text" name="firstname" onChange={this.handleFirstname} value={this.state.firstname} required />
+                            <input type="text" name="firstname"  onChange={this.handleFirstname} value={this.state.firstname} required />
                         </RegisterInputElement>
 
                         <RegisterInputElement width="45" >
