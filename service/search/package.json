@@ -8,16 +8,17 @@
     "test": "NODE_ENV=test nyc mocha app/**/*.spec.js --exit"
   },
   "dependencies": {
+    "@google-cloud/trace-agent": "^3.6.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "custom-env": "^1.0.0",
     "eureka-js-client": "^4.4.2",
     "express": "~4.16.0",
     "kafka-node": "^4.0.2",
+    "module-alias": "^2.2.0",
     "mongoolia": "^1.0.3",
     "mongoose": "^5.4.19",
-    "mongoose-algolia": "^1.8.0",
-    "module-alias": "^2.2.0"
+    "mongoose-algolia": "^1.8.0"
   },
   "_moduleAliases": {
     "@root": ".",
