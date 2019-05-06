@@ -41,6 +41,7 @@ exports.signup = async (req, res) => {
         }
         const userProfile = {
           id: user.id,
+          username: req.body.username,
           userType: user.userType,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
