@@ -147,16 +147,11 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "SHA256:sgZGX3RWS41FehbhPtvCHl4VKG4QFMARFCIRoA7oGUc"
+            - "18:35:bb:77:3e:19:7f:00:e4:fc:e6:26:f5:de:15:3b"
       - run:
           name: Deploy Over SSH
           command: |
-            echo ${PRIVATE_KEY} > key
-            chmod 600 key
-            ssh-agent
-            eval `ssh-agent -s`
-            ssh-add key
-            ssh ${SSH_USER}@${SSH_HOST} -i key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d" -vvv
+            ssh -vv -o ${SSH_USER}@${SSH_HOST} "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
 workflows:
   version: 2
   deploy:
