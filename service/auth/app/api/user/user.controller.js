@@ -38,32 +38,23 @@ exports.signup = async (req, res) => {
         const user = await userAuthData.save();
         if (user.userType === 'student') {
           kafkaProducer.send(kafkaMethods.INITOFFERINBOX, user.id);
-          var userProfile = {
-            id: user.id,
-            userType: user.userType,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            phoneNumber: req.body.phoneNumber
-          };
-        } else {
-          var userProfile = {
-            id: user.id,
-            userType: user.userType,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            phoneNumber: req.body.phoneNumber,
-            highSchool: req.body.highSchool,
-            bachelor: req.body.bachelor,
-            master: req.body.master,
-            doctoral: req.body.doctoral,
-            majorInBachelor: req.body.majorInBachelor,
-            majorInMaster: req.body.majorInMaster,
-            majorInDoctoral: req.body.majorInDoctoral,
-            majorInHighSchool: req.body.majorInHighSchool
-          };
         }
+        const userProfile = {
+          id: user.id,
+          userType: user.userType,
+          firstname: req.body.firstname,
+          lastname: req.body.lastname,
+          email: req.body.email,
+          phoneNumber: req.body.phoneNumber,
+          highSchool: req.body.highSchool,
+          bachelor: req.body.bachelor,
+          master: req.body.master,
+          doctoral: req.body.doctoral,
+          majorInBachelor: req.body.majorInBachelor,
+          majorInMaster: req.body.majorInMaster,
+          majorInDoctoral: req.body.majorInDoctoral,
+          majorInHighSchool: req.body.majorInHighSchool
+        };
         console.log(userProfile)
         kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         return res.status(201).json({ user });
