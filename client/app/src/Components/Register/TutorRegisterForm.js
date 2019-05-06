@@ -24,14 +24,14 @@ class TutorRegisterForm extends Component {
             validationPasswordStatus: false,
             duplicationStatus: false,
             duplicationDialog: false,
-            highSchool:"",
-            bachelor:"",
-            master:"",
-            doctoral:"",
-            majorInBachelor:"",
-            majorInMaster:"",
-            majorInDoctoral:"",
-            majorInHighSchool:"",
+            highSchool:" ",
+            bachelor:" ",
+            master:" ",
+            doctoral:" ",
+            majorInBachelor:" ",
+            majorInMaster:" ",
+            majorInDoctoral:" ",
+            majorInHighSchool:" ",
         }
     }
 
