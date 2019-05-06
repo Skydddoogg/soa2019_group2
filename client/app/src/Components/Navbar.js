@@ -112,7 +112,6 @@ class Navbar extends Component {
                             <Logo>Tutor Finder</Logo>
                             <ul>
                                 <li><a href="#">หาติวเตอร์</a></li>
-                                <li><a href="#">หานักเรียน</a></li>
                             </ul>
 
                         </LeftMenu>

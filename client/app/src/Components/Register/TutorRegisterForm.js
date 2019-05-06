@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TwoColumnRegisterInputElement, RegisterInputElement, PasswordValidationElement, PasswordStatus, ConfirmationAlert } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
+import { createUser } from '../../Actions/registerActions'
 class TutorRegisterForm extends Component {
     constructor(props) {
         super(props)
@@ -81,7 +82,6 @@ class TutorRegisterForm extends Component {
     }
 
     handleDegree = (e) => {
-        console.log(e.target.value)
         this.setState({
             degree: e.target.value
         })
@@ -103,6 +103,16 @@ class TutorRegisterForm extends Component {
                     confirmPasswordStatus: false
                 })
                 //call api here
+
+                const data = {
+                    'email' : this.state.email,
+                    'firstname' : this.state.firstname,
+                    'lastname' : this.state.lastname,
+                    'userType' : this.state.userType,
+                    'degree' : this.state.degree,
+                    'password' : this.state.passwordValue
+                };
+                createUser(data)
             } else {
                 this.setState({
                     confirmPasswordStatus: true

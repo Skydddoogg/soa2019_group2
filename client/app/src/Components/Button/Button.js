@@ -38,3 +38,42 @@ transition:all .2s ease;
     background-color:#006dbf;
 }
 `
+
+export const RemoveButton = styled.button`
+width:${props => props.width}%;
+height:45px;
+color:#fff;
+font-size:1.1em;
+padding:0 20px 0 20px;
+background:none;
+border:none;
+font-family:'Prompt', sans-serif;
+border-radius:3px;
+background-color:#FF0000;
+margin:auto;
+cursor:pointer;
+transition:all .2s ease;
+&:hover{
+    color:#fff;
+    background-color:#E00303;
+}
+`
+
+export const NonActiveRemoveButton = styled.button`
+width:${props => props.width}%;
+height:45px;
+color:#FF0000;
+font-size:1.1em;
+padding:0 20px 0 20px;
+background:none;
+border:1px solid #FF0000;
+font-family:'Prompt', sans-serif;
+border-radius:3px;
+margin:auto;
+cursor:pointer;
+transition:all .2s ease;
+&:hover{
+    color:#fff;
+    background-color:#E00303;
+}
+`
