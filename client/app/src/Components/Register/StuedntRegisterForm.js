@@ -98,9 +98,14 @@ class StuedntRegisterForm extends Component {
                 })
                 
                 //call api here
-                console.log(this.state.firstname)
-                console.log(this.state.lastname)
-                console.log(this.state.email)
+                const data = {
+                    'email' : this.state.email,
+                    'firstname' : this.state.firstname,
+                    'lastname' : this.state.lastname,
+                    'userType' : this.state.userType,
+                    'password' : this.state.passwordValue
+                };
+                createUser(data)
             } else {
                 this.setState({
                     confirmPasswordStatus: true
