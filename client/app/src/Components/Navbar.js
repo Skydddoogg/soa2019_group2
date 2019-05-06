@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Wrapper from './Wrapper'
 import Button, { ActiveButton } from './Button/Button'
-import {getProfile} from '../Actions/profileActions'
+import { getProfile } from '../Actions/profileActions'
 var NavbarOutside = styled.div`
 border-bottom:1px solid #E8EEF2;
 background-color:#fff;
@@ -79,33 +79,55 @@ var RightMenu = styled.div`
     }
 `
 
-const LoggedInMenu = () => (
-    <ul>
-        <li><a href="/offer">ข้อเสนอ</a></li>
-        <li><a href="/profile">โปรไฟล์</a></li>
-        <li><a href="/post">
-            <ActiveButton width="146px">ลงประกาศ</ActiveButton>
-        </a></li>
-    </ul>
-)
 
-const LoggedOutMenu = () => (
-    <ul>
-        <li><a href="/">เข้าสู่ระบบ</a></li>
-        <li><a href="/signup">
-            <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
-        </a></li>
-    </ul>
-)
 
 class Navbar extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            loginStatus:true
+            loginStatus: true,
+            userType: ''
         }
+        
     }
+
+    componentDidMount() {
+        if(localStorage.getItem('userId') != null){
+            this.setState({
+                loginStatus:true
+            })
+        }else{
+            this.setState({
+                loginStatus:false
+            })
+        }
+        // getProfile(localStorage.getItem('userId')).then(res => {
+        //     this.setState({ 
+        //         userType: res.profile.userType 
+        //     })
+        // })
+      }
+
     render() {
+        const LoggedInMenu = () => (
+            <ul>
+            {this.state.userType === 'tutor' ? <li><a href="/profile">โปรไฟล์</a></li> : <li><a href="/offer">ข้อเสนอ</a></li>}
+            <li><a href="/logout">ออกจากระบบ</a></li>
+            {this.state.userType === 'tutor' ? '' : <li><a href="/post"><ActiveButton width="146px">ลงประกาศ</ActiveButton></a></li>}
+        </ul>
+        )
+
+        const LoggedOutMenu = () => (
+            <ul>
+                <li><a href="/">เข้าสู่ระบบ</a></li>
+                <li><a href="/signup">
+                    <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
+                </a></li>
+            </ul>
+         )
+
+        
+
         return (
             <NavbarOutside className={this.props.animationClassName}>
                 <Wrapper>
@@ -119,8 +141,8 @@ class Navbar extends Component {
 
                         </LeftMenu>
                         <RightMenu>
-                            {this.state.loginStatus ? <LoggedInMenu/> : <LoggedOutMenu />}
-                            
+                            {this.state.loginStatus ? <LoggedInMenu /> : <LoggedOutMenu />}
+
                         </RightMenu>
                     </NavbarWrapper>
                 </Wrapper>
