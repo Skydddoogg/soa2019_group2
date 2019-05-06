@@ -148,7 +148,7 @@ jobs:
           name: Deploy Over SSH
           command: |
             echo ${PRIVATE_KEY} > private_key
-            openssl rsa -in private_key_new -out key
+            openssl rsa -in private_key -out key
             chmod 600 key
             ssh -oStrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} -i key "export IMAGE_VERSION=${CIRCLE_SHA1} && docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d"
 workflows:
