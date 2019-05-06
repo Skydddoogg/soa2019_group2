@@ -11,7 +11,7 @@ class Register extends Component {
               <h1>สมัครสมาชิก</h1>
               <BrowserRouter>
                     <Link to="/register/student/">นักเรียน</Link><br/>
-                    <Link to="/register/tutor/">ติวเตอร์</Link>
+                    <Link to="/register/tutor/" data-cy="tutorForm">ติวเตอร์</Link>
                     <Route path="/register/student/" component={RegisterForStudent} />
                     <Route path="/register/tutor/" component={RegisterForTutor} />
               </BrowserRouter>
