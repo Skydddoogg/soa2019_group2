@@ -8,16 +8,14 @@ const ProfileSchema = new mongoose.Schema({
   lastname: {type: String, required: true},
   email: {type: String, required: true},
   phoneNumber: {type: String, required: true},
-  nickname: {type: String, required: true},
-  profileImg: {type: String, required: true},
-  highSchool: {type: String, required: true},
-  bachelor: {type: String, required: true},
-  master: {type: String, required: true},
-  doctoral: {type: String, required: true},
-  majorInBachelor: {type: String, required: true},
-  majorInMaster: {type: String, required: true},
-  majorInDoctoral: {type: String, required: true},
-  majorInHighSchool: {type: String, required: true}
+  highSchool: {type: String},
+  bachelor: {type: String},
+  master: {type: String},
+  doctoral: {type: String},
+  majorInBachelor: {type: String},
+  majorInMaster: {type: String},
+  majorInDoctoral: {type: String},
+  majorInHighSchool: {type: String}
 });
 
 module.exports = mongoose.model('Profile', ProfileSchema);

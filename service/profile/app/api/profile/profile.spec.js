@@ -37,7 +37,15 @@ describe('Profile-service integration test', () => {
         firstname: 'firstname',
         lastname: 'lastname',
         email: 'username@email.com',
-        phoneNumber: '0801234567'
+        phoneNumber: '0801234567',
+        highSchool: 'LN school',
+        bachelor: 'KMITL',
+        master: 'KMITL',
+        doctoral: 'KMITL',
+        majorInBachelor: 'IT',
+        majorInMaster: 'IT',
+        majorInDoctoral: 'IT',
+        majorInHighSchool: 'Science-Math'
       });
       profile.save((err, profile) => {
         chai.request(server)
@@ -73,7 +81,15 @@ describe('Profile-service integration test', () => {
         firstname: 'firstname',
         lastname: 'lastname',
         email: 'username@email.com',
-        phoneNumber: '0801234567'
+        phoneNumber: '0801234567',
+        highSchool: 'LN school',
+        bachelor: 'KMITL',
+        master: 'KMITL',
+        doctoral: 'KMITL',
+        majorInBachelor: 'IT',
+        majorInMaster: 'IT',
+        majorInDoctoral: 'IT',
+        majorInHighSchool: 'Science-Math'
       });
       let editedProfile = {
         firstname: 'firstnameedited',
