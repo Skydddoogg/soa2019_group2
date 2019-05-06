@@ -103,6 +103,11 @@ client.start(error => {
     profileServiceProxy(req, res, next);
   });
 
+  // For auto deploy demonstration
+  app.use('/helloworld', (req, res, next) => {
+    res.status(200).json({ message: 'hello world' });
+  });
+
 });
 
 app.listen(PORT, HOST);
