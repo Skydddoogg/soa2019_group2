@@ -57,7 +57,7 @@ exports.signup = async (req, res) => {
         };
         kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
       
-        return res.status(201).json({ userProfile });
+        return res.status(201).json({ user });
       } catch (error) {
         return res.status(500).json({ error });
       }
