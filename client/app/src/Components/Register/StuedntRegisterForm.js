@@ -23,7 +23,15 @@ class StuedntRegisterForm extends Component {
             confirmPasswordStatus: false,
             validationPasswordStatus: false,
             duplicationStatus: false,
-            duplicationDialog:false
+            duplicationDialog:false,
+            highSchool:" ",
+            bachelor:" ",
+            master:" ",
+            doctoral:" ",
+            majorInBachelor:" ",
+            majorInMaster:" ",
+            majorInDoctoral:" ",
+            majorInHighSchool:" ",
         }
     }
 
@@ -120,7 +128,15 @@ class StuedntRegisterForm extends Component {
                     'lastname': this.state.lastname,
                     'email': this.state.email,
                     'userType': this.state.userType,
-                    'phoneNumber': this.state.phoneNumber
+                    'phoneNumber': this.state.phoneNumber,
+                    'highSchool': this.state.highSchool,
+                    'bachelor': this.state.bachelor,
+                    'master': this.state.master,
+                    'doctoral': this.state.doctoral,
+                    'majorInBachelor': this.state.majorInBachelor,
+                    'majorInMaster': this.state.majorInMaster,
+                    'majorInDoctoral': this.state.majorInDoctoral,
+                    'majorInHighSchool': this.state.majorInHighSchool
 
                 };
                 createUser(data).then(res =>{
