@@ -6,7 +6,6 @@ import Comments from '../Components/Profile/comments';
 import { getProfile } from '../Actions/profileActions'
 import axios from 'axios';
 import { stat } from 'fs';
-import Navbar from '../Components/Navbar'
 import Wrapper from '../Components/Wrapper'
 import styled from 'styled-components'
 
@@ -63,7 +62,6 @@ class TutorProfile extends Component {
       const { data } = this.state
       return (
         <div className="TutorProfile">
-        <Navbar />
         <Wrapper>
           
           <header className="TutorProfile-header">

@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { TwoColumnRegisterInputElement, RegisterInputElement, PasswordValidationElement, PasswordStatus, ConfirmationAlert } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
+import { createUser } from '../../Actions/registerActions'
 class TutorRegisterForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
+            username: '',
             email: '',
             firstname: '',
             lastname: '',
-            userType: 'tutor',
-            degree: '',
+            phoneNumber: '',
+            userType: 'student',
             passwordValue: "",
             confirmPasswordValue: "",
             lowerCaseStatus: false,
@@ -18,7 +20,7 @@ class TutorRegisterForm extends Component {
             numberCaseStatus: false,
             lengthOfPasswordState: false,
             confirmPasswordStatus: false,
-            validationPasswordStatus:false
+            validationPasswordStatus: false
         }
     }
 
@@ -81,9 +83,20 @@ class TutorRegisterForm extends Component {
     }
 
     handleDegree = (e) => {
-        console.log(e.target.value)
         this.setState({
             degree: e.target.value
+        })
+    }
+
+    handlePhoneNumber = (e) => {
+        this.setState({
+            phoneNumber: e.target.value
+        })
+    }
+
+    handleUsername = (e) => {
+        this.setState({
+            username: e.target.value
         })
     }
 
@@ -96,13 +109,26 @@ class TutorRegisterForm extends Component {
             this.state.lengthOfPasswordState
         ) {
             this.setState({
-                validationPasswordStatus:false
+                validationPasswordStatus: false
             })
             if (this.state.confirmPasswordValue === this.state.passwordValue) {
                 this.setState({
                     confirmPasswordStatus: false
                 })
                 //call api here
+
+                //call api here
+                const data = {
+                    'username': this.state.username,
+                    'password': this.state.passwordValue,
+                    'firstname': this.state.firstname,
+                    'lastname': this.state.lastname,
+                    'email': this.state.email,
+                    'userType': this.state.userType,
+                    'phoneNumber': this.state.phoneNumber
+
+                };
+                createUser(data)
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -119,7 +145,11 @@ class TutorRegisterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                <RegisterInputElement marginBottom={5}>
+                    <RegisterInputElement marginBottom={5}>
+                        <label>ชื่อผู้ใช้ </label>
+                        <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
+                    </RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
                         <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
                     </RegisterInputElement>
@@ -135,6 +165,10 @@ class TutorRegisterForm extends Component {
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
+                    <RegisterInputElement marginBottom={5}>
+                        <label>เบอร์โทรศัพท์ </label>
+                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
+                    </RegisterInputElement>
 
 
 
@@ -183,8 +217,8 @@ class TutorRegisterForm extends Component {
                             <option value="ปริญญาตรี">ปริญญาตรี</option>
                             <option value="ปริญญาโท">ปริญญาโท</option>
                             <option value="ปริญญาเอก">ปริญญาเอก</option>
-                            </select>
-                        
+                        </select>
+
                     </RegisterInputElement>
 
 

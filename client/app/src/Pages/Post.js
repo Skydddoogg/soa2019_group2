@@ -1,6 +1,5 @@
   import React, { Component } from 'react';
 import FormForFindingTutor from '../Components/Post/formFindingTutor';
-import Navbar from '../Components/Navbar'
 import Wrapper from '../Components/Wrapper'
 import styled from 'styled-components'
 
@@ -16,7 +15,6 @@ class Post extends Component {
     render() {
       return (
         <div className="Post">
-        <Navbar />
         <Wrapper>
           <header className="Post-header">
             <PostLayout>

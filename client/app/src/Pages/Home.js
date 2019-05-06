@@ -49,13 +49,14 @@ width:50%;
 var RightContent = styled.div`
 width:40%;
 `
+
+
 class Home extends Component {
   render() {
     return (
       <div>
         
         <HomeSection>
-        <Navbar animationClassName="animated bounceInDown" />
           <Wrapper>
             <InsideHomeSection className="animated bounceInUp">
               <LeftContent>

@@ -7,9 +7,11 @@ class StuedntRegisterForm extends Component {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
+            username: '',
             email: '',
             firstname: '',
             lastname: '',
+            phoneNumber: '',
             userType: 'student',
             passwordValue: "",
             confirmPasswordValue: "",
@@ -68,6 +70,12 @@ class StuedntRegisterForm extends Component {
         })
     }
 
+    handleUsername = (e) => {
+        this.setState({
+            username: e.target.value
+        })
+    }
+
     handleFirstname = (e) => {
         this.setState({
             firstname: e.target.value
@@ -77,6 +85,12 @@ class StuedntRegisterForm extends Component {
     handleLastName = (e) => {
         this.setState({
             lastname: e.target.value
+        })
+    }
+
+    handlePhoneNumber = (e) => {
+        this.setState({
+            phoneNumber: e.target.value
         })
     }
 
@@ -96,11 +110,19 @@ class StuedntRegisterForm extends Component {
                     confirmPasswordStatus: false
 
                 })
-                
+
                 //call api here
-                console.log(this.state.firstname)
-                console.log(this.state.lastname)
-                console.log(this.state.email)
+                const data = {
+                    'username': this.state.username,
+                    'password': this.state.passwordValue,
+                    'firstname': this.state.firstname,
+                    'lastname': this.state.lastname,
+                    'email': this.state.email,
+                    'userType': this.state.userType,
+                    'phoneNumber': this.state.phoneNumber
+
+                };
+                createUser(data)
             } else {
                 this.setState({
                     confirmPasswordStatus: true
@@ -118,9 +140,15 @@ class StuedntRegisterForm extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <RegisterInputElement marginBottom={5}>
+                        <label>ชื่อผู้ใช้ </label>
+                        <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
+                    </RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
                         <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
                     </RegisterInputElement>
+
+
                     <TwoColumnRegisterInputElement marginBottom={5}>
                         <RegisterInputElement width="45">
                             <label>ชื่อ</label>
@@ -133,6 +161,11 @@ class StuedntRegisterForm extends Component {
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
+
+                    <RegisterInputElement marginBottom={5}>
+                        <label>เบอร์โทรศัพท์ </label>
+                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
+                    </RegisterInputElement>
 
 
                     <RegisterInputElement marginBottom={5}>
