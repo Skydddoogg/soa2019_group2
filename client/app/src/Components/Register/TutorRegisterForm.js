@@ -7,11 +7,12 @@ class TutorRegisterForm extends Component {
         super(props)
         this.state = {
             confirmPasswordStatus: false,
+            username: '',
             email: '',
             firstname: '',
             lastname: '',
-            userType: 'tutor',
-            degree: '',
+            phoneNumber: '',
+            userType: 'student',
             passwordValue: "",
             confirmPasswordValue: "",
             lowerCaseStatus: false,
@@ -19,7 +20,7 @@ class TutorRegisterForm extends Component {
             numberCaseStatus: false,
             lengthOfPasswordState: false,
             confirmPasswordStatus: false,
-            validationPasswordStatus:false
+            validationPasswordStatus: false
         }
     }
 
@@ -87,6 +88,18 @@ class TutorRegisterForm extends Component {
         })
     }
 
+    handlePhoneNumber = (e) => {
+        this.setState({
+            phoneNumber: e.target.value
+        })
+    }
+
+    handleUsername = (e) => {
+        this.setState({
+            username: e.target.value
+        })
+    }
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -96,7 +109,7 @@ class TutorRegisterForm extends Component {
             this.state.lengthOfPasswordState
         ) {
             this.setState({
-                validationPasswordStatus:false
+                validationPasswordStatus: false
             })
             if (this.state.confirmPasswordValue === this.state.passwordValue) {
                 this.setState({
@@ -104,13 +117,16 @@ class TutorRegisterForm extends Component {
                 })
                 //call api here
 
+                //call api here
                 const data = {
-                    'email' : this.state.email,
-                    'firstname' : this.state.firstname,
-                    'lastname' : this.state.lastname,
-                    'userType' : this.state.userType,
-                    'degree' : this.state.degree,
-                    'password' : this.state.passwordValue
+                    'username': this.state.username,
+                    'password': this.state.passwordValue,
+                    'firstname': this.state.firstname,
+                    'lastname': this.state.lastname,
+                    'email': this.state.email,
+                    'userType': this.state.userType,
+                    'phoneNumber': this.state.phoneNumber
+
                 };
                 createUser(data)
             } else {
@@ -129,7 +145,11 @@ class TutorRegisterForm extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                <RegisterInputElement marginBottom={5}>
+                    <RegisterInputElement marginBottom={5}>
+                        <label>ชื่อผู้ใช้ </label>
+                        <input type="text" onChange={this.handleUsername} value={this.state.username} name="username" required />
+                    </RegisterInputElement>
+                    <RegisterInputElement marginBottom={5}>
                         <label>อีเมล์ </label>
                         <input type="email" onChange={this.handleEmail} value={this.state.email} name="email" required />
                     </RegisterInputElement>
@@ -145,6 +165,10 @@ class TutorRegisterForm extends Component {
                         </RegisterInputElement>
                     </TwoColumnRegisterInputElement>
 
+                    <RegisterInputElement marginBottom={5}>
+                        <label>เบอร์โทรศัพท์ </label>
+                        <input type="text" name="telephone" onChange={this.handlePhoneNumber} value={this.state.phoneNumber} required />
+                    </RegisterInputElement>
 
 
 
@@ -193,8 +217,8 @@ class TutorRegisterForm extends Component {
                             <option value="ปริญญาตรี">ปริญญาตรี</option>
                             <option value="ปริญญาโท">ปริญญาโท</option>
                             <option value="ปริญญาเอก">ปริญญาเอก</option>
-                            </select>
-                        
+                        </select>
+
                     </RegisterInputElement>
 
 

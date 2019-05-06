@@ -41,6 +41,7 @@ export default class LoginBox extends Component {
             password:this.state.password
         }
         handleLogin(data)
+        
     }
 
     constructor(props){

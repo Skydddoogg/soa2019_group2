@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Wrapper from './Wrapper'
 import Button, { ActiveButton } from './Button/Button'
+import {getProfile} from '../Actions/profileActions'
 var NavbarOutside = styled.div`
 border-bottom:1px solid #E8EEF2;
 background-color:#fff;
