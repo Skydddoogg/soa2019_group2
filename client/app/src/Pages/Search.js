@@ -222,14 +222,9 @@ const handleSendOffer = (item) => {
 
 const Hit = ({ item }) => {
   return (
-<<<<<<< HEAD
     <article name="asdsd" className="hit animated bounceInUp" name={item.objectID} onClick={() => handleSendOffer(item)}>
 
       <div className="product-desc-wrapper">
-=======
-    <article className="hit animated bounceInUp" >>
-      <div className="product-desc-wrapper" data-cy="searchHitObject">
->>>>>>> 69820ff1e7f771e75fa7ee0513dc2fec55932eb4
         <div className="product-name">
           <Highlight attribute="subject" hit={item} />
         </div>
