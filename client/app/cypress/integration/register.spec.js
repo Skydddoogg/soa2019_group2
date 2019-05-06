@@ -5,7 +5,7 @@ describe("Register Page", () => {
 
 
     it("Success register", () => {
-        cy.get('[data-cy=username]').click()
+        cy.get('[data-cy=Username]').click()
      
     });
 
