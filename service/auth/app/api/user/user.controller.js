@@ -38,7 +38,7 @@ exports.signup = async (req, res) => {
         const user = await userAuthData.save();
         if (user.userType === 'student') {
           kafkaProducer.send(kafkaMethods.INITOFFERINBOX, user.id);
-          const userProfile = {
+          var userProfile = {
             id: user.id,
             userType: user.userType,
             firstname: req.body.firstname,
@@ -46,9 +46,8 @@ exports.signup = async (req, res) => {
             email: req.body.email,
             phoneNumber: req.body.phoneNumber
           };
-          kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         } else {
-          const userProfile = {
+          var userProfile = {
             id: user.id,
             userType: user.userType,
             firstname: req.body.firstname,
@@ -64,8 +63,9 @@ exports.signup = async (req, res) => {
             majorInDoctoral: req.body.majorInDoctoral,
             majorInHighSchool: req.body.majorInHighSchool
           };
-          kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         }
+        console.log(userProfile)
+        kafkaProducer.send(kafkaMethods.INITPROFILE, userProfile);
         return res.status(201).json({ user });
       } catch (error) {
         return res.status(500).json({ error });
