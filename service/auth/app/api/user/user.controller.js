@@ -97,6 +97,5 @@ exports.validate = () => {
     check('lastname').exists({ checkFalsy: true }),
     check('email').isEmail({ checkFalsy: true }),
     check('phoneNumber').exists({ checkFalsy: true }),
-    check('highSchool').exists({ checkFalsy: true })
   ]
 }

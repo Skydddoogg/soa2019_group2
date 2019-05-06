@@ -32,7 +32,15 @@ initProfile = (jsonMsg) => {
     'firstname': jsonMsg.data.firstname,
     'lastname': jsonMsg.data.lastname,
     'email': jsonMsg.data.email,
-    'phoneNumber': jsonMsg.data.phoneNumber
+    'phoneNumber': jsonMsg.data.phoneNumber,
+    'highSchool': jsonMsg.data.highSchool,
+    'bachelor': jsonMsg.data.bachelor,
+    'master': jsonMsg.data.master,
+    'doctoral': jsonMsg.data.doctoral,
+    'majorInBachelor': jsonMsg.data.majorInBachelor,
+    'majorInMaster': jsonMsg.data.majorInMaster,
+    'majorInDoctoral': jsonMsg.data.majorInDoctoral,
+    'majorInHighSchool': jsonMsg.data.majorInHighSchool
   });
   profile.save();
 }
