@@ -76,7 +76,7 @@ class TutorProfile extends Component {
             <WrapperComment >
               <h3>Comments</h3>
 
-              <Comments targetId={this.state.targetId} />
+              {/* <Comments targetId={this.state.targetId} /> */}
             </WrapperComment>
 
           </header>

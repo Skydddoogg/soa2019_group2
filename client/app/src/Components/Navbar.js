@@ -115,13 +115,13 @@ class Navbar extends Component {
             <ul>
             {this.state.userType === 'tutor' ? <li><a href="/profile">โปรไฟล์</a></li> : <li><a href="/offer">ข้อเสนอ</a></li>}
             <li><a href="/logout">ออกจากระบบ</a></li>
-            {this.state.userType === 'tutor' ? '' : <li><a href="/post"><ActiveButton width="146px">ลงประกาศ</ActiveButton></a></li>}
+            {this.state.userType === 'tutor' ? '' : <li><a href="/post"><ActiveButton width="146px" data-cy="navCreatePost">ลงประกาศ</ActiveButton></a></li>}
         </ul>
         )
 
         const LoggedOutMenu = () => (
             <ul>
-                <li><a href="/">เข้าสู่ระบบ</a></li>
+                <li><a href="/" data-cy="navLogin_btn">เข้าสู่ระบบ</a></li>
                 <li><a href="/signup">
                     <ActiveButton width="146px">สมัครสมาชิก</ActiveButton>
                 </a></li>
@@ -138,7 +138,7 @@ class Navbar extends Component {
                         <LeftMenu>
                             <Logo a href="/">Tutor Finder</Logo>
                             <ul>
-                                <li><a href="/search">หาติวเตอร์</a></li>
+                                <li><a href="/search" data-cy="navFindTutor">หาติวเตอร์</a></li>
                             </ul>
 
                         </LeftMenu>

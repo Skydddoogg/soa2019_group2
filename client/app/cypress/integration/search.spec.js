@@ -11,7 +11,7 @@ describe("Search page", () =>{
             //     cy.wrap($li).invoke('text').should('include', 'math')
             // })
     
-        cy.get('[data-cy=searchHitObject]').should('have.length', 5)
+        cy.get('[data-cy=searchHitObject]').should('have.length', 7)
     //     cy.get('[data-cy=searchSubject]').each(($li) =>{
     //         cy.wrap($li).click()
     // });
@@ -29,7 +29,7 @@ describe("Search page", () =>{
         cy.get('input[class="ais-RangeInput-input ais-RangeInput-input--min"]').type(500)
         cy.get('input[class="ais-RangeInput-input ais-RangeInput-input--max"]').type(700)
         cy.contains('ok').click()
-        cy.get('[data-cy=searchHitObject]').should('have.length', 12)
+        cy.get('[data-cy=searchHitObject]').should('have.length', 1)
 
     })
 
