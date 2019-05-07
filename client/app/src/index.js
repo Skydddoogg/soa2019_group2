@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 const AppWithRouter = () => (
     <BrowserRouter>
-        <Navbar />
+      <Navbar />
       <App />
     </BrowserRouter>
   )

@@ -43,7 +43,9 @@ export default class LoginBox extends Component {
             username: this.state.username,
             password: this.state.password
         }
+        
         handleLogin(data).then(res => {
+            
             if (res == 500) {
                 this.setState({
                     validationStatus: false,
@@ -81,11 +83,11 @@ export default class LoginBox extends Component {
                 </ConfirmationAlert>
                 <RegisterInputElement width="100" marginBottom={5}>
                     <label>ชื่อผู้ใช้ </label>
-                    <input type="text" name="username" onChange={this.handleUsername} value={this.state.username} />
+                    <input type="text" name="username" data-cy="loginUsername" onChange={this.handleUsername} value={this.state.username} />
                 </RegisterInputElement>
                 <RegisterInputElement width="100" marginBottom={5}>
                     <label>รหัสผ่าน </label>
-                    <input type="password" name="password" onChange={this.handlePassword} value={this.state.password} />
+                    <input type="password" name="password"  data-cy="loginPassword" onChange={this.handlePassword} value={this.state.password} />
                 </RegisterInputElement>
                 <NonActiveButton width="100" style={{ marginBottom: 15 }}>เข้าสู่ระบบ</NonActiveButton>
                 <ActiveLink width="100" href="/signup" >สมัครสมาชิก</ActiveLink>

@@ -195,9 +195,6 @@ class TutorRegisterForm extends Component {
                     'majorInDoctoral': this.state.majorInDoctoral,
                     'majorInHighSchool': this.state.majorInHighSchool
                 };
-                
-
-                console.log(data)
                 createUser(data).then(res => {
                     if (res == 500) {
                         this.setState({

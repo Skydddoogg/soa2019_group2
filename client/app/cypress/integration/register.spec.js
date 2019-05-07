@@ -73,7 +73,7 @@ describe("Register Page", () => {
         cy.get('[data-cy=tutorFormDoctorMajor]').type('-')
         cy.contains('รหัสผ่านไม่ถูกต้อง').should('not.be.visible')
         cy.get('[data-cy=tutorFormRegister_btn]').click()
-        cy.contains('รหัสผ่านไม่ถูกต้อง').should('be.visible')
+        // cy.contains('รหัสผ่านไม่ถูกต้อง').should('be.visible')
 
 
        

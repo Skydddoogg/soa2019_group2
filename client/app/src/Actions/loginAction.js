@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
-
+import React from 'react'
+import {Redirect} from 'react-router-dom'
 export function handleLogin(data){
     return fetch('http://35.240.240.164:3000/api/auth/signin', {
         method: 'POST',
@@ -18,4 +19,11 @@ export function handleLogin(data){
     }).catch(err => {
         console.log(err)
     });
+}
+
+
+export function checkLoggedIn(){
+    if(localStorage.getItem('userId') == null){
+        return <Redirect to="/" />
+    }
 }

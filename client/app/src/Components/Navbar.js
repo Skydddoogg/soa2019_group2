@@ -86,7 +86,7 @@ class Navbar extends Component {
         super(props)
         this.state = {
             loginStatus: true,
-            userType: ''
+            userType: 'student'
         }
         
     }
@@ -96,16 +96,18 @@ class Navbar extends Component {
             this.setState({
                 loginStatus:true
             })
+
+            getProfile(localStorage.getItem('userId')).then(res => {
+                this.setState({ 
+                    userType: res.profile.userType 
+                })
+            })
         }else{
             this.setState({
                 loginStatus:false
             })
         }
-        // getProfile(localStorage.getItem('userId')).then(res => {
-        //     this.setState({ 
-        //         userType: res.profile.userType 
-        //     })
-        // })
+        
       }
 
     render() {

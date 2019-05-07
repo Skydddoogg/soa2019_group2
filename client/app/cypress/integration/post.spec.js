@@ -14,12 +14,7 @@ describe("Post page", () =>{
 
     });
     it.only("Filter posts by subject", () => {
-        cy.visit("localhost:3000/search")
-        cy.wait(3000)
-        cy.get('[data-cy=searchHitObject]').each(($div) =>{
-                cy.wrap($div).click()
-            
-        })
+        
     })
 
 

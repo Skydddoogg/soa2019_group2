@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import bg_pattern from '../Assets/images/home_bg_pattern.svg'
 import Wrapper from '../Components/Wrapper'
 import LoginBox from '../Components/Login/LoginBox'
+import {Redirect} from 'react-router-dom'
 var HomeSection = styled.section`
 background-color:#008FF6;
 width:100%;
@@ -53,6 +54,12 @@ width:40%;
 
 class Home extends Component {
   render() {
+    
+    if(localStorage.getItem('userId') != null){
+      return <Redirect to="/search" />
+    }
+
+
     return (
       <div>
         
