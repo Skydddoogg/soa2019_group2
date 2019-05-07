@@ -1,14 +1,20 @@
 import fetch from 'isomorphic-fetch';
 
-export function createFindingTutorPost(data) {
-    return fetch('http://localhost:3001/create', {
+export function createFindingTutorPost(data, token) {
+    return fetch('http://35.240.240.164:3000/api/post/create', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         }
-    }).then(res => {
-        return res;
+    })
+    .then((res) => {
+        // header
+        return res.json();
+    }).then(jsonRes => {
+        // body
+        console.log(jsonRes);
     }).catch(err => {
         console.log(err)
     });

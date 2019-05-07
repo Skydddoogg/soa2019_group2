@@ -11,12 +11,13 @@ export function getStudentOffer(userId) {
 }
 
 
-export function createOffer(userId) {
-    return fetch('http://localhost:3005/create', {
+export function createOffer(data, token) {
+    return fetch('http://35.240.240.164:3000/api/offer/create', {
         method: 'POST',
-        body: JSON.stringify(userId),
+        body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         }
     }).then(res => {
         return res;

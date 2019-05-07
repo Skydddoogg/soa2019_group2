@@ -216,6 +216,15 @@ function CustomHits({ hits }) {
 }
 
 const handleSendOffer = (item) => {
+  var token = localStorage.getItem('token');
+  console.log(item)
+  var data = {
+    postId: item.objectID,
+    studentId: item.creatorId
+  }
+  console.log(data)
+  console.log(token)
+  createOffer(data, token);
 }
 
 
@@ -229,7 +238,7 @@ const Hit = ({ item }) => {
           <Highlight attribute="subject" hit={item} />
         </div>
         <div className="product-type">
-          อาจารย์ <Highlight attribute="creatorUsername" hit={item} />
+          สร้างโดย <Highlight attribute="creatorUsername" hit={item} />
         </div>
         <div className="price">
           <h6>{item.expectPrice.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</h6> <span>บาท</span>
