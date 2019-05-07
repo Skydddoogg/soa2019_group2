@@ -116,3 +116,14 @@ export var ConfirmationAlert = styled.div`
   display:${props => props.show ? "block" : "none"};
 `
 
+export var LoadingAlert = styled.div`
+  width:100%;
+  padding:18px;
+  margin-top:3%;
+  margin-bottom:${props => props.marginBottom}%;
+  color: #1d630c;
+  background-color: #cbffb5;
+  border-color: #f5c6cb;
+  display:${props => props.show ? "block" : "none"};
+`
+

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Wrapper from '../Components/Wrapper'
 import { ActiveButton, NonActiveRemoveButton } from '../Components/Button/Button'
 import {getStudentOffer} from '../Actions/offerAction'
+import {Link} from 'react-router-dom'
 var offerInbox = [
   {
     postId: '5c99b60908aa5a2eb7c2f196',
@@ -85,7 +86,6 @@ class Offers extends Component {
             <OfferTable>
               <thead>
                 <tr>
-                <th>สถานะ</th>
                   <th>AA</th>
                   <th>BB</th>
                   <th>CC</th>
@@ -95,14 +95,17 @@ class Offers extends Component {
               <tbody>
                 {offerInbox.map(function (c, i) {
                   return <tr key={i}>
-                  <td><Status>ยืนยัน</Status></td>
                     <td>{c.postId}</td>
                     <td>{c.tutorId}</td>
                     <td>{c.tutorUsername}</td>
                     <td>
                       <ButtonWrapper>
-                        <NonActiveRemoveButton width="40">ปฏิเสธ</NonActiveRemoveButton>
-                        <ActiveButton width="40">ยืนยัน</ActiveButton>
+                        
+                        <Link to={{pathname: '/profile',
+  state: {
+    tutorId: c.tutorId
+  }
+}}><ActiveButton width="80">ดูข้อมูล</ActiveButton></Link>
                       </ButtonWrapper>
                     </td>
                   </tr>
