@@ -64,6 +64,8 @@ class CommentForm extends Component {
       return;
     }
 
+    var token = localStorage.getItem('token');
+
     // TODO: Get information
     var data = {
       message: textVal,
@@ -78,7 +80,7 @@ class CommentForm extends Component {
 
     console.log(data)
     // Send data to API
-    createComment(data);
+    createComment(data, token);
     
     this.props.onCommentSubmit({ownerUsername: authorVal, message: textVal, profileImg: authorImgVal});
     e.target[0].value = '';

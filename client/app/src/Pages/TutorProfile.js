@@ -48,7 +48,7 @@ class TutorProfile extends Component {
   }
 
   componentDidMount() {
-    const { tutorId } = this.props.location.state
+    // const { tutorId } = this.props.location.state
     //Check user logged in are tutor or studen
     var userId = localStorage.getItem('userId');
     var profile = getProfile(userId);
@@ -74,10 +74,10 @@ class TutorProfile extends Component {
             />
               <BrowserRouter>
                     <ToggleButtonWrapper >
-                    <TonggleButton active={!this.state.activeButton} onClick={Tester}><Link  to="/tutor-profile/post-history/" >ประวัติการประกาศ</Link></TonggleButton>
+                    {/* <TonggleButton active={!this.state.activeButton} onClick={Tester}><Link  to="/tutor-profile/post-history/" >ประวัติการประกาศ</Link></TonggleButton> */}
                     <TonggleButton active={this.state.activeButton} onClick={Tester}><Link to="/tutor-profile/comments/" >Comments</Link></TonggleButton>
                     </ToggleButtonWrapper>
-                    <Route path="/tutor-profile/post-history/" component={PostHistory} />
+                    {/* <Route path="/tutor-profile/post-history/" component={PostHistory} /> */}
                     <Route path="/tutor-profile/comments/" component={Comments} />
               </BrowserRouter>
           </header>
