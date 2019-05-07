@@ -1,8 +1,9 @@
 describe("Post page", () =>{
     beforeEach(function(){
-        cy.visit("localhost:3000/post")
     });
     it("Add new post", () =>{
+        cy.visit("localhost:3000/post")
+
         cy.get('[data-cy=postSubject]').select('ภาษาไทย')
         cy.get('[data-cy=postLevel]').select('มัธยมปลาย')
         cy.get('[data-cy=postStartTime]').type('16:00')
@@ -11,11 +12,10 @@ describe("Post page", () =>{
         cy.get('[data-cy=postExpectPrice]').type(300)   
         cy.get('[data-cy=postSubmit_btn]').click()
 
-
-
-
-
     });
+    it.only("Filter posts by subject", () => {
+        
+    })
 
 
 });

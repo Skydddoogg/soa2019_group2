@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   InstantSearch,
   HierarchicalMenu,
@@ -21,7 +21,7 @@ import algoliasearch from 'algoliasearch/lite';
 import styled from 'styled-components'
 import Wrapper from '../Components/Wrapper'
 import bg_pattern from '../Assets/images/home_bg_pattern.svg'
-
+import { createOffer } from '../Actions/offerAction'
 const searchClient = algoliasearch(
   'P8OW22R5NQ',
   '668aff46e9654cb4b523e3bc12537834'
@@ -36,27 +36,41 @@ align-items:flex-start;
   align-content:flex-start;
 `
 
-const Search = props => (
-  <SearchPage>
-    <InstantSearch
-      indexName="dev_posts"
-      searchClient={searchClient}
-      searchState={props.searchState}
-      createURL={props.createURL}
-      onSearchStateChange={props.onSearchStateChange}
-    >
-      <Wrapper>
-        <Configure hitsPerPage={16} />
-        <div className="content-wrapper">
-          <SearchWrapper >
-            <Facets />
-            <CustomResults />
-          </SearchWrapper>
-        </div>
-      </Wrapper>
-    </InstantSearch>
-  </SearchPage>
-);
+
+
+class Search extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showAlert: false,
+      postObj: {}
+    }
+
+  }
+  render() {
+    return (
+      <SearchPage>
+        <InstantSearch
+          indexName="dev_posts"
+          searchClient={searchClient}
+          searchState={this.props.searchState}
+          createURL={this.props.createURL}
+          onSearchStateChange={this.props.onSearchStateChange}
+        >
+          <Wrapper>
+            <Configure hitsPerPage={16} />
+            <div className="content-wrapper">
+              <SearchWrapper >
+                <Facets />
+                <CustomResults />
+              </SearchWrapper>
+            </div>
+          </Wrapper>
+        </InstantSearch>
+      </SearchPage>
+    )
+  }
+}
 
 const Header = () => (
   <header className="content-wrapper">
@@ -159,7 +173,7 @@ transition:all .2s ease;
 const Facets = () => (
   <FacetsWrapper className="animated bounceInUp">
     <Panel header={<h5>วิชา</h5>}>
-      <RefinementList attribute="subject" operator="or" limit={5} />
+      <RefinementList attribute="subject" operator="or"  limit={5} />
     </Panel>
 
     <Panel header={<h5>ระดับชั้น</h5>}>
@@ -184,7 +198,7 @@ const CustomSearchBox = ({ currentRefinement, refine }) => (
       id="q"
     />
     <span className="input-group-btn">
-      <button className="btn btn-default">
+      <button className="btn btn-default" data-cy="searchSubmit_btn">
         <i className="fa fa-search" />
       </button>
     </span>
@@ -195,16 +209,21 @@ function CustomHits({ hits }) {
   return (
     <main id="hits">
       {hits.map(hit => (
-        <Hit item={hit} key={hit.objectID}  />
+        <Hit item={hit} key={hit.objectID} />
       ))}
     </main>
   );
 }
 
-const Hit = ({ item }) => {
+const handleSendOffer = (item) => {
+}
 
+
+
+const Hit = ({ item }) => {
   return (
-    <article className="hit animated bounceInUp">
+    <article name="asdsd" className="hit animated bounceInUp" name={item.objectID} onClick={() => handleSendOffer(item)}>
+
       <div className="product-desc-wrapper">
         <div className="product-name">
           <Highlight attribute="subject" hit={item} />
