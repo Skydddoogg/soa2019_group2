@@ -113,7 +113,7 @@ class Navbar extends Component {
     render() {
         const LoggedInMenu = () => (
             <ul>
-            {this.state.userType === 'tutor' ? <li><a href="/profile">โปรไฟล์</a></li> : <li><a href="/offer">ข้อเสนอ</a></li>}
+            {this.state.userType === 'tutor' ? <li><a href="/profile">โปรไฟล์</a></li> : <li><a href="/offer" data-cy="navOffer">ข้อเสนอ</a></li>}
             <li><a href="/logout">ออกจากระบบ</a></li>
             {this.state.userType === 'tutor' ? '' : <li><a href="/post"><ActiveButton width="146px" data-cy="navCreatePost">ลงประกาศ</ActiveButton></a></li>}
         </ul>

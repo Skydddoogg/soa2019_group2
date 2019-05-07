@@ -11,7 +11,7 @@ describe("Search page", () =>{
             //     cy.wrap($li).invoke('text').should('include', 'math')
             // })
     
-        cy.get('[data-cy=searchHitObject]').should('have.length', 7)
+        cy.get('[data-cy=searchHitObject]').should('have.length', 10)
     //     cy.get('[data-cy=searchSubject]').each(($li) =>{
     //         cy.wrap($li).click()
     // });

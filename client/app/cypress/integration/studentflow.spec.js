@@ -44,6 +44,20 @@ describe("User flow", () =>{
         cy.get('[data-cy=navFindTutor]').click()
 
     })
+    it("User login to see offers", () =>{
+        cy.visit("localhost:3000")
+        cy.get('[data-cy=loginUsername').type('Mewkybar')
+        cy.get('[data-cy=loginPassword').type('Mewnaja10')
+        cy.get('[data-cy=loginLogin_btn').click()
+        cy.contains('กำลังเข้าสู่ระบบ...').should('be.visible')
+        cy.wait(500)
+
+        cy.get('[data-cy=navLogin_btn').click()
+        cy.wait(500)
+
+        cy.get('[data-cy=navOffer]').click()
+
+    })
     
 
 })
