@@ -50,21 +50,60 @@ class CommentList extends Component {
 
 class CommentForm extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      data: {},
+      targetId:localStorage.getItem('userId'),
+      dataTarget: {}
+    }
+  }
+
+  componentDidMount() {
+    var userId = localStorage.getItem('userId');
+    var author = getProfile(userId);
+    author.then(result => {
+      console.log(result.profile)
+      this.setState({
+        data: result.profile,
+      })
+    })
+
+    if (this.props.targetId != null) {
+      this.setState({
+        targetId:this.props.targetId
+      })
+    }
+    var target = getProfile(this.state.targetId);
+    target.then(result => {
+      this.setState({
+        dataTarget: result.profile,
+      })
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     // TODO: Get current user logged in
     
-
     // TODO: Get author
-    var authorVal = "Thanawat Lodkaew"
-    var authorIdVal = "1"
-    var authorTypeVal = "student"
+    // var userId = localStorage.getItem('userId');
+    // var author = getProfile(userId);
+    // author.then(result => {
+    //   this.setState({
+    //     data: result.profile,
+    //   })
+    // })
+    
+    var authorVal = this.state.data.firstname + this.state.data.lastname
+    var authorIdVal = this.state.data._id
+    var authorTypeVal = this.state.data.userType
     var authorImgVal = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
 
     // TODO: Get target
-    var targetIdVal = "2"
-    var targetVal = "Kevin Mawin"
-    var targetTypeVal = "tutor"
+    var targetIdVal = this.state.dataTarget._id
+    var targetVal = this.state.dataTarget.firstname + this.state.dataTarget.lastname
+    var targetTypeVal = this.state.dataTarget.userType
 
     var textVal = e.target[0].value.trim();
 
@@ -145,7 +184,6 @@ class Comments extends Component {
       return (
         <div className="Comments">
           <header className="Comments-header">
-              <h3>ความคิดเห็น</h3>
               <CommentBox data={commentData} />
           </header>
         </div>
