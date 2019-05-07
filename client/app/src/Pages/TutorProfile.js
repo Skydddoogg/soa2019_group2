@@ -48,8 +48,11 @@ class TutorProfile extends Component {
   }
 
   componentDidMount() {
+    const { tutorId } = this.props.location.state
+    //Check user logged in are tutor or studen
     var userId = localStorage.getItem('userId');
     var profile = getProfile(userId);
+    console.log(profile)
     profile.then(result => {
       this.setState({
         data: result.profile,
