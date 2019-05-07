@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TutorProfileArea from '../tutorProfileArea';
-import {Link, Route, BrowserRouter} from 'react-router-dom';
+import { Link, Route, BrowserRouter } from 'react-router-dom';
 import PostHistory from '../postHistory';
 import Comments from '../Components/Profile/comments';
 import { getProfile } from '../Actions/profileActions'
@@ -10,11 +10,17 @@ import Wrapper from '../Components/Wrapper'
 import styled from 'styled-components'
 
 
-const ToggleButtonWrapper = styled.div`
+const WrapperComment = styled.div`
   display:flex;
-  width:40%;
+  width:80%;
   margin:auto;    
   justify-content: space-around;
+  flex-direction:column;
+  & h3{
+    width:100%;
+    text-align:left;
+    color:#008FF6;
+  }
   
 `
 
@@ -32,27 +38,24 @@ const TonggleButton = styled.div`
   }
 `
 
-const Tester = () =>{
-  console.log()
-}
-
-
 class TutorProfile extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
       data: {},
-      activeButton:false,
+      activeButton: false,
+      targetId:localStorage.getItem('userId')
     }
   }
 
   componentDidMount() {
-    // const { tutorId } = this.props.location.state
-    //Check user logged in are tutor or studen
-    var userId = localStorage.getItem('userId');
-    var profile = getProfile(userId);
-    console.log(profile)
+    if (this.props.location.state != null) {
+      this.setState({
+        targetId:this.props.location.state.tutorId
+      })
+    }
+    var profile = getProfile(this.state.targetId);
     profile.then(result => {
       this.setState({
         data: result.profile,
@@ -60,31 +63,30 @@ class TutorProfile extends Component {
     })
   }
 
-  
-    render() {
-      
-      const { data } = this.state
-      return (
-        <div className="TutorProfile">
+
+  render() {
+
+    const { data } = this.state
+    return (
+      <div className="TutorProfile">
         <Wrapper>
-          
+
           <header className="TutorProfile-header">
             <TutorProfileArea
-                profileInfor={data}
+              profileInfor={data}
             />
-              <BrowserRouter>
-                    <ToggleButtonWrapper >
-                    {/* <TonggleButton active={!this.state.activeButton} onClick={Tester}><Link  to="/tutor-profile/post-history/" >ประวัติการประกาศ</Link></TonggleButton> */}
-                    <TonggleButton active={this.state.activeButton} onClick={Tester}><Link to="/tutor-profile/comments/" >Comments</Link></TonggleButton>
-                    </ToggleButtonWrapper>
-                    {/* <Route path="/tutor-profile/post-history/" component={PostHistory} /> */}
-                    <Route path="/tutor-profile/comments/" component={Comments} />
-              </BrowserRouter>
-          </header>
-          </Wrapper>
-        </div>
-      );
-    }
-  }
 
-  export default TutorProfile;
+            <WrapperComment >
+              <h3>Comments</h3>
+
+              {/* <Comments targetId={this.state.targetId} /> */}
+            </WrapperComment>
+
+          </header>
+        </Wrapper>
+      </div>
+    );
+  }
+}
+
+export default TutorProfile;

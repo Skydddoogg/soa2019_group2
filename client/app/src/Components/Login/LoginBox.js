@@ -62,7 +62,6 @@ export default class LoginBox extends Component {
         })
 
         handleLogin(data).then(res => {
-            console.log(res == null)
             if (res == 500) {
                 this.setState({
                     validationStatus: false,
