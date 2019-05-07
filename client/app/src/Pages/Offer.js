@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import styled from 'styled-components'
 import Wrapper from '../Components/Wrapper'
 import { ActiveButton, NonActiveRemoveButton } from '../Components/Button/Button'
-import {getStudentOffer} from '../Actions/offerAction'
+import { getStudentOffer } from '../Actions/offerAction'
 import {Link} from 'react-router-dom'
-var offerInbox = [
-  {
-    postId: '5c99b60908aa5a2eb7c2f196',
-    tutorId: '5cd0c3d8c21000008525ce1b',
-    tutorUsername: 'nishino_nanase'
-  },
-  {
-    postId: '5c99b60908aa5a2eb7c2f196',
-    tutorId: '5cd0c3d8c21000008525ce1b',
-    tutorUsername: 'ikuta_erika'
-  }
-]
+// var offerInbox = [
+//   {
+//     postId: '5c99b60908aa5a2eb7c2f196',
+//     tutorId: '5cd0c3d8c21000008525ce1b',
+//     tutorUsername: 'nishino_nanase'
+//   },
+//   {
+//     postId: '5c99b60908aa5a2eb7c2f196',
+//     tutorId: '5cd0c3d8c21000008525ce1b',
+//     tutorUsername: 'ikuta_erika'
+//   }
+// ]
 
 const OfferTitle = styled.h1`
 font-size:2.5em;
@@ -69,15 +69,26 @@ const Status = styled.div`
 `
 
 class Offers extends Component {
-  componentDidMount() {
-    getStudentOffer(localStorage.getItem('userId'));
-  }
-
-  constructor(props){
+  constructor(props) {
     super(props)
-
+    this.state = {
+      data: []
+    }
   }
+
+  componentDidMount() {
+
+    var offers = getStudentOffer(localStorage.getItem('userId'), localStorage.getItem('token'))
+    offers.then(result => {
+      console.log(result.offerInbox.offerlist)
+      this.setState({
+        data: result.offerInbox.offerlist,
+      })
+    })
+  }
+
   render() {
+    const { data } = this.state
     return (
       <div className="Offers">
         <header className="Offers-header">
@@ -86,17 +97,14 @@ class Offers extends Component {
             <OfferTable>
               <thead>
                 <tr>
-                  <th>AA</th>
-                  <th>BB</th>
-                  <th>CC</th>
-                  <th></th>
+                  <th>Post ID</th>
+                  <th>ติวเตอร์</th>
                 </tr>
               </thead>
               <tbody>
-                {offerInbox.map(function (c, i) {
+                {data.map(function (c, i) {
                   return <tr key={i}>
                     <td>{c.postId}</td>
-                    <td>{c.tutorId}</td>
                     <td>{c.tutorUsername}</td>
                     <td>
                       <ButtonWrapper>
