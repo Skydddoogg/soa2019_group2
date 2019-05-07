@@ -45,7 +45,7 @@ class CommentBox extends Component {
   render() {
     return (
       <div className="comment-box">
-        <CommentForm data={this.props.data} onCommentSubmit={this.handleCommentSubmit} />
+        <CommentForm data={this.props.data} onCommentSubmit={this.handleCommentSubmit} targetId={this.props.targetId}  />
         <CommentList data={this.props.data} />
       </div>
     );
@@ -133,16 +133,25 @@ class CommentForm extends Component {
     var token = localStorage.getItem('token');
 
     // TODO: Get information
+    // var data = {
+    //   message: textVal,
+    //   ownerId: authorIdVal,
+    //   targetId: targetIdVal,
+    //   ownerUsername: authorVal,
+    //   targetUsername: targetVal,
+    //   ownerType: authorTypeVal,
+    //   targetType: targetTypeVal,
+    //   profileImg: authorImgVal
+    // }
     var data = {
-      message: textVal,
-      ownerId: authorIdVal,
-      targetId: targetIdVal,
-      ownerUsername: authorVal,
+      targetId: this.props.targetId,
       targetUsername: targetVal,
-      ownerType: authorTypeVal,
       targetType: targetTypeVal,
+      message: textVal,
       profileImg: authorImgVal
-    }
+  }
+
+    
 
     console.log(data)
     // Send data to API
@@ -175,7 +184,7 @@ class Comment extends Component {
         <div><Avatar size="60" src={this.props.profileImg} round={true}/></div>
         <div>
           <div>
-          <h2>{this.props.ownerUsername}</h2>
+          <h2>{this.props.ownerUsername }</h2>
           <p>{this.props.message}</p>  
           </div>
         </div>
@@ -209,7 +218,7 @@ class Comments extends Component {
       return (
         <div className="Comments">
           <header className="Comments-header">
-              <CommentBox data={commentData} />
+              <CommentBox data={commentData} targetId={this.props.targetId} />
           </header>
         </div>
       );

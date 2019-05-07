@@ -9,6 +9,7 @@ export function createComment(data, token) {
             'Authorization': 'Bearer ' + token
         }
     }).then(res => {
+        console.log(res)
         return res;
     }).catch(err => {
         console.log(err)
@@ -21,6 +22,6 @@ export function getReviews(targetId) {
         if (response.status >= 400) {
             throw new Error("Bad response from server");
         }
-        return response.json();
+        return response.json()
     })
 }
