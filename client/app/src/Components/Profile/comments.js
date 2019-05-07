@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
+import {ActiveButton} from '../Button/Button'
 import { createComment, getReviews } from '../../Actions/reviewActions';
 import styled from 'styled-components'
 import {getProfile} from '../../Actions/profileActions'
 const Form = styled.form`
+  & div{
+    margin-bottom:1%;
+  }
+
+  
   & textarea{
     width:100%;
-    border:1px solid #ccc;
+    height:150px;
+    border:1px solid #ccc !important;
   }
+`
+const CommentWrapper = styled.div`
+width:100%;
+border:1px solid #ccc;
+padding:1%;
+margin-bottom:1%;
+display:flex;
+& div:nth-child(1){
+  margin-right:2%;
+}
+
 `
 class CommentBox extends Component {
 
@@ -98,7 +116,7 @@ class CommentForm extends Component {
     var authorVal = this.state.data.firstname + this.state.data.lastname
     var authorIdVal = this.state.data._id
     var authorTypeVal = this.state.data.userType
-    var authorImgVal = "https://cdn.guidingtech.com/media/assets/WordPress-Import/2012/10/Smiley-Thumbnail.png"
+    var authorImgVal = "http://www.chulatutoracademy.com/chulatutor/ckfinder/userfiles/images/Fast-Learning.jpg"
 
     // TODO: Get target
     var targetIdVal = this.state.dataTarget._id
@@ -139,10 +157,12 @@ class CommentForm extends Component {
   render() {
     return(
       <Form className="comment-form form-group" onSubmit={this.handleSubmit}>
-        <div className="input-group">
+      <div>
           <textarea className="form-control" ></textarea>
+          </div>
+          <div>
+        <ActiveButton type="submit"  className="btn btn-primary" >แสดงความคิดเห็น</ActiveButton>
         </div>
-        <input type="submit" value="แสดงความคิดเห็น" className="btn btn-primary" />
       </Form>
     );
   }
@@ -151,10 +171,16 @@ class CommentForm extends Component {
 class Comment extends Component {
   render() {
     return (
-      <div className="comment">
-        <div><Avatar size="60" src={this.props.profileImg} round={true}/> <b>{this.props.ownerUsername}</b></div>
-        {this.props.message}
-      </div>
+      <CommentWrapper className="comment">
+        <div><Avatar size="60" src={this.props.profileImg} round={true}/></div>
+        <div>
+          <div>
+          <h2>{this.props.ownerUsername}</h2>
+          <p>{this.props.message}</p>  
+          </div>
+        </div>
+        
+      </CommentWrapper>
     );
   }
 }
@@ -172,7 +198,6 @@ class Comments extends Component {
       var targetId = this.props.targetId;
       var reviews = getReviews(targetId)
       reviews.then(result => {
-        console.log(result)
         this.setState({
           commentData: result,
         })

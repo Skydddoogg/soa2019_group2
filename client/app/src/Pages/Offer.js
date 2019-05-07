@@ -88,12 +88,13 @@ class Offers extends Component {
                 <tr>
                   <th>AA</th>
                   <th>BB</th>
-                  <th>CC</th>
+                  <th>ชื่ออาจารย์</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {offerInbox.map(function (c, i) {
+                  console.log(c)
                   return <tr key={i}>
                     <td>{c.postId}</td>
                     <td>{c.tutorId}</td>
