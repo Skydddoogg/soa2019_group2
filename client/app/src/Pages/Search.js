@@ -198,7 +198,7 @@ const CustomSearchBox = ({ currentRefinement, refine }) => (
       id="q"
     />
     <span className="input-group-btn">
-      <button className="btn btn-default">
+      <button className="btn btn-default" data-cy="searchSubmit_btn">
         <i className="fa fa-search" />
       </button>
     </span>
