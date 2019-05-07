@@ -2,7 +2,7 @@
 
 # Tutor Finder
 ### Client
-* [React Web Application](https://github.com/Skydddoogg/soa2019_group2/tree/master/client/app)
+* :white_check_mark: [React Web Application](https://github.com/Skydddoogg/soa2019_group2/tree/master/client/app)
 ### Services
 * :white_check_mark: [API Gateway](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/api-gateway) Running via port 3000
 * :white_check_mark: [Post Service](https://github.com/Skydddoogg/soa2019_group2/tree/master/service/post) Running via port 3001
