@@ -49,7 +49,7 @@ const Search = props => (
         <Configure hitsPerPage={16} />
         <div className="content-wrapper">
           <SearchWrapper >
-            <Facets />
+            <Facets/>
             <CustomResults />
           </SearchWrapper>
         </div>
@@ -184,7 +184,7 @@ const CustomSearchBox = ({ currentRefinement, refine }) => (
       id="q"
     />
     <span className="input-group-btn">
-      <button className="btn btn-default">
+      <button className="btn btn-default" data-cy="searchSubmit_btn">
         <i className="fa fa-search" />
       </button>
     </span>
