@@ -1,35 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
+import styled from 'styled-components'
+const WrapperProfile = styled.div`
+width:80%;
+margin:auto;
+& h1 , h2 ,h3 ,h4{
+  font-family:prompt;
+}
+& > h1{
+  color:#008FF6;
+  text-align:center;
+  font-size:2.5em;
+}
+`
+const Table = styled.table`
+width:100%;
+border-collapse: collapse;
 
+font-family:Bai Jamjuree;
+border: 1px solid #E8EEF2;
+  & tr{
+    width:100%;
+    border-bottom: 1px solid #E8EEF2;
+  }
+  & th{
+    color:#008FF6;
+    font-weight:bold;
+    text-align:center;
+  }
+  & td, th{
+    padding:1%;
+  }
+
+  & tbody > tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+`
 const TutorProfileArea = (props) => {
   return (
-    <div>
-        <h1>อาจารย์ {props.profileInfor.nickname}</h1>
-        <Avatar size="150" src={props.profileInfor.profileImg} round={true}/>
+    <WrapperProfile>
+      <h1>โปรไฟล์</h1>
+      <h2>อาจารย์ {props.profileInfor.firstname} {props.profileInfor.lastname}</h2>
 
-        <h3>Email</h3> 
-        
-        {props.profileInfor.email}
+      <h3>Email : {props.profileInfor.email}</h3>
 
-        <h3>ประวัติการศึกษา</h3>
-        <div>
-            <div><b>มัธยมปลาย: {props.profileInfor.majorInHighSchool}</b></div>
-            <div>{props.profileInfor.highSchool}</div>
-        </div>
-        <div>
-            <div><b>ปริญญาตรี: {props.profileInfor.majorInBachelor}</b></div>
-            <div>{props.profileInfor.bachelor}</div>
-        </div>
-        <div>
-            <div><b>ปริญญาโท: {props.profileInfor.majorInMaster}</b></div>
-            <div>{props.profileInfor.master}</div>
-        </div>
-        <div>
-            <div><b>ปริญญาเอก: {props.profileInfor.majorInDoctoral}</b></div>
-            <div>{props.profileInfor.doctoral}</div>
-        </div>
-    </div>
+
+      <Table>
+        <thead><tr><th>ประวัติการศึกษา</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>มัธยมปลาย :</b> {props.profileInfor.highSchool} <b>สาขา :</b> {props.profileInfor.majorInHighSchool}</td>
+          </tr>
+
+          <tr>
+            <td><b>ปริญญาตรี :</b> {props.profileInfor.bachelor} <b>สาขา :</b> {props.profileInfor.majorInBachelor}</td>
+          </tr>
+
+          <tr>
+            <td><b>ปริญญาโท :</b> {props.profileInfor.master} <b>สาขา :</b> {props.profileInfor.majorInMaster}</td>
+          </tr>
+
+
+          <tr>
+            <td><b>ปริญญาเอก :</b> {props.profileInfor.doctoral} <b>สาขา :</b> {props.profileInfor.majorInDoctoral}</td>
+          </tr>
+        </tbody>
+      </Table>
+    </WrapperProfile >
   )
 };
 

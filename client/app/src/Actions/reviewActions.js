@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 export function createComment(data) {
-    return fetch('http://localhost:3004/create', {
+    return fetch('http://35.240.240.164:3000/api/create', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -15,7 +15,7 @@ export function createComment(data) {
 }
 
 export function getReviews(targetId) {
-    return fetch('http://localhost:3004/reviews/' + targetId)
+    return fetch('http://35.240.240.164:3000/api/reviews/' + targetId)
     .then(function(response) {
         if (response.status >= 400) {
             throw new Error("Bad response from server");

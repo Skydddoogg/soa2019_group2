@@ -7,12 +7,12 @@ import {Link} from 'react-router-dom'
 var offerInbox = [
   {
     postId: '5c99b60908aa5a2eb7c2f196',
-    tutorId: '5cb365b5fb61c836316035fe',
+    tutorId: '5cd0c3d8c21000008525ce1b',
     tutorUsername: 'nishino_nanase'
   },
   {
     postId: '5c99b60908aa5a2eb7c2f196',
-    tutorId: '5cb365b5fb61c836316035fe',
+    tutorId: '5cd0c3d8c21000008525ce1b',
     tutorUsername: 'ikuta_erika'
   }
 ]

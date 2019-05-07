@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
 import { createComment, getReviews } from '../../Actions/reviewActions';
-
+import styled from 'styled-components'
+import {getProfile} from '../../Actions/profileActions'
+const Form = styled.form`
+  & textarea{
+    width:100%;
+    border:1px solid #ccc;
+  }
+`
 class CommentBox extends Component {
 
   getInitialState() {
@@ -45,6 +52,8 @@ class CommentForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    // TODO: Get current user logged in
+    
 
     // TODO: Get author
     var authorVal = "Thanawat Lodkaew"
@@ -85,15 +94,15 @@ class CommentForm extends Component {
     e.target[1].value = '';
     return;
   }
-
+  
   render() {
     return(
-      <form className="comment-form form-group" onSubmit={this.handleSubmit}>
+      <Form className="comment-form form-group" onSubmit={this.handleSubmit}>
         <div className="input-group">
-          <input type="text" placeholder="Say something..." className="form-control" />
+          <textarea className="form-control" ></textarea>
         </div>
         <input type="submit" value="แสดงความคิดเห็น" className="btn btn-primary" />
-      </form>
+      </Form>
     );
   }
 }
@@ -119,7 +128,7 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-      var targetId = '2';
+      var targetId = this.props.targetId;
       var reviews = getReviews(targetId)
       reviews.then(result => {
         console.log(result)
