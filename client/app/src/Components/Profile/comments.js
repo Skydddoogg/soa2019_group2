@@ -69,9 +69,9 @@ class CommentForm extends Component {
       })
     })
 
-    if (this.props.location.state != null) {
+    if (this.props.targetId != null) {
       this.setState({
-        targetId:this.props.location.state.tutorId
+        targetId:this.props.targetId
       })
     }
     var target = getProfile(this.state.targetId);
@@ -184,7 +184,6 @@ class Comments extends Component {
       return (
         <div className="Comments">
           <header className="Comments-header">
-              <h3>ความคิดเห็น</h3>
               <CommentBox data={commentData} />
           </header>
         </div>
