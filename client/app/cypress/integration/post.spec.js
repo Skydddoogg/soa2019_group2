@@ -13,7 +13,7 @@ describe("Post page", () =>{
         cy.get('[data-cy=postSubmit_btn]').click()
 
     });
-    it.only("Filter posts by subject", () => {
+    it("Filter posts by subject", () => {
         
     })
 

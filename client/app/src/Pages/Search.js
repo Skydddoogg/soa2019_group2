@@ -224,7 +224,7 @@ const Hit = ({ item }) => {
   return (
     <article name="asdsd" className="hit animated bounceInUp" name={item.objectID} onClick={() => handleSendOffer(item)}>
 
-      <div className="product-desc-wrapper">
+      <div className="product-desc-wrapper" data-cy="searchHitObject">
         <div className="product-name">
           <Highlight attribute="subject" hit={item} />
         </div>

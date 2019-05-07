@@ -110,8 +110,8 @@ export default class LoginBox extends Component {
                     <label>รหัสผ่าน </label>
                     <input type="password" name="password"  data-cy="loginPassword" onChange={this.handlePassword} value={this.state.password} />
                 </RegisterInputElement>
-                <NonActiveButton width="100" style={{ marginBottom: 15 }}>เข้าสู่ระบบ</NonActiveButton>
-                <ActiveLink width="100" href="/signup" >สมัครสมาชิก</ActiveLink>
+                <NonActiveButton width="100" style={{ marginBottom: 15 } } data-cy="loginLogin_btn">เข้าสู่ระบบ</NonActiveButton>
+                <ActiveLink width="100" href="/signup" data-cy="loginRegister_btn" >สมัครสมาชิก</ActiveLink>
             </LoginForm>
         )
     }
