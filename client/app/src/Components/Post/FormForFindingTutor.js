@@ -1,10 +1,10 @@
-import React from 'react';
+import React,{Component} from 'react';
 import useForm from 'react-hook-form';
 import { createFindingTutorPost } from '../../Actions/postActions';
 import { RegisterInputElement } from '../FormElements/RegisterInputElement'
 import { ActiveButton } from '../Button/Button'
 import styled from 'styled-components'
-
+import {Redirect} from 'react-router-dom'
 
 const PostWrapper = styled.div`
   width:50%;
@@ -12,18 +12,15 @@ const PostWrapper = styled.div`
 `
 export default function FormForFindingTutor() {
   const { register, handleSubmit, errors } = useForm();
-
   const onSubmit = data => {
-    const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')
       createFindingTutorPost(data, token)
-  
-
   };
 
 
   return (
     <PostWrapper>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} action="/search">
         <RegisterInputElement marginBottom={2}>
           <label>ต้องการเรียนวิชา:</label>
           <select name="subject" data-cy="postSubject" ref={register({ required: true })}>

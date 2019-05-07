@@ -45,22 +45,19 @@ class TutorProfile extends Component {
     this.state = {
       data: {},
       activeButton: false,
-      targetId:localStorage.getItem('userId')
+      targetId:this.props.location.state.tutorId == null ? localStorage.getItem('userId') : this.props.location.state.tutorId,
     }
   }
 
   componentDidMount() {
-    if (this.props.location.state != null) {
-      this.setState({
-        targetId:this.props.location.state.tutorId
-      })
-    }
+   
     var profile = getProfile(this.state.targetId);
     profile.then(result => {
       this.setState({
         data: result.profile,
       })
     })
+
   }
 
 
@@ -79,7 +76,7 @@ class TutorProfile extends Component {
             <WrapperComment >
               <h3>Comments</h3>
 
-              <Comments targetId={this.state.targetId} />
+              {/* <Comments targetId={this.state.targetId} /> */}
             </WrapperComment>
 
           </header>

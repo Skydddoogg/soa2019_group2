@@ -1,5 +1,5 @@
   import React, { Component } from 'react';
-import FormForFindingTutor from '../Components/Post/formFindingTutor';
+import FormForFindingTutor from '../Components/Post/FormForFindingTutor';
 import Wrapper from '../Components/Wrapper'
 import styled from 'styled-components'
 
