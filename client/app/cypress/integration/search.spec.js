@@ -6,9 +6,11 @@ describe("Search page", () =>{
     it("Filter by subject", () =>{
         cy.get('input[class="ais-RefinementList-checkbox"]').first().check()
         cy.contains('ok').click()
-        cy.get('[data-cy=searchHitObject] > .product-name > span > span').each(($span) =>{
-            cy.wrap($span).invoke('text').should('eq', 'Math')
-        })
+    
+            // cy.get('[data-cy=searchHitObject] > div[class="product-name"] > span > span').each(($li) =>{
+            //     cy.wrap($li).invoke('text').should('include', 'math')
+            // })
+    
         cy.get('[data-cy=searchHitObject]').should('have.length', 5)
     //     cy.get('[data-cy=searchSubject]').each(($li) =>{
     //         cy.wrap($li).click()
@@ -16,12 +18,23 @@ describe("Search page", () =>{
     })
 
     it("Filter by level", () =>{
+        cy.get('div[class="ais-RefinementList"]').eq(1).then(($li) =>{
+            cy.wrap($li).get('li > label > input').first().check()
+        })
+
 
     })
 
-    it.only("Select a tutor session", () =>{
-        cy.get('[data-cy=searchHitObject] > div[class="product-name"] > span > span').each(($div) =>{
-            cy.wrap($div).first().invoke('text').should('eq', 'Japanese')
+    it("Filter by price", () =>{
+        cy.get('input[class="ais-RangeInput-input ais-RangeInput-input--min"]').type(500)
+        cy.get('input[class="ais-RangeInput-input ais-RangeInput-input--max"]').type(700)
+        cy.contains('ok').click()
+        cy.get('[data-cy=searchHitObject]').should('have.length', 12)
+
     })
+
+    it("Select a tutor session", () =>{
+        cy.get('[data-cy=searchHitObject] > div[class="product-name"] ').first().click()
     })
+    
 })
